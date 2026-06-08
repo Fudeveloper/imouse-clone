@@ -1,0 +1,20 @@
+# iMouse Clone — Core deps
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+pyserial>=3.5
+pydantic>=2.0
+
+# Screen capture
+mss>=9.0
+Pillow>=10.0
+
+# Computer vision
+opencv-python>=4.9.0
+numpy>=1.24
+
+# OCR (iMouse uses PaddleOCR)
+paddlepaddle>=3.0.0
+paddleocr>=2.8.0
+
+# WebSocket (included with FastAPI/uvicorn)
+websockets>=12.0
