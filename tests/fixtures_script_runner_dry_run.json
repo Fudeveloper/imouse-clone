@@ -1,0 +1,8 @@
+{
+  "name": "dry run smoke",
+  "run_id": "dry_run_smoke",
+  "steps": [
+    {"action": "click", "device_id": "dev_1", "x": 1, "y": 2},
+    {"action": "record", "name": "manual dry run", "status": "pass", "note": "dry-run only"}
+  ]
+}

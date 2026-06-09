@@ -1,0 +1,73 @@
+{
+  "name": "pilot 4 group smoke",
+  "run_id": "pilot_4_group_smoke",
+  "stop_on_error": false,
+  "steps": [
+    {
+      "action": "call",
+      "name": "register dev_1",
+      "fun": "/device/register",
+      "data": {"id": "dev_1"}
+    },
+    {
+      "action": "call",
+      "name": "register dev_2",
+      "fun": "/device/register",
+      "data": {"id": "dev_2"}
+    },
+    {
+      "action": "call",
+      "name": "register dev_3",
+      "fun": "/device/register",
+      "data": {"id": "dev_3"}
+    },
+    {
+      "action": "call",
+      "name": "register dev_4",
+      "fun": "/device/register",
+      "data": {"id": "dev_4"}
+    },
+    {
+      "action": "call",
+      "name": "save pilot_4 group",
+      "fun": "/group/save",
+      "data": {"name": "pilot_4", "ids": ["dev_1", "dev_2", "dev_3", "dev_4"]}
+    },
+    {
+      "action": "group_click",
+      "name": "group safe click",
+      "group": "pilot_4",
+      "x": 100,
+      "y": 100
+    },
+    {
+      "action": "wait",
+      "name": "wait after group click",
+      "seconds": 1
+    },
+    {
+      "action": "group_swipe",
+      "name": "group short swipe",
+      "group": "pilot_4",
+      "x1": 300,
+      "y1": 900,
+      "x2": 300,
+      "y2": 500,
+      "steps": 20,
+      "step_delay": 0.01
+    },
+    {
+      "action": "group_type",
+      "name": "group text probe",
+      "group": "pilot_4",
+      "text": "pilot4"
+    },
+    {
+      "action": "record",
+      "name": "manual pilot 4 observation",
+      "status": "pass",
+      "note": "Before real run, replace with per-device observation: dev_1/dev_2/dev_3/dev_4 click, swipe, type response and any failed device id."
+    }
+  ]
+}
+

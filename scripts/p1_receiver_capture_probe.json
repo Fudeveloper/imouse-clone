@@ -1,0 +1,136 @@
+{
+  "name": "p1 receiver capture probe",
+  "run_id": "p1_receiver_capture_probe",
+  "stop_on_error": true,
+  "steps": [
+    {
+      "action": "record",
+      "name": "receiver metadata - edit before real run",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Before real run, edit details with the actual receiver/capture route. This record is mandatory evidence, not a functional pass.",
+      "required_details": [
+        "receiver_provider",
+        "receiver_name",
+        "receiver_version",
+        "receiver_path",
+        "receiver_start_command",
+        "airplay_name",
+        "capture_method",
+        "iphone_id",
+        "ios_version",
+        "hid_provider",
+        "hid_id",
+        "serial_port"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME",
+        "COM_EDIT_ME",
+        "uxplay_or_windows_receiver_or_wired_capture",
+        "window_or_display_or_sdk_or_capture_card",
+        "ch9329_or_xp_hardware"
+      ],
+      "details": {
+        "device_id": "dev_1",
+        "receiver_provider": "uxplay_or_windows_receiver_or_wired_capture",
+        "receiver_name": "EDIT_ME",
+        "receiver_version": "EDIT_ME",
+        "receiver_path": "EDIT_ME",
+        "receiver_start_command": "EDIT_ME",
+        "airplay_name": "imouse-dev-01",
+        "capture_method": "window_or_display_or_sdk_or_capture_card",
+        "iphone_id": "ip01",
+        "ios_version": "EDIT_ME",
+        "hid_provider": "ch9329_or_xp_hardware",
+        "hid_id": "hid01",
+        "serial_port": "COM_EDIT_ME"
+      }
+    },
+    {
+      "action": "call",
+      "name": "register dev_1",
+      "fun": "/device/register",
+      "data": {
+        "id": "dev_1"
+      }
+    },
+    {
+      "action": "metrics",
+      "name": "metrics before receiver probe",
+      "label": "p1_receiver_capture_probe_before",
+      "extra": {
+        "device_count": 1,
+        "stage": "p1_receiver_capture"
+      }
+    },
+    {
+      "action": "call",
+      "name": "start airplay receiver if current provider is wired into API",
+      "fun": "/airplay/connect",
+      "data": {
+        "id": "dev_1"
+      }
+    },
+    {
+      "action": "call",
+      "name": "start capture",
+      "fun": "/capture/start",
+      "data": {
+        "id": "dev_1"
+      }
+    },
+    {
+      "action": "record",
+      "name": "manual airplay connection check",
+      "status": "pass",
+      "note": "Before real run, replace with actual observation: iPhone can see the receiver name, connection succeeds, and the displayed screen belongs to dev_1.",
+      "details": {
+        "failure_category_if_fail": "airplay_discovery_or_airplay_pairing_or_binding",
+        "expected_artifacts": [
+          "receiver log",
+          "iPhone screen recording or photo",
+          "Windows receiver screenshot"
+        ]
+      }
+    },
+    {
+      "action": "repeat",
+      "name": "ten screenshot quality probes",
+      "count": 10,
+      "wait_between": 0.5,
+      "stop_on_error": true,
+      "steps": [
+        {
+          "action": "screenshot",
+          "name": "quality screenshot",
+          "device_id": "dev_1"
+        }
+      ]
+    },
+    {
+      "action": "metrics",
+      "name": "metrics after receiver probe",
+      "label": "p1_receiver_capture_probe_after",
+      "extra": {
+        "device_count": 1,
+        "stage": "p1_receiver_capture"
+      }
+    },
+    {
+      "action": "record",
+      "name": "manual screenshot review",
+      "status": "pass",
+      "note": "Before real run, replace with actual observation: all screenshots are non-black, non-white, correct device, correct orientation, stable size.",
+      "details": {
+        "expected_pass": {
+          "screenshot_count": 10,
+          "non_black": true,
+          "non_white": true,
+          "correct_device": true,
+          "stable_size": true
+        },
+        "failure_category_if_fail": "capture_or_capture_quality_or_binding"
+      }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "stable 10 group watchdog",
+  "run_id": "stable_10_group_watchdog",
+  "stop_on_error": false,
+  "steps": [
+    {
+      "action": "call",
+      "name": "save stable_10 group",
+      "fun": "/group/save",
+      "data": {
+        "name": "stable_10",
+        "ids": ["dev_1", "dev_2", "dev_3", "dev_4", "dev_5", "dev_6", "dev_7", "dev_8", "dev_9", "dev_10"]
+      }
+    },
+    {
+      "action": "metrics",
+      "name": "watchdog system metrics",
+      "label": "stable10_watchdog_round",
+      "extra": {
+        "device_count": 10,
+        "expected_online_count": 10,
+        "manual_fields": ["online_count", "screenshot_success_count", "airplay_disconnects", "hid_failures", "failed_device_ids", "cpu_note", "memory_note", "network_note"]
+      }
+    },
+    {
+      "action": "call",
+      "name": "list devices before watchdog round",
+      "fun": "/dev/list"
+    },
+    {
+      "action": "group_click",
+      "name": "watchdog group click",
+      "group": "stable_10",
+      "x": 100,
+      "y": 100
+    },
+    {
+      "action": "wait",
+      "name": "settle after click",
+      "seconds": 2
+    },
+    {
+      "action": "group_swipe",
+      "name": "watchdog group swipe",
+      "group": "stable_10",
+      "x1": 300,
+      "y1": 900,
+      "x2": 300,
+      "y2": 500,
+      "steps": 20,
+      "step_delay": 0.01
+    },
+    {
+      "action": "wait",
+      "name": "settle after swipe",
+      "seconds": 2
+    },
+    {
+      "action": "group_type",
+      "name": "watchdog group type",
+      "group": "stable_10",
+      "text": "stable10"
+    },
+    {
+      "action": "record",
+      "name": "manual stable 10 observation",
+      "status": "pass",
+      "note": "Run this every 30 minutes during the 2-hour 10-device test. Replace note with online count, screenshot success count, HID failures, AirPlay disconnects, CPU, memory, network, and failed device ids."
+    }
+  ]
+}

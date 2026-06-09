@@ -1,0 +1,350 @@
+{
+  "name": "P1 single device control probe",
+  "run_id": "p1_single_device_control_probe",
+  "stop_on_error": true,
+  "steps": [
+    {
+      "action": "record",
+      "name": "component metadata - edit before real run",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Before a real run, replace every EDIT_ME value with the actual receiver, capture, HID, iPhone, iOS, hub, cable, and operator ledger. This record is mandatory traceability evidence, not a control pass.",
+      "required_details": [
+        "device_id",
+        "receiver_provider",
+        "receiver_name",
+        "receiver_version",
+        "receiver_path",
+        "receiver_start_command",
+        "airplay_name",
+        "capture_provider",
+        "capture_method",
+        "capture_source",
+        "iphone_id",
+        "iphone_model",
+        "ios_version",
+        "hid_provider",
+        "hid_id",
+        "serial_port",
+        "hub_port",
+        "cable_id",
+        "operator"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME",
+        "COM_EDIT_ME",
+        "uxplay_or_windows_receiver_or_wired_capture",
+        "window_or_display_or_sdk_or_capture_card",
+        "ch9329_or_xp_hardware"
+      ],
+      "details": {
+        "device_id": "dev_1",
+        "receiver_provider": "uxplay_or_windows_receiver_or_wired_capture",
+        "receiver_name": "EDIT_ME",
+        "receiver_version": "EDIT_ME",
+        "receiver_path": "EDIT_ME",
+        "receiver_start_command": "EDIT_ME",
+        "airplay_name": "imouse-dev-01",
+        "capture_provider": "EDIT_ME",
+        "capture_method": "window_or_display_or_sdk_or_capture_card",
+        "capture_source": "EDIT_ME",
+        "iphone_id": "EDIT_ME",
+        "iphone_model": "EDIT_ME",
+        "ios_version": "EDIT_ME",
+        "hid_provider": "ch9329_or_xp_hardware",
+        "hid_id": "EDIT_ME",
+        "serial_port": "COM_EDIT_ME",
+        "hub_port": "EDIT_ME",
+        "cable_id": "EDIT_ME",
+        "operator": "EDIT_ME"
+      }
+    },
+    {
+      "action": "call",
+      "name": "register dev_1",
+      "fun": "/device/register",
+      "data": {
+        "id": "dev_1"
+      }
+    },
+    {
+      "action": "metrics",
+      "name": "metrics before P1 control probe",
+      "label": "p1_single_device_control_probe_before",
+      "extra": {
+        "device_count": 1,
+        "stage": "p1_single_device_control",
+        "manual_fields": [
+          "receiver_cpu_note",
+          "memory_note",
+          "network_note",
+          "hid_latency_note"
+        ]
+      }
+    },
+    {
+      "action": "record",
+      "name": "manual receiver and capture ready check",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Edit this before real run. Confirm the selected receiver route is already visible to the iPhone, the current screen belongs to dev_1, and the capture source is the selected receiver window/display/card.",
+      "required_details": [
+        "observed_by",
+        "observed_at",
+        "iphone_can_see_receiver",
+        "airplay_or_wired_connected",
+        "receiver_window_matches_dev_1",
+        "capture_source_selected",
+        "expected_artifacts"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME"
+      ],
+      "details": {
+        "observed_by": "EDIT_ME",
+        "observed_at": "EDIT_ME_YYYYMMDD_HHMM",
+        "iphone_can_see_receiver": "EDIT_ME_TRUE_FALSE",
+        "airplay_or_wired_connected": "EDIT_ME_TRUE_FALSE",
+        "receiver_window_matches_dev_1": "EDIT_ME_TRUE_FALSE",
+        "capture_source_selected": "EDIT_ME_TRUE_FALSE",
+        "failure_category_if_fail": "airplay_discovery_or_airplay_pairing_or_capture_binding",
+        "expected_artifacts": [
+          "receiver log",
+          "iPhone photo or screen recording",
+          "Windows receiver or capture source screenshot"
+        ]
+      }
+    },
+    {
+      "action": "call",
+      "name": "start capture for selected receiver source",
+      "fun": "/capture/start",
+      "data": {
+        "id": "dev_1"
+      }
+    },
+    {
+      "action": "repeat",
+      "name": "ten screenshot quality probes",
+      "count": 10,
+      "wait_between": 0.5,
+      "stop_on_error": true,
+      "steps": [
+        {
+          "action": "screenshot",
+          "name": "quality screenshot",
+          "device_id": "dev_1",
+          "min_width": 16,
+          "min_height": 16,
+          "min_stddev": 1.0
+        }
+      ]
+    },
+    {
+      "action": "record",
+      "name": "manual screenshot review",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Edit this before real run. Review the saved screenshot artifacts and confirm they are current, non-black, non-white, correctly bound to dev_1, and stable in orientation/size.",
+      "required_details": [
+        "observed_by",
+        "observed_at",
+        "screenshot_count_reviewed",
+        "non_black",
+        "non_white",
+        "correct_device",
+        "stable_size",
+        "orientation"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME"
+      ],
+      "details": {
+        "observed_by": "EDIT_ME",
+        "observed_at": "EDIT_ME_YYYYMMDD_HHMM",
+        "screenshot_count_reviewed": "EDIT_ME_10",
+        "non_black": "EDIT_ME_TRUE_FALSE",
+        "non_white": "EDIT_ME_TRUE_FALSE",
+        "correct_device": "EDIT_ME_TRUE_FALSE",
+        "stable_size": "EDIT_ME_TRUE_FALSE",
+        "orientation": "EDIT_ME_portrait_or_landscape",
+        "failure_category_if_fail": "capture_or_capture_quality_or_binding"
+      }
+    },
+    {
+      "action": "click",
+      "name": "safe click probe - edit coordinates",
+      "device_id": "dev_1",
+      "x": 100,
+      "y": 100,
+      "failure_screenshot_device_id": "dev_1"
+    },
+    {
+      "action": "wait",
+      "name": "settle after click",
+      "seconds": 1
+    },
+    {
+      "action": "record",
+      "name": "manual click response",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Edit this before real run. Use a safe coordinate from the GUI screenshot and record the visible response, release behavior, and coordinate drift.",
+      "required_details": [
+        "observed_by",
+        "observed_at",
+        "click_x",
+        "click_y",
+        "visible_response",
+        "released",
+        "coordinate_error_px"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME"
+      ],
+      "details": {
+        "observed_by": "EDIT_ME",
+        "observed_at": "EDIT_ME_YYYYMMDD_HHMM",
+        "click_x": "EDIT_ME",
+        "click_y": "EDIT_ME",
+        "visible_response": "EDIT_ME_TRUE_FALSE_AND_NOTE",
+        "released": "EDIT_ME_TRUE_FALSE",
+        "coordinate_error_px": "EDIT_ME",
+        "failure_category_if_fail": "hid_click_or_calibration"
+      }
+    },
+    {
+      "action": "swipe",
+      "name": "short vertical swipe - edit coordinates",
+      "device_id": "dev_1",
+      "x1": 300,
+      "y1": 900,
+      "x2": 300,
+      "y2": 500,
+      "steps": 20,
+      "step_delay": 0.01,
+      "failure_screenshot_device_id": "dev_1"
+    },
+    {
+      "action": "wait",
+      "name": "settle after swipe",
+      "seconds": 1
+    },
+    {
+      "action": "record",
+      "name": "manual swipe response",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Edit this before real run. Record the visible page movement, direction, release, and whether the path was affected by orientation or safe-area mapping.",
+      "required_details": [
+        "observed_by",
+        "observed_at",
+        "swipe_path",
+        "visible_response",
+        "direction_correct",
+        "released"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME"
+      ],
+      "details": {
+        "observed_by": "EDIT_ME",
+        "observed_at": "EDIT_ME_YYYYMMDD_HHMM",
+        "swipe_path": "EDIT_ME_x1_y1_x2_y2",
+        "visible_response": "EDIT_ME_TRUE_FALSE_AND_NOTE",
+        "direction_correct": "EDIT_ME_TRUE_FALSE",
+        "released": "EDIT_ME_TRUE_FALSE",
+        "failure_category_if_fail": "hid_swipe_or_calibration"
+      }
+    },
+    {
+      "action": "type",
+      "name": "keyboard text probe - focus safe input first",
+      "device_id": "dev_1",
+      "text": "imouse-p1-123",
+      "failure_screenshot_device_id": "dev_1"
+    },
+    {
+      "action": "wait",
+      "name": "settle after text input",
+      "seconds": 1
+    },
+    {
+      "action": "record",
+      "name": "manual text response",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Edit this before real run. Focus a safe input field before the type step, then record whether every character appeared in the correct field.",
+      "required_details": [
+        "observed_by",
+        "observed_at",
+        "safe_input_field",
+        "expected_text",
+        "actual_text",
+        "text_matched",
+        "focus_correct"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME"
+      ],
+      "details": {
+        "observed_by": "EDIT_ME",
+        "observed_at": "EDIT_ME_YYYYMMDD_HHMM",
+        "safe_input_field": "EDIT_ME",
+        "expected_text": "imouse-p1-123",
+        "actual_text": "EDIT_ME",
+        "text_matched": "EDIT_ME_TRUE_FALSE",
+        "focus_correct": "EDIT_ME_TRUE_FALSE",
+        "failure_category_if_fail": "hid_keyboard_or_business_state"
+      }
+    },
+    {
+      "action": "metrics",
+      "name": "metrics after P1 control probe",
+      "label": "p1_single_device_control_probe_after",
+      "extra": {
+        "device_count": 1,
+        "stage": "p1_single_device_control",
+        "manual_fields": [
+          "cpu_after_note",
+          "memory_after_note",
+          "receiver_disconnects",
+          "hid_failures"
+        ]
+      }
+    },
+    {
+      "action": "record",
+      "name": "manual P1 final control decision",
+      "device_id": "dev_1",
+      "status": "pass",
+      "note": "Edit this before real run. Only keep status=pass when screenshot, click, swipe, text input, component metadata, Acceptance, and Readiness can all support the P1 claim.",
+      "required_details": [
+        "observed_by",
+        "observed_at",
+        "screenshot_visible",
+        "click_pass",
+        "swipe_pass",
+        "text_pass",
+        "acceptance_command_to_run",
+        "readiness_command_to_run",
+        "remaining_blockers"
+      ],
+      "forbid_placeholder_values": [
+        "EDIT_ME"
+      ],
+      "details": {
+        "observed_by": "EDIT_ME",
+        "observed_at": "EDIT_ME_YYYYMMDD_HHMM",
+        "screenshot_visible": "EDIT_ME_TRUE_FALSE",
+        "click_pass": "EDIT_ME_TRUE_FALSE",
+        "swipe_pass": "EDIT_ME_TRUE_FALSE",
+        "text_pass": "EDIT_ME_TRUE_FALSE",
+        "acceptance_command_to_run": ".\\.venv\\Scripts\\python -m imouse.acceptance evidence\\<run_id>.jsonl --gate p1 --markdown evidence\\<run_id>_p1_acceptance.md --gap-markdown evidence\\<run_id>_p1_gap.md",
+        "readiness_command_to_run": ".\\.venv\\Scripts\\python -m imouse.readiness --target p1 --evidence evidence\\<run_id>.jsonl --markdown evidence\\<run_id>_readiness.md",
+        "remaining_blockers": "EDIT_ME_none_or_list_failures",
+        "failure_category_if_fail": "claim_boundary_or_unresolved_p1_failure"
+      }
+    }
+  ]
+}

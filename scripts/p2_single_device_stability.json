@@ -1,0 +1,78 @@
+{
+  "name": "P2 single device 30 minute stability",
+  "run_id": "p2_single_device_stability",
+  "stop_on_error": false,
+  "steps": [
+    {
+      "action": "call",
+      "name": "register dev_1",
+      "fun": "/device/register",
+      "data": {"id": "dev_1"}
+    },
+    {
+      "action": "repeat",
+      "name": "six five-minute single-device rounds",
+      "count": 6,
+      "wait_between": 300,
+      "stop_on_error": false,
+      "steps": [
+        {
+          "action": "metrics",
+          "name": "round system metrics",
+          "label": "p2_dev1_round",
+          "extra": {
+            "device_count": 1,
+            "expected_online_count": 1,
+            "manual_fields": ["online_count", "screenshot_success", "airplay_disconnects", "hid_failures", "cpu_note", "memory_note"]
+          }
+        },
+        {
+          "action": "screenshot",
+          "name": "round screenshot",
+          "device_id": "dev_1"
+        },
+        {
+          "action": "click",
+          "name": "round safe click",
+          "device_id": "dev_1",
+          "x": 100,
+          "y": 100
+        },
+        {
+          "action": "wait",
+          "name": "settle after click",
+          "seconds": 1
+        },
+        {
+          "action": "swipe",
+          "name": "round vertical swipe",
+          "device_id": "dev_1",
+          "x1": 300,
+          "y1": 900,
+          "x2": 300,
+          "y2": 500,
+          "steps": 20,
+          "step_delay": 0.01
+        },
+        {
+          "action": "type",
+          "name": "round text probe",
+          "device_id": "dev_1",
+          "text": "p2-stability"
+        },
+        {
+          "action": "record",
+          "name": "manual round observation",
+          "status": "info",
+          "note": "During real run, replace with round number, online_count, screenshot status, click/swipe/type observation, AirPlay disconnect count, HID failure count, CPU note, memory note, and artifacts."
+        }
+      ]
+    },
+    {
+      "action": "record",
+      "name": "manual P2 final decision",
+      "status": "info",
+      "note": "After real run, change to pass/fail with final 30-minute stability decision and top 3 failures. If fail, add category and details before rerun or record the final decision in GUI Manual."
+    }
+  ]
+}

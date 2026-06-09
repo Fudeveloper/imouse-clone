@@ -1,0 +1,78 @@
+{
+  "name": "P3 pilot 4 30 minute watchdog",
+  "run_id": "p3_pilot4_30min_watchdog",
+  "stop_on_error": false,
+  "steps": [
+    {
+      "action": "call",
+      "name": "save pilot_4 group",
+      "fun": "/group/save",
+      "data": {"name": "pilot_4", "ids": ["dev_1", "dev_2", "dev_3", "dev_4"]}
+    },
+    {
+      "action": "repeat",
+      "name": "six five-minute group rounds",
+      "count": 6,
+      "wait_between": 300,
+      "stop_on_error": false,
+      "steps": [
+        {
+          "action": "metrics",
+          "name": "round system metrics",
+          "label": "p3_pilot4_round",
+          "extra": {
+            "device_count": 4,
+            "expected_online_count": 4,
+            "manual_fields": ["online_count", "screenshot_success_count", "airplay_disconnects", "hid_failures", "failed_device_ids", "cpu_note", "memory_note"]
+          }
+        },
+        {
+          "action": "call",
+          "name": "list devices in round",
+          "fun": "/dev/list"
+        },
+        {
+          "action": "group_click",
+          "name": "round group click",
+          "group": "pilot_4",
+          "x": 100,
+          "y": 100
+        },
+        {
+          "action": "wait",
+          "name": "settle after group click",
+          "seconds": 1
+        },
+        {
+          "action": "group_swipe",
+          "name": "round group swipe",
+          "group": "pilot_4",
+          "x1": 300,
+          "y1": 900,
+          "x2": 300,
+          "y2": 500,
+          "steps": 20,
+          "step_delay": 0.01
+        },
+        {
+          "action": "group_type",
+          "name": "round group type",
+          "group": "pilot_4",
+          "text": "pilot4-watchdog"
+        },
+        {
+          "action": "record",
+          "name": "manual group round observation",
+          "status": "info",
+          "note": "During real run, replace with per-device observation, failed device ids, online count, screenshot success count, AirPlay disconnects, HID failures, CPU, memory, and artifacts."
+        }
+      ]
+    },
+    {
+      "action": "record",
+      "name": "manual P3 final decision",
+      "status": "info",
+      "note": "After real run, change to pass/fail with final 4-device 30-minute decision and top 3 failures. If fail, add category and details before rerun or record the final decision in GUI Manual."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "single device smoke",
+  "run_id": "single_device_smoke",
+  "stop_on_error": true,
+  "steps": [
+    {
+      "action": "call",
+      "name": "register dev_1",
+      "fun": "/device/register",
+      "data": {"id": "dev_1"}
+    },
+    {
+      "action": "call",
+      "name": "list devices",
+      "fun": "/dev/list"
+    },
+    {
+      "action": "screenshot",
+      "name": "baseline screenshot",
+      "device_id": "dev_1"
+    },
+    {
+      "action": "click",
+      "name": "safe click probe",
+      "device_id": "dev_1",
+      "x": 100,
+      "y": 100
+    },
+    {
+      "action": "wait",
+      "name": "wait after click",
+      "seconds": 1
+    },
+    {
+      "action": "swipe",
+      "name": "short vertical swipe",
+      "device_id": "dev_1",
+      "x1": 300,
+      "y1": 900,
+      "x2": 300,
+      "y2": 500,
+      "steps": 20,
+      "step_delay": 0.01
+    },
+    {
+      "action": "type",
+      "name": "keyboard text probe",
+      "device_id": "dev_1",
+      "text": "imouse-smoke"
+    },
+    {
+      "action": "record",
+      "name": "manual single device observation",
+      "status": "pass",
+      "note": "Before real run, replace this note with actual iPhone observation: screenshot visible, click response, swipe response, text response."
+    }
+  ]
+}
