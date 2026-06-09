@@ -19,6 +19,10 @@ Thumbs.db
 
 # Screenshots (generated at runtime)
 screenshots/
+.cache/
+evidence/
+state/
+templates/
 
 # Config (user-specific)
 .env

@@ -41,30 +41,29 @@ def check_deps() -> dict:
     for mod in ["serial", "cv2", "numpy", "PIL", "fastapi", "uvicorn"]:
         try:
             __import__(mod)
-            status[mod] = "✓"
+            status[mod] = "OK"
         except ImportError:
-            status[mod] = "✗ not installed"
+            status[mod] = "MISSING: not installed"
 
     # System deps
     uxplay = find_uxplay()
-    status["uxplay"] = f"✓ {uxplay}" if uxplay else "✗ not found (install UxPlay)"
+    status["uxplay"] = f"OK: {uxplay}" if uxplay else "MISSING: not found (install UxPlay)"
 
     return status
 
 
 def print_banner():
     print(r"""
-    ██╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗███████╗
-    ██║████╗ ████║██╔═══██╗██║   ██║██╔════╝██╔════╝
-    ██║██╔████╔██║██║   ██║██║   ██║███████╗█████╗
-    ██║██║╚██╔╝██║██║   ██║██║   ██║╚════██║██╔══╝
-    ██║██║ ╚═╝ ██║╚██████╔╝╚██████╔╝███████║███████╗
-    ╚═╝╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
-          iOS Group Control — No Jailbreak Required
+     ___ __  __  ___  _   _ ____  _____
+    |_ _|  \/  |/ _ \| | | / ___|| ____|
+     | || |\/| | | | | | | \___ \|  _|
+     | || |  | | |_| | |_| |___) | |___
+    |___|_|  |_|\___/ \___/|____/|_____|
+          iOS Group Control - No Jailbreak Required
 
        Architecture: AirPlay + CH9329 + OpenCV + PaddleOCR
     """)
-    print("─" * 60)
+    print("-" * 60)
 
 
 def main():
@@ -84,7 +83,7 @@ def main():
     print_banner()
 
     if args.check:
-        print("📋 Dependency Check:")
+        print("Dependency Check:")
         for dep, status in check_deps().items():
             print(f"  {dep:12s}  {status}")
         return 0
