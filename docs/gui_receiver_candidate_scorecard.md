@@ -1,65 +1,65 @@
-﻿# GUI Receiver Candidate Scorecard
+# GUI Receiver Candidate Scorecard
 
-`Rx Score` is the receiver-route selection scorecard in the Python GUI. It compares `uxplay`, `windows_receiver`, `wired`, and `capture_card` before the operator locks the receiver lane for a field run.
+`Rx Score` 是 Python GUI 中的接收器路由选择记分卡。它在操作者为现场运行锁定接收器通道之前比较 `uxplay`、`windows_receiver`、`wired` 和 `capture_card`。
 
-Use the Live Probe workflow:
+使用 Live Probe 工作流：
 
 ```text
 Home -> Action Map -> Src Refresh -> Src Audit -> XP Drill -> XP Timeline -> XP Arch -> XP Lab -> Coach -> Rx Score -> Rx Bootstrap -> Rx Setup -> Rx Evidence -> Transcript -> Route/Kit -> Local -> Screenshot -> P1 Trial -> Events/Problems -> Acceptance/Readiness
 ```
 
-Open `Rx Score` after `Coach` and before `Rx Bootstrap` / `Rx Setup` when:
+在以下情况下，在 `Coach` 之后、`Rx Bootstrap`/`Rx Setup` 之前打开 `Rx Score`：
 
-- `uxplay` is missing or unstable.
-- a commercial Windows receiver is available but needs license/window-binding review.
-- a wired route or capture card may be more stable for the first real-iPhone proof.
-- the team needs a written reason for why one receiver route was selected.
+- `uxplay` 缺失或不稳定。
+- 有商业 Windows 接收器可用但需要授权/窗口绑定审查。
+- 有线路由或采集卡可能对首次真实 iPhone 证明更稳定。
+- 团队需要书面理由说明为什么选择了一个接收器路由。
 
-The scorecard reads current GUI state and cached reports:
+记分卡读取当前 GUI 状态和缓存报告：
 
-- Route Decision JSON and route validation report.
-- Doctor report, especially `binary:uxplay` and `receiver_provider`.
-- Acceptance screenshot/manual rows when evidence exists.
-- Readiness preview or final Readiness report.
-- Evidence summary counts and failure counts.
+- Route Decision JSON 和路由验证报告。
+- Doctor 报告，特别是 `binary:uxplay` 和 `receiver_provider`。
+- 有证据时的 Acceptance 截图/Manual 行。
+- Readiness 预览或最终 Readiness 报告。
+- 证据摘要计数和失败计数。
 
-## Columns
+## 列
 
-- `Candidate`: receiver lane being compared.
-- `Status`: `fail`, `pending`, `warn`, `ready`, or `pass`.
-- `Recommendation`: `recommended`, `blocked`, `route-needed`, `selected-needs-proof`, or `backup`.
-- `Selected`: whether the current Route Decision selects this lane.
-- `Score`: explainable score from source, route, install, binding, screenshot, logs, Python integration, license/product risk, and XP alignment.
-- `Current signal`: current route/provider/doctor/screenshot/manual/evidence state.
-- `Strengths`: why the candidate is attractive for the current run.
-- `Gaps`: what still blocks or weakens the candidate.
-- `Next action`: the next GUI step.
-- `Stop rule`: when to stop and avoid mixing receiver evidence.
+- `Candidate`：正在比较的接收器通道。
+- `Status`：`fail`、`pending`、`warn`、`ready` 或 `pass`。
+- `Recommendation`：`recommended`、`blocked`、`route-needed`、`selected-needs-proof` 或 `backup`。
+- `Selected`：当前 Route Decision 是否选择了此通道。
+- `Score`：可解释的评分，来自来源、路由、安装、绑定、截图、日志、Python 集成、授权/产品风险和 XP 对标程度。
+- `Current signal`：当前路由/提供者/Doctor/截图/Manual/证据状态。
+- `Strengths`：为什么该候选方案对当前运行有吸引力。
+- `Gaps`：什么仍然阻止或削弱该候选方案。
+- `Next action`：下一个 GUI 步骤。
+- `Stop rule`：何时停止并避免混合接收器证据。
 
-## Route Selection SOP
+## 路由选择 SOP
 
-1. Click `Rx Score`.
-2. Start from any `fail` row, especially selected-route failures.
-3. If no route file exists, click `Edit Route` and fill real receiver/HID/iPhone values.
-4. If `UxPlay open receiver` is blocked by `binary:uxplay=fail`, either install UxPlay or select a valid alternate route under a fresh run_id.
-5. If `Windows AirPlay receiver` is recommended, click `Rx Bootstrap` and fill version/license, path, start command, AirPlay name, capture method, and window binding before setup.
-6. If `wired` or `capture_card` is recommended, click `Rx Bootstrap`, label cable/card/driver/input, and prove automatic frame capture before HID.
-7. Click `Rx Setup` for the selected route.
-8. Click `Rx Evidence` to organize receiver/capture proof commands, artifacts, and stop lines.
-9. Run Doctor with the same Route Decision path.
-10. Run Screenshot / Shot Bench before P1 Trial.
-11. Use Acceptance and Readiness after JSONL evidence exists.
+1. 点击 `Rx Score`。
+2. 从任何 `fail` 行开始，特别是所选路由的失败。
+3. 如果没有路由文件，点击 `Edit Route` 并填写真实接收器/HID/iPhone 值。
+4. 如果 `UxPlay open receiver` 被 `binary:uxplay=fail` 阻止，要么安装 UxPlay，要么在新的 run_id 下选择有效的备选路由。
+5. 如果推荐 `Windows AirPlay receiver`，点击 `Rx Bootstrap` 并在设置之前填写版本/授权、路径、启动命令、AirPlay 名称、采集方法和窗口绑定。
+6. 如果推荐 `wired` 或 `capture_card`，点击 `Rx Bootstrap`，标记线缆/卡/驱动/输入，并在 HID 之前证明自动帧采集。
+7. 为所选路由点击 `Rx Setup`。
+8. 点击 `Rx Evidence` 以组织接收器/采集证明命令、工件和停止线。
+9. 使用相同的 Route Decision 路径运行 Doctor。
+10. 在 P1 Trial 之前运行 Screenshot/Shot Bench。
+11. 在 JSONL 证据存在后使用 Acceptance 和 Readiness。
 
-## Boundary
+## 边界
 
-- `Rx Score` does not write JSONL evidence.
-- `Rx Score` does not start or install a receiver.
-- `Rx Bootstrap` may create a Route Decision draft for an alternate receiver, but it still keeps P1 blocked.
-- A `recommended` row is not a real-iPhone pass.
-- A `ready` row is not iOS perfect control.
-- XP parity still requires side-by-side capability evidence, API behavior, receiver/capture/HID proof, SOP coverage, and field stability evidence.
+- `Rx Score` 不写入 JSONL 证据。
+- `Rx Score` 不启动或安装接收器。
+- `Rx Bootstrap` 可能为备选接收器创建 Route Decision 草案，但仍保持 P1 阻塞。
+- `recommended` 行不是真实 iPhone 通过。
+- `ready` 行不是 iOS 完美控制。
+- XP 对标仍需要并排能力证据、API 行为、接收器/采集/HID 证明、SOP 覆盖率和现场稳定性证据。
 
-Export path:
+导出路径：
 
 ```text
 evidence/<run_id>_<stage>_receiver_candidate_scorecard.md

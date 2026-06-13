@@ -1,4 +1,4 @@
-# Follow-Along Test Method
+# 逐步跟测方法
 
 本文件给操作者逐步跟测。它不证明已经实现 iOS 完美控制，也不替代 GUI、JSONL evidence、Acceptance 或 Readiness。它的作用是让每一轮测试都按同一顺序执行、记录、失败分类和复盘。
 
@@ -8,7 +8,7 @@
 
 - `uxplay` 缺失时，默认 AirPlay prototype route 不能通过 Doctor。
 - 没有真实 iPhone JSONL evidence 时，Readiness P1 必须失败。
-- GUI reports, Source Refresh, XP Drill, XP Lab, Roadmap, and Pack are not real-device control evidence.
+- GUI reports、Source Refresh、XP Drill、XP Lab、Roadmap 和 Pack 不是真实设备控制 evidence。
 
 只有同一 `run_id` 下同时具备截图质量、真实 iPhone 手工观察、JSONL evidence、Acceptance PASS、Readiness PASS，才能讨论 P1 控制通过。
 
@@ -61,7 +61,7 @@ Home -> Snapshot -> Procure -> API Cov -> Script Cov -> Proof Map -> Claim Scope
 - `Src Refresh` 只确认公开来源刷新责任，不抓网页、不写 evidence。
 - `Src Audit` 可在 GUI 中离线或联网生成 URL/PyPI 状态快照，但仍不写 JSONL evidence、不证明真机。
 - `XP Drill` 把 XP 迭代细节落到验证 drill，不证明我们已支持。
-- `XP Lab` turns XP hardware/receiver signals into procurement and lab validation gates; it still does not prove support.
+- `XP Lab` 把 XP 硬件/receiver 信号转化为采购和实验室验证门；它仍不证明我们已支持。
 - `Procure` 用来把主流路线转成供应商问题、采购停线、实验室 SOP 和证据门。
 - `Industry` 和 `Routes` 用来确认主线仍是 receiver/capture + USB HID + vision/OCR + local API。
 - WDA/Appium/MDM/Shortcuts 只能作为辅助，不作为 XP-style 黑盒主线。

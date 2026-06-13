@@ -1,10 +1,10 @@
-# iMouse XP Public Source Refresh
+# iMouse XP 公开来源刷新
 
 更新时间：2026-06-09
 
 本文只记录公开资料带来的研发判断，不把任何宣传语当成已验收能力。实机结论仍以本项目 `evidence/<run_id>.jsonl`、Acceptance、Readiness、人工观察和硬件记录为准。
 
-## Source Tiers
+## 来源分层
 
 | 等级 | 来源 | 用法 |
 |---|---|---|
@@ -12,7 +12,7 @@
 | 中 | `https://www.iosautot.cn/XP版API文档/`、`https://bestmoon-doc.gitbook.io/bestmoon/xp-tool-ios/imouse-xp-new-version`、`https://pypi.org/project/imouse-py/` | 补充接口细节、部署方式、SDK 包版本和现场运维线索；进入研发前需要再复核。 |
 | 低 | 第三方转载、非官方包名、论坛经验 | 只作为问题假设，不进入架构结论。 |
 
-## 2026-06-09 Public Refresh
+## 2026-06-09 公开来源刷新
 
 | 公开信号 | 来源 | 研发处理 |
 |---|---|---|
@@ -26,9 +26,9 @@
 
 本轮已经把这些公开信号接入 GUI `Sources` / XP Public Source Ledger，并用 `Compat` / Device-iOS Compatibility Matrix 承接公开兼容性宣传到本地 model/iOS 覆盖。两者只生成审计台账和覆盖矩阵，不写 JSONL evidence，也不证明 XP parity、广泛兼容或真实 iOS 控制。
 
-## Package Namespace Drift Guard
+## 包命名空间漂移守卫
 
-Track these PyPI namespaces separately during every source refresh:
+每次来源刷新时分别跟踪这些 PyPI 命名空间：
 
 | Package | Public URL | SOP decision |
 |---|---|---|
@@ -36,9 +36,9 @@ Track these PyPI namespaces separately during every source refresh:
 | `imouse-xp` | `https://pypi.org/project/imouse-xp/` | Treat as a similar-name package and dependency-confusion risk until the artifact is pinned and reviewed. |
 | `py-imouse-xp` | `https://pypi.org/project/py-imouse-xp/` | Treat as a similar-name package and SDK-drift risk until maintainer/source/API behavior/license are reviewed. |
 
-Do not install any lookalike package on field machines until version, hash, source, maintainer, license, and API surface are reviewed. Package import success is not XP parity, not iOS compatibility, and not real iPhone control evidence; it only opens the next API regression and hardware-backed field test.
+在现场机器上不要安装任何相似包，直到版本、hash、来源、维护者、许可证和 API 界面都已审查。包导入成功不等于 XP 对标、不等于 iOS 兼容、不等于真实 iPhone 控制 evidence；它只是开启了下一轮 API 回归和硬件支持的现场测试。
 
-## Repeatable Audit Command
+## 可重复审计命令
 
 静态文档必须配套可重复复核。每次 route、package、兼容口径、roadmap 或 demo 说法变化前，先运行：
 
@@ -54,7 +54,7 @@ Do not install any lookalike package on field machines until version, hash, sour
 
 审计结果只记录 URL 状态、PyPI 版本、关键词命中、local doc 时间戳、SOP owner 和 claim boundary。`ok` 只代表公开源可达且关键词未漂移，不代表本项目已控制真实 iPhone，不代表广泛 iOS 兼容，也不代表 XP parity。
 
-## Confirmed Public Signals
+## 已确认的公开信号
 
 | 信号 | 公开来源 | 对我们的影响 |
 |---|---|---|
@@ -66,7 +66,7 @@ Do not install any lookalike package on field machines until version, hash, sour
 | XP 新版资料强调 Console/Core 分离，Kernel 作为 Windows service，Console 异常时通常重启 Kernel。 | `https://bestmoon-doc.gitbook.io/bestmoon/xp-tool-ios/imouse-xp-new-version` | GUI 不是最终产品核心；P2/P3 后必须补服务化、日志、重启、升级、权限和运维控制台。 |
 | XP 首次配置和鼠标参数相关资料把“手机先配置好”放在控制前面：锁屏/旋转/辅助触控菜单、投屏身份、鼠标参数库和扫码策略会直接影响坐标、画面和业务流程。 | `https://www.imouse.cc/XP版帮助文档/` | `iOS SOP` 必须在 Bench 前运行；设置齐全最多是 `ready`，仍需截图、人工观察、Acceptance 和 Readiness。 |
 
-## Iteration Lessons
+## 迭代启示
 
 1. 第一阶段不是“写更多按钮”，而是证明一台 iPhone 的看、点、滑、输全链路。
 2. XP 的壁垒不是单个鼠标 API，而是投屏稳定性、硬件绑定、鼠标参数、截图/图色质量、批量调度和现场运维。
@@ -74,9 +74,9 @@ Do not install any lookalike package on field machines until version, hash, sour
 4. 如果没有 XP 专用硬件，不要把 CH9329 结果包装成 XP 4.4 固件兼容；只能说“通用 HID 路线验证”。
 5. 如果没有 Windows receiver 或有线投屏实测，不要声称已经达到 XP 的窗口分离、硬解、自动绑定体验。
 
-## SOP Impact
+## SOP 影响
 
-2026-06-09 GUI addition:
+2026-06-09 GUI 新增：
 
 - `Knowledge Center` maps XP public model, mainstream industry route, P1 route decision, field SOP, hardware pitfalls, API/helper gaps, iteration lessons, and claim boundary into GUI next actions.
 - `Sources` maps current public XP claims into source tier, R&D impact, verification gap, and next GUI action.
@@ -86,7 +86,7 @@ Do not install any lookalike package on field machines until version, hash, sour
 - `Rerun Playbook` maps failed categories and stage gates into smallest rerun action, fresh run_id rule, evidence-to-keep, and stop rule so public-source lessons become executable field SOP.
 - `Recovery Drill` maps XP-style operational lessons around receiver restart, HID rebinding, group isolation, watchdog metrics, and handoff stop rules into a GUI recovery board.
 - `Events` maps XP API envelope, WebSocket/msgid, callback lifecycle, Attach Log ingestion, error taxonomy, and claim boundary into a single GUI audit board before rerun or SDK parity claims.
-- These research/SOP dashboards do not write evidence and do not prove XP parity or real iOS control.
+- 这些研究/SOP 面板不写 evidence，也不证明 XP 对标或真实 iOS 控制。
 
 P1 前 GUI 要服务现场 SOP，而不是追求多窗口观感：
 
@@ -100,7 +100,7 @@ P1 前 GUI 要服务现场 SOP，而不是追求多窗口观感：
 - `Manual` 必须记录真实 iPhone 观察，尤其是 API 成功但手机不动、坐标偏移、输入法异常、断线等问题。
 - `Pack`/`Session`/`Dashboard` 只能做索引和复盘，不允许当成实机通过证据。
 
-## Procurement Questions
+## 采购确认问题
 
 采购 XP 专用硬件或 receiver 时先问清：
 

@@ -1,43 +1,43 @@
-﻿# GUI XP Hardware Lab
+# GUI XP Hardware Lab
 
-`XP Lab` is the GUI board for hardware procurement and lab validation. It turns the XP-style public hardware, receiver, projection, HID, and group-control signals into practical buying decisions, bench tests, required evidence, and stop rules.
+`XP Lab` 是用于硬件采购和实验室验证的 GUI 看板。它将 XP 风格的公开硬件、接收器、投屏、HID 和群控信号转换为实际购买决策、工作台测试、所需证据和停止规则。
 
-It is intentionally not a success screen. A `ready` row means the lab lane is reviewable for the current run; it does not prove real iPhone response, broad compatibility, or XP dedicated-hardware parity.
+它有意不是一个成功屏幕。`ready` 行表示实验室通道在当前运行中可审查；它不证明真实 iPhone 响应、广泛兼容性或 XP 专用硬件对标。
 
-## Operator Path
+## 操作者路径
 
 Home -> Action Map -> Src Refresh -> Src Audit -> XP Drill -> XP Timeline -> XP Arch -> XP Lab -> Coach -> Rx Score -> Rx Bootstrap -> Rx Setup -> Transcript -> Route/Kit -> Local -> Screenshot -> P1 Trial -> Events/Problems -> Acceptance/Readiness
 
-Open `XP Lab` before buying receiver/HID hardware, before changing Route Decision, and before making XP parity claims.
+在购买接收器/HID 硬件之前、在更改 Route Decision 之前、以及在声明 XP 对标之前打开 `XP Lab`。
 
-## Lanes
+## 通道
 
-| Lane | Purpose | Evidence gate |
+| 通道 | 目的 | 证据门控 |
 |---|---|---|
-| Route and procurement ledger | Locks one receiver, one HID lane, one iPhone, one hub/cable path, and one operator. | Route Decision JSON/report and Doctor. |
-| Receiver/capture rig | Compares UxPlay, Windows receiver, wired projection, and capture-card fallback. | Receiver metadata, screenshot artifacts, window/device binding, logs. |
-| Windows/wired/decode lane | Separates product receiver work from the UxPlay prototype. | fps/latency/reconnect notes and screenshot stability samples. |
-| HID controller rig | Separates generic CH9329/self-built proof from XP dedicated hardware. | HID identity, firmware, serial, manual click/swipe/type observations. |
-| XP dedicated hardware parity | Keeps XP hardware, firmware, and auto-binding claims separate. | Legal side-by-side XP hardware artifacts. |
-| iPhone settings fixture | Makes iPhone settings reproducible. | model/iOS, AssistiveTouch, pointer profile, baseline screenshot. |
-| Hub, cable, and power map | Prevents physical drift from being misdiagnosed as script failure. | hub id, port, cable id, power path, operator note. |
-| Capture stability and metrics | Moves from first screenshot to repeatable product evidence. | screenshot samples, metrics, reconnect timing, dashboard. |
-| Logs and recovery bridge | Keeps receiver/HID/script failures explainable. | raw logs, parsed callbacks, triage, recovery, rerun decision. |
-| Scale procurement boundary | Blocks premature group buying and group claims. | P2/P3/P4 per-device artifacts, metrics, logs, readiness. |
+| 路由和采购账本 | 锁定一个接收器、一个 HID 通道、一个 iPhone、一个 Hub/线缆路径和一个操作者。 | Route Decision JSON/报告和 Doctor。 |
+| 接收器/采集装置 | 比较 UxPlay、Windows 接收器、有线投屏和采集卡备选。 | 接收器元数据、截图工件、窗口/设备绑定、日志。 |
+| Windows/有线/解码通道 | 将产品接收器工作与 UxPlay 原型分离。 | fps/延迟/重连记录和截图稳定性样本。 |
+| HID 控制器装置 | 将通用 CH9329/自制证明与 XP 专用硬件分离。 | HID 身份、固件、序列号、Manual 点击/滑动/输入观察。 |
+| XP 专用硬件对标 | 将 XP 硬件、固件和自动绑定声明分开。 | 合法的并排 XP 硬件工件。 |
+| iPhone 设置夹具 | 使 iPhone 设置可复现。 | 型号/iOS、AssistiveTouch、指针配置文件、基线截图。 |
+| Hub、线缆和电源映射 | 防止物理漂移被误诊为脚本失败。 | Hub ID、端口、线缆 ID、电源路径、操作者备注。 |
+| 采集稳定性和指标 | 从第一张截图到可重复的产品证据。 | 截图样本、指标、重连时机、仪表板。 |
+| 日志和恢复桥梁 | 使接收器/HID/脚本失败可解释。 | 原始日志、解析的 callback、分类、恢复、重跑决策。 |
+| 规模采购边界 | 阻止过早的群控购买和群控声明。 | P2/P3/P4 按设备工件、指标、日志、Readiness。 |
 
-## Follow-Along Test
+## 跟随测试
 
-1. Click `Route Init` or `Route Edit`; replace every placeholder with real bench values.
-2. Click `Validate`, then `Doctor`.
-3. Open `XP Lab` and start from the first `fail`, `pending`, or `warn` row.
-4. Use `Run Selected` to open the owning board, such as `Rx Score`, `Rx Bootstrap`, `Bench`, `Control Bench`, `iOS SOP`, `Shot Bench`, `Attach Log`, or `Dashboard`.
-5. Export `XP Lab` to `evidence/<run_id>_<stage>_xp_hardware_lab.md`.
-6. Continue only when the current row has the required artifacts for the same `run_id`.
+1. 点击 `Route Init` 或 `Route Edit`；用真实工作台值替换每个占位符。
+2. 点击 `Validate`，然后 `Doctor`。
+3. 打开 `XP Lab` 并从第一个 `fail`、`pending` 或 `warn` 行开始。
+4. 使用 `Run Selected` 打开所属看板，如 `Rx Score`、`Rx Bootstrap`、`Bench`、`Control Bench`、`iOS SOP`、`Shot Bench`、`Attach Log` 或 `Dashboard`。
+5. 将 `XP Lab` 导出到 `evidence/<run_id>_<stage>_xp_hardware_lab.md`。
+6. 仅当当前行对相同 `run_id` 具有所需工件时才继续。
 
-## Boundaries
+## 边界
 
-- `XP Lab` is a procurement and lab validation board; it does not write JSONL field evidence.
-- CH9329 or self-built HID success is generic HID proof only.
-- XP dedicated hardware parity needs legal side-by-side hardware evidence.
-- Windows receiver, wired projection, hardware decode, and auto-binding claims need measured local artifacts.
-- No row can override Acceptance, Readiness, manual observation, screenshot quality, or same-run evidence.
+- `XP Lab` 是一个采购和实验室验证看板；它不写入 JSONL 现场证据。
+- CH9329 或自制 HID 成功仅为通用 HID 证明。
+- XP 专用硬件对标需要合法的并排硬件证据。
+- Windows 接收器、有线投屏、硬件解码和自动绑定声明需要测量的本地工件。
+- 没有任何行可以覆盖 Acceptance、Readiness、Manual 观察、截图质量或相同运行证据。

@@ -1,63 +1,63 @@
 # GUI Verification Walkthrough
 
-`Verify` is the GUI step-by-step verification walkthrough for one `run_id` and one stage. It is the operator-facing bridge between the long follow-along SOP and the current GUI state.
+`Verify` 是一个 `run_id` 和一个阶段的 GUI 逐步验证走查。它是冗长跟随 SOP 与当前 GUI 状态之间面向操作者的桥梁。
 
-It does not execute commands, does not write JSONL evidence, and does not prove real iPhone response. It tells the operator what to run next, what result to expect, what evidence to keep, and where to stop.
+它不执行命令，不写入 JSONL 证据，也不证明真实 iPhone 响应。它告诉操作者下一步运行什么、预期什么结果、保留什么证据以及在哪里停止。
 
-## When To Open
+## 何时打开
 
-Open `Verify` after setting the `Evidence run_id` and before claiming any P1/P2/P3/P4 result.
+在设置 `Evidence run_id` 之后、声明任何 P1/P2/P3/P4 结果之前打开 `Verify`。
 
-Use it together with:
+与以下内容一起使用：
 
-- `Local` for copy-ready PowerShell command replay.
-- `Coach`, `Transcript`, `Wizard`, and `Runner` for field execution.
-- `Proof Map`, `Claim Scope`, `Acceptance`, `Readiness`, and `Pack` before handoff.
+- `Local` 用于可复制的 PowerShell 命令重放。
+- `Coach`、`Transcript`、`Wizard` 和 `Runner` 用于现场执行。
+- `Proof Map`、`Claim Scope`、`Acceptance`、`Readiness` 和 `Pack` 用于交付前。
 
-## Rows
+## 行
 
-Each row contains:
+每行包含：
 
-| Column | Meaning |
+| 列 | 含义 |
 |---|---|
-| `Phase` | The verification phase, such as offline self-check, run identity, route decision, Doctor, receiver capture, HID manual control, Acceptance/Readiness, stability, group scale, XP parity review, or handoff pack. |
-| `Scope` | The stage or operating scope affected by the row. |
-| `Status` | `pass`, `ready`, `warn`, `fail`, or `pending`; later rows cannot override an earlier `fail`. |
-| `Current` | What the GUI currently knows from route reports, Doctor, JSONL summary, Acceptance, Readiness, and artifact inventory. |
-| `Command / GUI path` | The exact command or GUI path to replay. Commands include the current `run_id` and stage. |
-| `Expected result` | What must be true before moving forward. |
-| `Evidence to keep` | The artifact, JSONL event, report, screenshot, log, or manual observation needed for handoff. |
-| `Stop rule` | The condition that blocks promotion or forces rerun. |
-| `GUI action` | The panel opened by `Run Selected`. |
+| `Phase` | 验证阶段，如离线自检、运行身份、路由决策、Doctor、接收器采集、HID Manual 控制、Acceptance/Readiness、稳定性、群控规模、XP 对标审查或交付 Pack。 |
+| `Scope` | 该行影响的阶段或操作范围。 |
+| `Status` | `pass`、`ready`、`warn`、`fail` 或 `pending`；后面的行不能覆盖前面的 `fail`。 |
+| `Current` | GUI 当前从路由报告、Doctor、JSONL 摘要、Acceptance、Readiness 和工件清单中已知的信息。 |
+| `Command / GUI path` | 要重放的精确命令或 GUI 路径。命令包含当前 `run_id` 和阶段。 |
+| `Expected result` | 继续前进之前必须为真的条件。 |
+| `Evidence to keep` | 交付所需的工件、JSONL 事件、报告、截图、日志或 Manual 观察。 |
+| `Stop rule` | 阻止提升或强制重跑的条件。 |
+| `GUI action` | 由 `Run Selected` 打开的面板。 |
 
-## P1 Order
+## P1 顺序
 
-Run the P1 walkthrough top to bottom:
+从上到下运行 P1 走查：
 
-1. Offline self-check: unit tests, compileall, dependency check.
-2. Run identity: stable `run_id`, exact device id, stage, operator.
-3. Route decision: receiver, capture, HID, iPhone, iOS, Hub, cable, and blockers are real values.
-4. Doctor: no `fail`, or a route-aware non-UxPlay receiver decision explains the warning.
-5. Receiver capture: current screenshot is not black, stale, cropped, wrong-window, or wrong-device.
-6. HID manual control: click, swipe release, and text input each have lane-separated Manual pass/fail observation.
-7. Acceptance and Readiness: both pass for the same evidence JSONL and current stage.
-8. Handoff pack: required artifacts are present, recommended gaps are acknowledged, and claim wording follows `Claim Scope`.
+1. 离线自检：单元测试、compileall、依赖检查。
+2. 运行身份：稳定的 `run_id`、精确设备 ID、阶段、操作者。
+3. 路由决策：接收器、采集、HID、iPhone、iOS、Hub、线缆和阻塞项为真实值。
+4. Doctor：无 `fail`，或路由感知的非 UxPlay 接收器决策解释了警告。
+5. 接收器采集：当前截图不是黑屏、过期、裁剪、错误窗口或错误设备。
+6. HID Manual 控制：点击、滑动释放和文字输入各有通道分离的 Manual 通过/失败观察。
+7. Acceptance 和 Readiness：对相同证据 JSONL 和当前阶段均通过。
+8. 交付 Pack：必需工件存在，推荐的差距已确认，声明措辞遵循 `Claim Scope`。
 
-## Stop Lines
+## 停止线
 
-- Stop before HID if route, Doctor, receiver identity, capture binding, iPhone settings, or screenshot quality is not clean.
-- Stop if API/HID command success is not matched by visible real-iPhone behavior.
-- Stop if a generic Manual note is being used to close click, swipe, and text lanes at once.
-- Stop if Acceptance or Readiness fails.
-- Stop if `real_ios_verified=False`.
-- Stop XP parity wording unless XP dedicated hardware/receiver/firmware/binding evidence exists for the same claim scope.
+- 如果路由、Doctor、接收器身份、采集绑定、iPhone 设置或截图质量不清洁，则在 HID 之前停止。
+- 如果 API/HID 命令成功与可见的真实 iPhone 行为不匹配，则停止。
+- 如果通用 Manual 备注被用于同时关闭点击、滑动和文字通道，则停止。
+- 如果 Acceptance 或 Readiness 失败，则停止。
+- 如果 `real_ios_verified=False`，则停止。
+- 除非相同声明范围存在 XP 专用硬件/接收器/固件/绑定证据，否则停止 XP 对标措辞。
 
-## Export
+## 导出
 
-Click `Export` in `Verify` to write:
+在 `Verify` 中点击 `Export` 写入：
 
 ```text
 evidence/<run_id>_<stage>_verification_walkthrough.md
 ```
 
-The export is a test guide and handoff checklist. It is useful only when paired with the actual JSONL evidence, screenshots, manual observations, Doctor, Acceptance, Readiness, and exact device/iOS scope.
+导出是测试指南和交付检查清单。它只有在与实际 JSONL 证据、截图、Manual 观察、Doctor、Acceptance、Readiness 和精确设备/iOS 范围配对时才有用。

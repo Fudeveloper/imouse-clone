@@ -1,44 +1,44 @@
-﻿# GUI XP Iteration Timeline
+# GUI XP Iteration Timeline
 
-`XP Timeline` is the GUI board for reviewing the inferred iMouse XP product iteration path. It turns public XP signals into chronological R&D lessons, common pitfalls, SOP gates, required evidence, and stop rules.
+`XP Timeline` 是用于审查推断的 iMouse XP 产品迭代路径的 GUI 看板。它将公开的 XP 信号转换为按时间排列的研发经验、常见陷阱、SOP 门控、所需证据和停止规则。
 
-It sits between source refresh and implementation planning:
+它位于来源刷新和实现规划之间：
 
 ```text
 Sources -> Src Refresh -> Action Map -> XP Timeline -> Iter Radar -> XP Drill -> XP Arch -> XP Lab -> Roadmap
 ```
 
-## Operator Path
+## 操作者路径
 
 Home -> Action Map -> Src Refresh -> Src Audit -> XP Drill -> XP Timeline -> XP Arch -> XP Lab -> Coach -> Rx Score -> Rx Bootstrap -> Rx Setup -> Transcript -> Route/Kit -> Local -> Screenshot -> P1 Trial -> Events/Problems -> Acceptance/Readiness
 
-Open `XP Timeline` after `Src Refresh` and `Action Map`, before changing roadmap priorities, hardware procurement, or parity wording.
+在 `Src Refresh` 和 `Action Map` 之后、在更改路线图优先级、硬件采购或对标措辞之前打开 `XP Timeline`。
 
-## Timeline Phases
+## 时间线阶段
 
-| # | Phase | Why it matters |
+| # | 阶段 | 为何重要 |
 |---|---|---|
-| 01 | No-app black-box control | Separates real iPhone response from API/HID success. |
-| 02 | Kernel/API and Console split | Keeps GUI, scripts, callbacks, client helpers, and evidence on one service boundary. |
-| 03 | Receiver/projection productization | Makes AirPlay/wired receiver, window binding, decode, reconnect, and logs a product lane. |
-| 04 | Firmware, wired projection, and binding | Prevents CH9329 proof from becoming XP hardware or 4.4 firmware parity wording. |
-| 05 | Vision, OCR, and script assets | Turns OpenCV/OCR calls into replayable assets, regions, thresholds, and artifacts. |
-| 06 | Logs, recovery, and group scale | Blocks group claims until failures are isolated by device, component, log, and metrics. |
-| 07 | Source refresh and claim governance | Keeps public claims, package signals, and GUI exports out of acceptance wording. |
+| 01 | 无应用黑盒控制 | 将真实 iPhone 响应与 API/HID 成功分开。 |
+| 02 | Kernel/API 和 Console 拆分 | 保持 GUI、脚本、callback、客户端辅助和证据在一个服务边界内。 |
+| 03 | 接收器/投屏产品化 | 使 AirPlay/有线接收器、窗口绑定、解码、重连和日志成为产品通道。 |
+| 04 | 固件、有线投屏和绑定 | 防止 CH9329 证明成为 XP 硬件或 4.4 固件对标措辞。 |
+| 05 | 视觉、OCR 和脚本资产 | 将 OpenCV/OCR 调用转换为可回放资产、区域、阈值和工件。 |
+| 06 | 日志、恢复和群控规模 | 在失败按设备、组件、日志和指标隔离之前阻止群控声明。 |
+| 07 | 来源刷新和声明治理 | 保持公开声明、包信号和 GUI 导出不在验收措辞中。 |
 
-## Follow-Along Test
+## 跟随测试
 
-1. Run `Sources` and `Src Refresh`.
-2. Run `Action Map`.
-3. Click `XP Timeline`.
-4. Start from the first `fail`, `pending`, or `warn` row.
-5. Use `Run Selected` to open the owning GUI board.
-6. Export `XP Timeline` to `evidence/<run_id>_<stage>_xp_iteration_timeline.md`.
-7. Re-open `Iter Radar`, `XP Drill`, `XP Arch`, `XP Lab`, and `Roadmap` after the row has enough same-run evidence.
+1. 运行 `Sources` 和 `Src Refresh`。
+2. 运行 `Action Map`。
+3. 点击 `XP Timeline`。
+4. 从第一个 `fail`、`pending` 或 `warn` 行开始。
+5. 使用 `Run Selected` 打开所属 GUI 看板。
+6. 将 `XP Timeline` 导出到 `evidence/<run_id>_<stage>_xp_iteration_timeline.md`。
+7. 在该行有足够的相同运行证据后重新打开 `Iter Radar`、`XP Drill`、`XP Arch`、`XP Lab` 和 `Roadmap`。
 
-## Boundaries
+## 边界
 
-- `XP Timeline` is product-iteration intelligence, not JSONL evidence.
-- A public XP signal never proves our receiver, HID, screenshot, OCR, group, or parity behavior.
-- A `ready` row is reviewable only for the current stage and evidence scope.
-- Perfect-control, broad iOS compatibility, and XP parity wording still require same-run field evidence, Acceptance, Readiness, and exact device/iOS coverage.
+- `XP Timeline` 是产品迭代情报，不是 JSONL 证据。
+- 公开的 XP 信号永远不能证明我们的接收器、HID、截图、OCR、群控或对标行为。
+- `ready` 行仅对当前阶段和证据范围可审查。
+- 完美控制、广泛 iOS 兼容性和 XP 对标措辞仍需要相同运行的现场证据、Acceptance、Readiness 和精确设备/iOS 覆盖率。

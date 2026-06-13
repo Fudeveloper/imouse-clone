@@ -1,71 +1,71 @@
-﻿# GUI P1 Field Transcript
+# GUI P1 Field Transcript
 
-`Transcript` is the fillable field log for the first real-iPhone P1 run. It turns `Coach`, `Rx Bootstrap`, and `Rx Setup` state into one operator transcript with observation prompts, expected results, failure categories, artifact paths, rerun rules, and stop rules.
+`Transcript` 是首次真实 iPhone P1 运行的可填写现场日志。它将 `Coach`、`Rx Bootstrap` 和 `Rx Setup` 状态转换为操作者记录，包含观察提示、预期结果、失败分类、工件路径、重跑规则和停止规则。
 
-It is not JSONL evidence. It does not record Manual pass by itself and does not prove real iPhone control.
+它不是 JSONL 证据。它本身不记录 Manual 通过，也不证明真实 iPhone 控制。
 
-## GUI Path
+## GUI 路径
 
-Use the Live Probe workflow:
+使用 Live Probe 工作流：
 
 ```text
 Home -> Action Map -> Src Refresh -> Src Audit -> XP Drill -> XP Timeline -> XP Arch -> XP Lab -> Coach -> Rx Score -> Rx Bootstrap -> Rx Setup -> Transcript -> Route/Kit -> Local -> Screenshot -> P1 Trial -> Events/Problems -> Acceptance/Readiness
 ```
 
-Open `Transcript` after `Src Refresh`, `Coach`, `Rx Score`, any needed `Rx Bootstrap`, and `Rx Setup`, then export it before the first real HID action. Keep it open or printed while the operator watches the physical iPhone.
+在 `Src Refresh`、`Coach`、`Rx Score`、任何需要的 `Rx Bootstrap` 和 `Rx Setup` 之后打开 `Transcript`，然后在首次真实 HID 操作之前导出。在操作者观察物理 iPhone 时保持其打开或打印。
 
-The dialog also has `Prefill Manual`, `Record Pass`, and `Record Fail` helpers. They copy the selected transcript row into the bottom Manual controls. `Record Pass` is intentionally limited to click, swipe, and keyboard-input checkpoints; setup or route rows are prefilled as `info` so they cannot accidentally satisfy the Manual control gate.
+该对话框还具有 `Prefill Manual`、`Record Pass` 和 `Record Fail` 辅助功能。它们将选定的记录行复制到底部 Manual 控件中。`Record Pass` 有意限制为点击、滑动和键盘输入检查点；设置或路由行预填为 `info`，因此它们不会意外满足 Manual 控制门控。
 
-## What The Operator Fills
+## 操作者填写内容
 
-Each row includes:
+每行包含：
 
-- checkpoint and current status;
-- what to observe on the physical iPhone;
-- expected result;
-- likely failure categories;
-- artifact/log path to attach;
-- operator fill-in slot;
-- rerun rule;
-- stop rule;
-- GUI action for the next probe.
+- 检查点和当前状态；
+- 在物理 iPhone 上观察什么；
+- 预期结果；
+- 可能的失败分类；
+- 要附加的工件/日志路径；
+- 操作者填写栏；
+- 重跑规则；
+- 停止规则；
+- 下一步探针的 GUI 操作。
 
-The operator should write what the physical iPhone did, not only what the API returned.
+操作者应记录物理 iPhone 的实际行为，而不仅仅是 API 返回的内容。
 
-## Required Field Discipline
+## 所需现场纪律
 
-- A pass row must mention the visible iPhone response.
-- A fail row must include one failure category and one artifact/log path.
-- Screenshot rows must name whether the frame was current, nonblank, correct-window, correct-device, and correct-orientation.
-- Click/swipe/type rows must mention visible response, focus, pointer behavior, release behavior, and text result.
-- Any route, receiver, HID, cable, Hub port, iPhone, selected device, or iOS-settings change after failed evidence requires a fresh run_id.
-- Use `P1 Trial` or the Manual control to write real Manual observations into JSONL.
-- Use `Prefill Manual` when the operator wants to edit the note before recording.
-- Use `Record Pass` only after the physical iPhone visibly responded to click, swipe, or keyboard input.
-- Use `Record Fail` for any row that needs a categorized failure and artifact/log path.
+- 通过行必须提及可见的 iPhone 响应。
+- 失败行必须包含一个失败分类和一个工件/日志路径。
+- 截图行必须说明帧是否为当前、非空白、正确窗口、正确设备和正确方向。
+- 点击/滑动/输入行必须提及可见响应、焦点、指针行为、释放行为和文字结果。
+- 任何路由、接收器、HID、线缆、Hub 端口、iPhone、所选设备或 iOS 设置在失败证据后的更改需要新的 run_id。
+- 使用 `P1 Trial` 或 Manual 控制将真实 Manual 观察写入 JSONL。
+- 当操作者想在记录前编辑备注时使用 `Prefill Manual`。
+- 仅在物理 iPhone 可见响应了点击、滑动或键盘输入后使用 `Record Pass`。
+- 对任何需要分类失败和工件/日志路径的行使用 `Record Fail`。
 
-## Export
+## 导出
 
-`Export` writes:
+`Export` 写入：
 
 ```text
 evidence/<run_id>_<stage>_p1_field_transcript.md
 ```
 
-This export is a field transcript and handoff aid. It supports review, but Acceptance and Readiness still decide the claim boundary.
+此导出是现场记录和交付辅助工具。它支持审查，但 Acceptance 和 Readiness 仍然决定声明边界。
 
-## Pass Boundary
+## 通过边界
 
-The transcript can only support a P1 claim when the same run_id has:
+记录仅当相同 run_id 具有以下条件时才能支持 P1 声明：
 
-- Route Decision ready;
-- alternate receiver bootstrap documented when the run does not use UxPlay;
-- receiver setup lane documented;
-- Doctor without fail;
-- screenshot quality evidence;
-- Manual click, swipe, and text observations in JSONL;
-- no unexplained fail events;
-- Acceptance PASS;
-- Readiness PASS with `real_ios_control_verified=true`.
+- Route Decision 就绪；
+- 当运行不使用 UxPlay 时，备选接收器引导已记录；
+- 接收器设置通道已记录；
+- Doctor 无失败；
+- 截图质量证据；
+- JSONL 中的 Manual 点击、滑动和文字观察；
+- 无未解释的失败事件；
+- Acceptance PASS；
+- Readiness PASS 且 `real_ios_control_verified=true`。
 
-Without those, the transcript should point to the first missing or failed row, not promote the run.
+没有这些条件，记录应指向第一个缺失或失败的行，而不是提升该运行。

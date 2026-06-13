@@ -1,19 +1,19 @@
 # GUI Field Evidence Runner
 
-`Runner` is the live field checklist for one `run_id`. Use it after `Wizard` is built and before any P1 claim.
+`Runner` 是一个 `run_id` 的现场检查清单。在 `Wizard` 构建完成后、任何 P1 声明之前使用它。
 
-It checks the same-run path for:
+它检查相同运行路径中的以下内容：
 
-| Gate | What it proves | Stop line |
+| 门控 | 证明内容 | 停止线 |
 |---|---|---|
-| Run scope | Selected devices and evidence path are known. | Stop if the physical iPhone, HID, receiver, Hub port, cable, or run_id cannot be traced. |
-| Route decision | Receiver, capture, HID, iPhone, iOS, bench, and blockers are recorded. | Stop if validation fails or placeholders remain. |
-| Route-aware Doctor | Local dependencies and the selected receiver route are preflighted. | Stop on any Doctor fail; warn needs an operator note. |
-| Screenshot quality | A current, usable frame is captured from the target iPhone. | Stop if the frame is black, stale, cropped, wrong-window, or wrong-orientation. |
-| HID click/swipe/text | Each control lane has its own Manual pass/fail observation. | Stop if API success is not matched by visible real-iPhone behavior. |
-| Acceptance and Readiness | The JSONL evidence passes machine gates for the same run_id. | Stop if command output differs from GUI state. |
+| 运行范围 | 已知所选设备和证据路径。 | 如果物理 iPhone、HID、接收器、Hub 端口、线缆或 run_id 无法追溯，则停止。 |
+| 路由决策 | 接收器、采集、HID、iPhone、iOS、工作台和阻塞项已记录。 | 如果验证失败或占位符仍然存在，则停止。 |
+| 路由感知 Doctor | 本地依赖项和所选接收器路由已预检。 | 在任何 Doctor 失败时停止；warn 需要操作者备注。 |
+| 截图质量 | 从目标 iPhone 捕获了当前可用的帧。 | 如果帧为黑屏、过期、裁剪、错误窗口或错误方向，则停止。 |
+| HID 点击/滑动/文字 | 每个控制通道都有各自的 Manual 通过/失败观察。 | 如果 API 成功与可见的真实 iPhone 行为不匹配，则停止。 |
+| Acceptance 和 Readiness | JSONL 证据通过了相同 run_id 的机器门控。 | 如果命令输出与 GUI 状态不一致，则停止。 |
 
-Runner exports `evidence/<run_id>_<stage>_field_runner.md` with copy-ready PowerShell commands:
+Runner 导出 `evidence/<run_id>_<stage>_field_runner.md`，包含可复制的 PowerShell 命令：
 
 ```powershell
 .\.venv\Scripts\python -m imouse.route_decision validate evidence\<run_id>_route_decision.json --require-ready --markdown evidence\<run_id>_<stage>_route_decision.md --record-evidence evidence\<run_id>.jsonl
@@ -23,4 +23,4 @@ Runner exports `evidence/<run_id>_<stage>_field_runner.md` with copy-ready Power
 .\.venv\Scripts\python -m imouse.readiness --target <stage> --evidence evidence\<run_id>.jsonl --markdown evidence\<run_id>_readiness.md
 ```
 
-Runner is not evidence by itself. Real iOS control still requires JSONL events, screenshot artifacts, separate Manual observations for click/swipe/text, Acceptance PASS, Readiness PASS, and the exact device/iOS scope.
+Runner 本身不是证据。真实 iOS 控制仍需要 JSONL 事件、截图工件、点击/滑动/文字的独立 Manual 观察、Acceptance PASS、Readiness PASS 以及精确的设备/iOS 范围。

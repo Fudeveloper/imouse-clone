@@ -97,11 +97,11 @@ GUI 当前支持启动/停止本地服务、设备注册、硬件扫描/绑定�
 
 详细步骤见 `docs/gui_prototype.md` 和 `docs/verification_plan.md`。
 
-### GUI Local Verification
+### GUI 本地验证
 
-`Local` in the Live Probe panel opens a command-by-command local verification board and exports `evidence/<run_id>_<stage>_local_verification.md`.
+Live Probe 面板中的 `Local` 打开逐命令本地验证面板并导出 `evidence/<run_id>_<stage>_local_verification.md`。
 
-It covers:
+覆盖内容：
 
 - `.\.venv\Scripts\python -m unittest discover -s tests -v`
 - `.\.venv\Scripts\python -m compileall -q imouse tests`
@@ -111,43 +111,43 @@ It covers:
 - `.\.venv\Scripts\python -m imouse.script_runner scripts\p1_single_device_control_probe.json --dry-run --run-id <run_id>`
 - `.\.venv\Scripts\python -m imouse.readiness --target p1 --evidence evidence\<run_id>.jsonl`
 
-Boundary: Local Verification is a terminal guide only. It does not run commands, does not write JSONL evidence, and does not prove real iOS control.
+边界：本地验证仅是终端指南。它不运行命令、不写 JSONL evidence、不证明真实 iOS 控制。
 
-### XP Event/Error Contract
+### XP Event/Error 协议
 
 `Events` in the Live Probe panel opens the XP event/error contract board and exports `evidence/<run_id>_<stage>_xp_event_error_contract.md`.
 
-It audits `/api` envelope fields, HTTP/WebSocket `msgid`, callbacks, Attach Log ingestion, receiver/capture/HID error taxonomy, and claim boundaries. It is a SOP/compatibility audit only; JSONL evidence, screenshot quality, Manual observation, Acceptance, and Readiness still decide real iOS control claims.
+它审计 `/api` 信封字段、HTTP/WebSocket `msgid`、callback、Attach Log 接入、receiver/采集/HID 错误分类和声明边界。它仅做 SOP/兼容性审计；JSONL evidence、截图质量、Manual 观察、Acceptance 和 Readiness 仍然决定真实 iOS 控制声明。
 
-### XP API Coverage Board
+### XP API 覆盖面板
 
 `API Cov` in the Live Probe panel opens the XP API/SDK coverage board and exports `evidence/<run_id>_<stage>_xp_api_coverage.md`.
 
-It maps XP-style fun/helper domains to local API coverage, tests, runtime gates, field evidence and claim boundaries. Local API tests close only P0 compatibility; receiver, HID, click, swipe, text, screenshot, group, cloud and XP hardware parity claims still require their own evidence gates.
+它将 XP 风格 fun/helper 域映射到本地 API 覆盖、测试、runtime 门、现场 evidence 和声明边界。本地 API 测试仅关闭 P0 兼容性；receiver、HID、click、swipe、text、截图、分组、云和 XP 硬件对标声明仍需要各自的 evidence 门。
 
-### GUI Script Coverage Board
+### GUI 脚本覆盖面板
 
 `Script Cov` in the Live Probe panel opens the script coverage board and exports `evidence/<run_id>_<stage>_script_coverage.md`.
 
-It maps stage scenario files, dry-run, Real-run Guard, metadata records, screenshot probes, HID click/swipe/text lanes, vision/OCR, metrics, group scripts, failure replay, and claim boundaries. Dry-run or scenario success closes only script readiness; it does not prove real iPhone response, group control, or XP script parity.
+它将阶段场景文件、dry-run、Real-run Guard、元数据记录、截图探针、HID click/swipe/text lane、视觉/OCR、metrics、分组脚本、失败回放和声明边界映射到面板。dry-run 或场景成功仅关闭脚本就绪；不证明真实 iPhone 响应、群控或 XP 脚本对标。
 
-### GUI Acceptance Proof Map
+### GUI 验收证据闭环地图
 
 `Proof Map` in the Live Probe panel opens the acceptance proof map and exports `evidence/<run_id>_<stage>_proof_map.md`.
 
-It maps every Acceptance/Readiness row to the exact GUI action, JSONL/event requirement, artifact, next command, and stop rule. Proof Map is navigation only: same-run screenshot quality, lane-separated Manual click/swipe/text observations, Acceptance PASS, Readiness PASS, and exact device/iOS/receiver/HID scope still decide real iOS control claims.
+它将每个 Acceptance/Readiness 行映射到精确的 GUI 动作、JSONL/event 要求、artifact、下一条命令和停止线。Proof Map 仅做导航：同轮截图质量、分 lane Manual click/swipe/text 观察、Acceptance PASS、Readiness PASS 和精确 device/iOS/receiver/HID 范围仍然决定真实 iOS 控制声明。
 
-### GUI Claim Scope
+### GUI 声明范围
 
 `Claim Scope` in the Live Probe panel opens the handoff wording board and exports `evidence/<run_id>_<stage>_claim_scope.md`.
 
-It turns the current Readiness, Acceptance, Proof Map, Evidence Pack, API/Core coverage, compatibility, and XP gap signals into allowed claims and forbidden claims. Claim Scope is wording guidance only: it does not write JSONL evidence, prove real iPhone response, prove group control, prove XP hardware parity, or prove broad iPhone/iOS compatibility.
+它将当前 Readiness、Acceptance、Proof Map、Evidence Pack、API/Core 覆盖、兼容性和 XP gap 信号转化为允许声明和禁止声明。Claim Scope 仅是话术指导：它不写 JSONL evidence，不证明真实 iPhone 响应，不证明群控，不证明 XP 硬件对标，也不证明广泛 iPhone/iOS 兼容。
 
-### GUI Goal Gate
+### GUI 目标门
 
 `Goals` in the Live Probe panel opens the four-goal acceptance board and exports `evidence/<run_id>_<stage>_gui_goal_gate.md`.
 
-It now treats Proof Map and Claim Scope as closure inputs for the iOS control and SOP goals, so a clean-looking Acceptance/Readiness run still cannot become a completion claim while proof rows or handoff wording remain blocked.
+它现在将 Proof Map 和 Claim Scope 作为 iOS 控制和 SOP 目标的闭合输入，因此即使 Acceptance/Readiness 运行看起来通过，只要 proof 行或交接话术仍被阻断，就不能成为完成声明。
 
 ## Preflight Doctor
 

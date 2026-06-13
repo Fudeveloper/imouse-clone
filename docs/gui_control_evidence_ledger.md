@@ -1,51 +1,51 @@
 # GUI Control Evidence Ledger
 
-Use `Ctrl Ledger` during P1 real-iPhone testing, after Route/Doctor/Screenshot are ready and before Acceptance/Readiness handoff.
+在 Route/Doctor/Screenshot 就绪之后、Acceptance/Readiness 交付之前，在 P1 真实 iPhone 测试期间使用 `Ctrl Ledger`。
 
-## Purpose
+## 目的
 
-`Ctrl Ledger` is the lane-separated proof board for real iPhone control. It reads the same `evidence/<run_id>.jsonl` as Control Bench, but it makes the operator close these lanes separately:
+`Ctrl Ledger` 是真实 iPhone 控制的通道分离证明看板。它读取与 Control Bench 相同的 `evidence/<run_id>.jsonl`，但要求操作者分别关闭以下通道：
 
-| Lane | Minimum proof | Stop line |
+| 通道 | 最低证明 | 停止线 |
 |---|---|---|
-| HID click | A Manual pass whose step/note names `HID click`, with target, before state, after state, visible pointer/click behavior, and artifact path when useful. | Stop on missing click, wrong target, stuck press, pointer drift, or capture mismatch. |
-| HID swipe | A Manual pass whose step/note names `HID swipe`, with direction, distance, release, before/after screen movement, and artifact path. | Stop on inverted direction, wrong distance, no release, stuck press, or calibration drift. |
-| Keyboard input | A Manual pass whose step/note names `Keyboard input`, with focused field, expected text, actual visible text, input method state, and artifact path. | Stop on wrong focus, missing/duplicated text, keyboard language/input-method mismatch, or HID binding failure. |
+| HID 点击 | 一个 Manual 通过记录，其步骤/备注名称包含 `HID click`，包含目标、操作前状态、操作后状态、可见指针/点击行为，以及有用的工件路径。 | 在以下情况停止：缺失点击、目标错误、按压卡住、指针漂移或采集不匹配。 |
+| HID 滑动 | 一个 Manual 通过记录，其步骤/备注名称包含 `HID swipe`，包含方向、距离、释放、操作前后屏幕移动以及工件路径。 | 在以下情况停止：方向反转、距离错误、无释放、按压卡住或校准漂移。 |
+| 键盘输入 | 一个 Manual 通过记录，其步骤/备注名称包含 `Keyboard input`，包含聚焦字段、预期文本、实际可见文本、输入法状态以及工件路径。 | 在以下情况停止：焦点错误、文字缺失/重复、键盘语言/输入法不匹配或 HID 绑定失败。 |
 
-## Operator Flow
+## 操作者流程
 
-1. Run `Prepare`, fill Route Decision, run Doctor, and take a current screenshot.
-2. Open `P1 Trial` for the physical action sequence.
-3. Open `Ctrl Ledger`.
-4. Select `HID click`, `HID swipe`, or `Keyboard input`.
-5. Click `Record Pass` only after watching the physical iPhone respond.
-6. Click `Record Fail` when the visible result is wrong, then keep category and artifact/log path.
-7. Refresh `Ctrl Ledger`, then run Acceptance and Readiness for the same `run_id`.
+1. 运行 `Prepare`，填写 Route Decision，运行 Doctor，并拍摄当前截图。
+2. 打开 `P1 Trial` 进行物理动作序列。
+3. 打开 `Ctrl Ledger`。
+4. 选择 `HID click`、`HID swipe` 或 `Keyboard input`。
+5. 仅在观察到物理 iPhone 响应后点击 `Record Pass`。
+6. 当可见结果错误时点击 `Record Fail`，然后保留分类和工件/日志路径。
+7. 刷新 `Ctrl Ledger`，然后对相同的 `run_id` 运行 Acceptance 和 Readiness。
 
-## Generic Manual Rule
+## 通用 Manual 规则
 
-A broad Manual row such as "control smoke looked ok" is context only. It cannot close click, swipe, and text at the same time.
+类似"控制冒烟测试看起来正常"的通用 Manual 行仅为上下文信息。它不能同时关闭点击、滑动和文字通道。
 
-If `Generic Manual quarantine` is fail or warn, rewrite the field observation into three explicit Manual rows:
+如果 `Generic Manual quarantine` 为 fail 或 warn，则将现场观察重写为三个明确的 Manual 行：
 
 - `Control ledger - HID click`
 - `Control ledger - HID swipe`
 - `Control ledger - Keyboard input`
 
-Each row should describe the physical iPhone before/after state. API success, SDK success, exported Markdown, public-source research, or dry-run output cannot replace this.
+每行应描述物理 iPhone 的操作前/后状态。API 成功、SDK 成功、导出的 Markdown、公开来源研究或 dry-run 输出不能替代此记录。
 
-## Failure SOP
+## 失败 SOP
 
-When one lane fails:
+当一个通道失败时：
 
-| Failure category | First check | Evidence to keep | Rerun rule |
+| 失败分类 | 首先检查 | 需保留的证据 | 重跑规则 |
 |---|---|---|---|
-| `hid` | HID serial, firmware, Hub power, cable, AssistiveTouch pointer state. | HID id, COM/USB log, before/after screen artifact. | Rerun only the affected lane after rebinding HID. |
-| `calibration` | Active area, orientation, safe point, coordinate transform. | Screenshot with point, calibration profile, observed offset. | Redo calibration, then rerun click/swipe before scripts. |
-| `capture` | Receiver window, stale/black frame, orientation, wrong device. | Current screenshot, receiver log, window/display id. | Rerun Shot Bench before HID lanes. |
-| `business_state` | App/page focus, popup, keyboard/input state. | Page screenshot and operator note. | Reset page state, then rerun only the affected lane. |
-| `claim_boundary` | Acceptance, Readiness, exact device/iOS scope. | Reports and Evidence Pack. | Do not promote; collect missing same-run evidence. |
+| `hid` | HID 序列号、固件、Hub 电源、线缆、AssistiveTouch 指针状态。 | HID id、COM/USB 日志、操作前后屏幕工件。 | 重新绑定 HID 后仅重跑受影响通道。 |
+| `calibration` | 活动区域、方向、安全点、坐标变换。 | 带有标记点的截图、校准配置文件、观察到的偏移。 | 重新校准，然后在脚本之前重跑点击/滑动。 |
+| `capture` | 接收器窗口、过期/黑帧、方向、错误设备。 | 当前截图、接收器日志、窗口/显示 ID。 | 在 HID 通道之前重跑 Shot Bench。 |
+| `business_state` | 应用/页面焦点、弹窗、键盘/输入状态。 | 页面截图和操作者备注。 | 重置页面状态，然后仅重跑受影响通道。 |
+| `claim_boundary` | Acceptance、Readiness、精确设备/iOS 范围。 | 报告和 Evidence Pack。 | 不得升级；收集缺失的相同运行证据。 |
 
-## Claim Boundary
+## 声明边界
 
-`Ctrl Ledger` can make evidence review stricter, but it does not prove real iOS control by itself. P1 remains unverified until the same run has current screenshot quality, lane-specific Manual click/swipe/text passes, no unexplained fail events, Acceptance PASS, Readiness PASS, and exact device/iOS scope.
+`Ctrl Ledger` 可以使证据审查更严格，但它本身不能证明真实 iOS 控制。在相同运行具有当前截图质量、通道特定的 Manual 点击/滑动/文字通过记录、无未解释的失败事件、Acceptance PASS、Readiness PASS 以及精确的设备/iOS 范围之前，P1 仍然未经验证。

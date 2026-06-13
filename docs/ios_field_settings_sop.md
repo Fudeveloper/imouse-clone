@@ -1,4 +1,4 @@
-# iOS Field Settings SOP
+# iOS 现场设置 SOP
 
 本页描述 GUI 里的 `iOS SOP` 面板。它用于把真实 iPhone 开跑前必须确认的现场设置、物理台账和证据门集中到一张表里。
 

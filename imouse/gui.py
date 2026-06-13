@@ -1,4 +1,4 @@
-"""Tkinter control console for the XP-compatible iMouse prototype."""
+"""XP 兼容 iMouse 原型的 Tkinter 控制台。"""
 
 from __future__ import annotations
 
@@ -89,122 +89,122 @@ FAILURE_CATEGORIES = (
 PITFALL_LIBRARY_TOPICS = (
     {
         "key": "receiver_discovery",
-        "pitfall": "Receiver discovery and AirPlay naming",
+        "pitfall": "接收端发现与 AirPlay 命名",
         "categories": ("airplay_discovery",),
         "source": "docs/receiver_capture_selection.md",
-        "symptom": "iPhone cannot find the receiver, connects to the wrong receiver, or disappears after network changes.",
-        "likely_causes": "receiver name drift, firewall/LAN isolation, Bonjour/mDNS instability, duplicate AirPlay names, or operator selecting the wrong iPhone.",
-        "sop_check": "Route Decision must record receiver name/version/path/start command/AirPlay name and Doctor must be clean.",
-        "first_probe": "Run Doctor, start the chosen receiver, verify the AirPlay name from the iPhone, then take one screenshot.",
-        "stop_rule": "Stop if the receiver identity is ambiguous or the iPhone cannot discover the exact AirPlay target.",
+        "symptom": "iPhone 无法找到接收端、连接到错误的接收端，或在网络变化后消失。",
+        "likely_causes": "接收端名称漂移、防火墙/LAN 隔离、Bonjour/mDNS 不稳定、重复的 AirPlay 名称，或操作员选择了错误的 iPhone。",
+        "sop_check": "Route Decision 必须记录接收端名称/版本/路径/启动命令/AirPlay 名称，且 Doctor 必须干净。",
+        "first_probe": "运行 Doctor，启动选定的接收端，从 iPhone 验证 AirPlay 名称，然后截取一张截图。",
+        "stop_rule": "如果接收端身份不明确或 iPhone 无法发现确切的 AirPlay 目标，则停止。",
         "method": "run_preflight_doctor",
     },
     {
         "key": "receiver_stream_capture",
-        "pitfall": "Black screen, stale frame, or wrong capture window",
+        "pitfall": "黑屏、过时帧或错误捕获窗口",
         "categories": ("airplay_stream", "capture"),
         "source": "docs/receiver_capture_selection.md",
-        "symptom": "Screenshot is black/blank, low-texture, stale, cropped, rotated, or from another device/window.",
-        "likely_causes": "wrong capture provider/window handle, receiver decode issue, orientation mismatch, protected content, or stale screenshot cache.",
-        "sop_check": "Run Shot Bench and keep frame artifacts before any click/swipe/type claim.",
-        "first_probe": "Use Screenshot, Shot Bench, Timeline, and Attach Log before touching HID.",
-        "stop_rule": "Stop if screenshot quality is not pass; HID success cannot prove control without a current visible frame.",
+        "symptom": "截图为黑屏/空白、低纹理、过时、裁剪、旋转或来自其他设备/窗口。",
+        "likely_causes": "错误的捕获提供者/窗口句柄、接收端解码问题、方向不匹配、受保护内容或过时的截图缓存。",
+        "sop_check": "运行 Shot Bench 并在任何点击/滑动/输入声明之前保留帧证据。",
+        "first_probe": "在操作 HID 之前使用 Screenshot、Shot Bench、Timeline 和 Attach Log。",
+        "stop_rule": "如果截图质量未通过则停止；没有当前可见帧，HID 成功不能证明控制有效。",
         "method": "run_capture_quality_bench_from_gui",
     },
     {
         "key": "hid_no_response",
-        "pitfall": "HID command success but iPhone does not respond",
+        "pitfall": "HID 命令成功但 iPhone 无响应",
         "categories": ("hid",),
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "symptom": "API returns OK but pointer is missing, click does nothing, swipe sticks, text focus is wrong, or release is not observed.",
-        "likely_causes": "wrong serial port, OTG/cable power issue, firmware mismatch, AssistiveTouch/pointer settings, focus mismatch, or HID report timing.",
-        "sop_check": "Scan/bind the selected HID, verify iPhone pointer settings, then record Manual pass/fail for click/swipe/type.",
-        "first_probe": "Run P1 Trial or Control Bench with one safe click, one visible swipe release, and one ASCII text input.",
-        "stop_rule": "Stop if API/HID command success is not matched by Manual pass on the real iPhone.",
+        "symptom": "API 返回 OK 但指针缺失、点击无效、滑动卡住、文本焦点错误或释放未被观察到。",
+        "likely_causes": "错误的串口、OTG/线缆电源问题、固件不匹配、AssistiveTouch/指针设置、焦点不匹配或 HID 报告时序。",
+        "sop_check": "扫描/绑定选定的 HID，验证 iPhone 指针设置，然后记录点击/滑动/输入的 Manual 通过/失败。",
+        "first_probe": "使用一个安全点击、一个可见滑动释放和一个 ASCII 文本输入运行 P1 Trial 或 Control Bench。",
+        "stop_rule": "如果 API/HID 命令成功未在真实 iPhone 上得到 Manual 通过，则停止。",
         "method": "show_control_response_bench_from_gui",
     },
     {
         "key": "calibration_pointer_drift",
-        "pitfall": "Coordinate drift, wrong orientation, or inverted swipe",
+        "pitfall": "坐标漂移、方向错误或滑动反转",
         "categories": ("calibration",),
         "source": "docs/coordinate_calibration.md",
-        "symptom": "Click lands beside the target, swipe direction feels inverted, or coordinates work on one orientation/device only.",
-        "likely_causes": "active area mismatch, orientation drift, screenshot/capture scaling, device resolution differences, or reused calibration.",
-        "sop_check": "Calibrate from the current screenshot and keep five-point evidence for the same iPhone/orientation.",
-        "first_probe": "Use Screenshot -> Use Screenshot calibration -> P1 Trial safe target -> Manual observation.",
-        "stop_rule": "Stop if the target point cannot be explained from the current screenshot bounds.",
+        "symptom": "点击落在目标旁边、滑动方向感觉反转，或坐标仅在一种方向/设备上有效。",
+        "likely_causes": "活动区域不匹配、方向漂移、截图/捕获缩放、设备分辨率差异或复用的校准。",
+        "sop_check": "从当前截图进行校准，并为同一 iPhone/方向保留五点证据。",
+        "first_probe": "使用 Screenshot -> Use Screenshot 校准 -> P1 Trial 安全目标 -> Manual 观察。",
+        "stop_rule": "如果目标点无法从当前截图边界解释，则停止。",
         "method": "show_p1_trial_from_gui",
     },
     {
         "key": "vision_asset_drift",
-        "pitfall": "Template, color, OCR, or text recognition drift",
+        "pitfall": "模板、颜色、OCR 或文本识别漂移",
         "categories": ("vision_template", "vision_color", "ocr"),
         "source": "docs/script_runner.md",
-        "symptom": "Find-image/color/OCR works once then misses after brightness, theme, iOS version, page state, or device changes.",
-        "likely_causes": "tiny/low-texture templates, broad color tolerance, stale OCR cache/model, wrong region, or business-state drift.",
-        "sop_check": "Use Template Asset Index, fixed regions, screenshot artifacts, and replayable scenario JSON before blaming HID.",
-        "first_probe": "Open Assets, replace weak templates, restrict region, then rerun dry-run and the smallest real scenario.",
-        "stop_rule": "Stop if a recognition miss cannot be replayed from a saved screenshot artifact.",
+        "symptom": "Find-image/color/OCR 工作一次后，在亮度、主题、iOS 版本、页面状态或设备变化后识别失败。",
+        "likely_causes": "过小/低纹理模板、过宽的颜色容差、过时的 OCR 缓存/模型、错误区域或业务状态漂移。",
+        "sop_check": "在归咎于 HID 之前，使用 Template Asset Index、固定区域、截图证据和可重放的场景 JSON。",
+        "first_probe": "打开 Assets，替换弱模板，限制区域，然后重新运行 dry-run 和最小的真实场景。",
+        "stop_rule": "如果识别失败无法从保存的截图证据重放，则停止。",
         "method": "show_template_asset_manager",
     },
     {
         "key": "group_isolation",
-        "pitfall": "Group run hides per-device failure",
+        "pitfall": "群组运行隐藏单设备故障",
         "categories": ("group_dispatch",),
         "source": "docs/p2_p3_stability_runbook.md",
-        "symptom": "Batch action reports mixed results, one device fails silently, or a shared receiver/Hub/cable issue looks like script failure.",
-        "likely_causes": "group membership drift, shared Hub power, wrong device id mapping, missing per-device artifact, or aggregate-only error handling.",
-        "sop_check": "Use Matrix, Timeline, device groups, per-device artifacts, and unplug/replug isolation before scaling.",
-        "first_probe": "Run P1/P2 first, then P3 pilot_4 with per-device evidence and one-device failure injection.",
-        "stop_rule": "Stop scaling if a failure cannot be tied to device id, iPhone, HID, receiver, Hub port, cable, and artifact.",
+        "symptom": "批量操作报告混合结果、一个设备静默失败，或共享的接收端/Hub/线缆问题看起来像脚本故障。",
+        "likely_causes": "群组成员漂移、共享 Hub 电源、错误的设备 ID 映射、缺少单设备证据或仅聚合错误处理。",
+        "sop_check": "在扩展之前使用 Matrix、Timeline、设备群组、单设备证据和拔插隔离。",
+        "first_probe": "先运行 P1/P2，然后使用单设备证据和单设备故障注入运行 P3 pilot_4。",
+        "stop_rule": "如果故障无法关联到设备 ID、iPhone、HID、接收端、Hub 端口、线缆和证据，则停止扩展。",
         "method": "show_device_evidence_matrix_from_gui",
     },
     {
         "key": "performance_stability",
-        "pitfall": "Latency, reconnect, resource, or long-run instability",
+        "pitfall": "延迟、重连、资源或长时间运行不稳定",
         "categories": ("performance",),
         "source": "docs/p2_p3_stability_runbook.md",
-        "symptom": "Frames lag, receiver reconnects slowly, CPU/GPU spikes, HID delay grows, or long-running scripts drift.",
-        "likely_causes": "receiver decode path, hardware acceleration, Windows capture overhead, network jitter, Hub power, or missing watchdog metrics.",
-        "sop_check": "Collect metrics, callback/log events, 100 screenshots, and P2/P3/P4 run durations before scale claims.",
-        "first_probe": "Run Shot Bench, metrics/watchdog scenario, Callback, Attach Log, and Stage Dashboard.",
-        "stop_rule": "Stop P2/P3/P4 if metrics are missing or failures are not isolated by device and component.",
+        "symptom": "帧延迟、接收端重连缓慢、CPU/GPU 飙升、HID 延迟增大或长时间运行脚本漂移。",
+        "likely_causes": "接收端解码路径、硬件加速、Windows 捕获开销、网络抖动、Hub 电源或缺少看门狗指标。",
+        "sop_check": "在扩展声明之前收集指标、callback/日志事件、100 张截图和 P2/P3/P4 运行时长。",
+        "first_probe": "运行 Shot Bench、指标/看门狗场景、Callback、Attach Log 和 Stage Dashboard。",
+        "stop_rule": "如果缺少指标或故障未按设备和组件隔离，则停止 P2/P3/P4。",
         "method": "show_stage_dashboard_from_gui",
     },
     {
         "key": "business_state",
-        "pitfall": "Business page state changes underneath the script",
+        "pitfall": "业务页面状态在脚本运行期间发生变化",
         "categories": ("business_state",),
         "source": "docs/script_runner.md",
-        "symptom": "The same click reaches a different page, popup, login state, keyboard focus, or language/theme state.",
-        "likely_causes": "missing flow guards, app/page state drift, modal dialogs, keyboard/focus changes, or stale business assumptions.",
-        "sop_check": "Capture before/after screenshots, add state guards, and keep failure categories/artifacts with the script step.",
-        "first_probe": "Use Scenario Library, Timeline, Triage, and Review to replay the smallest failed business step.",
-        "stop_rule": "Stop if the script cannot prove precondition, action, and postcondition from artifacts.",
+        "symptom": "相同的点击到达不同的页面、弹窗、登录状态、键盘焦点或语言/主题状态。",
+        "likely_causes": "缺少流程守卫、应用/页面状态漂移、模态对话框、键盘/焦点变化或过时的业务假设。",
+        "sop_check": "捕获前后截图，添加状态守卫，并将故障类别/证据与脚本步骤关联。",
+        "first_probe": "使用 Scenario Library、Timeline、Triage 和 Review 来重放最小失败的业务步骤。",
+        "stop_rule": "如果脚本无法从证据中证明前置条件、操作和后置条件，则停止。",
         "method": "show_scenario_library_from_gui",
     },
     {
         "key": "claim_boundary",
-        "pitfall": "Offline/API/GUI success becomes an iOS control claim",
+        "pitfall": "离线/API/GUI 成功被误认为 iOS 控制声明",
         "categories": ("route_decision", "uncategorized"),
         "source": "docs/verification_plan.md",
-        "symptom": "A report, API response, dry-run, or dashboard is treated as proof that the real iPhone responded.",
-        "likely_causes": "missing Manual observation, missing screenshot quality, acceptance/readiness not run, or public XP claims copied into local claims.",
-        "sop_check": "Use Goals, Control Bench, Acceptance, Readiness, and Device/iOS Matrix before any promotion wording.",
-        "first_probe": "Run Goals, Control Bench, Acceptance, Readiness, and inspect real_ios_verified.",
-        "stop_rule": "Stop any perfect-control or XP-parity claim without JSONL evidence and Manual pass on the real iPhone.",
+        "symptom": "报告、API 响应、dry-run 或仪表盘被视为真实 iPhone 已响应的证明。",
+        "likely_causes": "缺少 Manual 观察、缺少截图质量检查、Acceptance/Readiness 未运行，或公开 XP 声明被复制为本地声明。",
+        "sop_check": "在任何提升声明之前使用 Goals、Control Bench、Acceptance、Readiness 和 Device/iOS Matrix。",
+        "first_probe": "运行 Goals、Control Bench、Acceptance、Readiness 并检查 real_ios_verified。",
+        "stop_rule": "如果没有 JSONL 证据和真实 iPhone 上的 Manual 通过，则停止任何完美控制或 XP 对等声明。",
         "method": "show_gui_goal_gate_from_gui",
     },
     {
         "key": "xp_hardware_parity",
-        "pitfall": "CH9329 prototype result is mistaken for XP hardware parity",
+        "pitfall": "CH9329 原型结果被误认为 XP 硬件对等",
         "categories": ("hid",),
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "symptom": "Generic HID click/swipe/type works, but XP dedicated hardware/4.4 firmware/auto-binding behavior is untested.",
-        "likely_causes": "no legal XP hardware sample, unobserved firmware behavior, hidden binding protocol, or unsupported mouse mode assumptions.",
-        "sop_check": "Keep XP hardware comparison separate from generic P1 and run same iPhone/page side-by-side when hardware is available.",
-        "first_probe": "Open XP Gap and Hardware Bench; compare CH9329 and XP hardware only with legal hardware and real artifacts.",
-        "stop_rule": "Stop XP dedicated hardware, 4.4 firmware, or auto-binding claims until side-by-side evidence exists.",
+        "symptom": "通用 HID 点击/滑动/输入有效，但 XP 专用硬件/4.4 固件/自动绑定行为未经测试。",
+        "likely_causes": "没有合法的 XP 硬件样品、未观察的固件行为、隐藏的绑定协议或不支持的鼠标模式假设。",
+        "sop_check": "将 XP 硬件比较与通用 P1 分开，并在硬件可用时在同一 iPhone/页面上进行对比。",
+        "first_probe": "打开 XP Gap 和 Hardware Bench；仅使用合法硬件和真实证据比较 CH9329 和 XP 硬件。",
+        "stop_rule": "在存在对比证据之前，停止 XP 专用硬件、4.4 固件或自动绑定声明。",
         "method": "write_xp_gap_audit_from_gui",
     },
 )
@@ -212,110 +212,110 @@ PITFALL_LIBRARY_TOPICS = (
 MAINSTREAM_ROUTE_TOPICS = (
     {
         "key": "mainline_decision",
-        "lane": "XP-style black-box route",
+        "lane": "XP 风格黑盒路线",
         "role": "mainline",
         "route_type": "receiver + screenshot + USB HID + local kernel API",
         "source": "docs/industry_sop_playbook.md",
-        "fit": "Closest to iMouse XP's no-jailbreak, no-phone-app, cross-app pixel-control model.",
-        "p1_gate": "Route Decision ready, Doctor clean, current screenshot, HID manual pass, Acceptance and Readiness.",
-        "evidence": "route JSON/report, doctor report, screenshot artifact, manual click/swipe/type, acceptance, readiness.",
-        "stop_rule": "Stop if any part is only API/dry-run/GUI evidence without real iPhone observation.",
+        "fit": "最接近 iMouse XP 的免越狱、免手机应用、跨应用像素控制模型。",
+        "p1_gate": "Route Decision 就绪、Doctor 干净、当前截图、HID 手动通过、Acceptance 和 Readiness。",
+        "evidence": "路由 JSON/报告、Doctor 报告、截图证据、手动点击/滑动/输入、验收和就绪。",
+        "stop_rule": "如果任何部分仅有 API/dry-run/GUI 证据而无真实 iPhone 观察，则停止。",
         "method": "show_field_evidence_wizard_from_gui",
     },
     {
         "key": "uxplay_receiver",
-        "lane": "UxPlay AirPlay receiver",
+        "lane": "UxPlay AirPlay 接收端",
         "role": "prototype_receiver",
-        "route_type": "wireless AirPlay receiver",
+        "route_type": "无线 AirPlay 接收端",
         "source": "docs/receiver_capture_selection.md",
-        "fit": "Useful for P1 prototype capture when installed and uniquely discoverable.",
-        "p1_gate": "receiver.route=uxplay, uxplay installed, iPhone sees exact AirPlay name, screenshot quality pass.",
-        "evidence": "provider/version/path/start command/AirPlay name plus Shot Bench artifacts.",
-        "stop_rule": "Stop if uxplay is missing, window capture is not automatable, or frames are black/stale.",
+        "fit": "在安装且可唯一发现时，适用于 P1 原型捕获。",
+        "p1_gate": "receiver.route=uxplay、uxplay 已安装、iPhone 可看到确切 AirPlay 名称、截图质量通过。",
+        "evidence": "提供者/版本/路径/启动命令/AirPlay 名称加 Shot Bench 证据。",
+        "stop_rule": "如果 uxplay 缺失、窗口捕获不可自动化或帧为黑屏/过时，则停止。",
         "method": "run_preflight_doctor",
     },
     {
         "key": "windows_receiver",
-        "lane": "Windows receiver/window capture",
+        "lane": "Windows 接收端/窗口捕获",
         "role": "product_receiver_candidate",
-        "route_type": "native Windows receiver or stable window capture",
+        "route_type": "原生 Windows 接收端或稳定窗口捕获",
         "source": "docs/receiver_capture_selection.md",
-        "fit": "More aligned with XP desktop productization than the Linux/X11 prototype path.",
-        "p1_gate": "receiver.route=windows_receiver and a fixed process/window/capture method can be recorded.",
-        "evidence": "receiver name/version/window title/process/capture method/license status and repeated screenshots.",
-        "stop_rule": "Stop if the receiver is only human-visible and cannot produce code-captured frames.",
+        "fit": "比 Linux/X11 原型路径更符合 XP 桌面产品化方向。",
+        "p1_gate": "receiver.route=windows_receiver 且可记录固定的进程/窗口/捕获方法。",
+        "evidence": "接收端名称/版本/窗口标题/进程/捕获方法/许可证状态和重复截图。",
+        "stop_rule": "如果接收端仅人工可见且无法产生代码捕获的帧，则停止。",
         "method": "edit_route_decision_from_gui",
     },
     {
         "key": "wired_projection",
-        "lane": "Wired projection/vendor SDK",
+        "lane": "有线投屏/供应商 SDK",
         "role": "product_receiver_candidate",
-        "route_type": "wired projection, vendor SDK, or dedicated driver",
+        "route_type": "有线投屏、供应商 SDK 或专用驱动",
         "source": "docs/receiver_capture_selection.md",
-        "fit": "Potentially stronger for latency and stability, but only if frames/logs/device identity are accessible.",
-        "p1_gate": "receiver.route=wired, device identity is traceable, frames can be captured automatically.",
-        "evidence": "driver/version/cable/port/capture method/latency/reconnect log and screenshot artifacts.",
-        "stop_rule": "Stop if the route is a closed manual viewer with no frame capture or device binding evidence.",
+        "fit": "在延迟和稳定性方面可能更强，但前提是帧/日志/设备身份可访问。",
+        "p1_gate": "receiver.route=wired、设备身份可追踪、帧可自动捕获。",
+        "evidence": "驱动/版本/线缆/端口/捕获方法/延迟/重连日志和截图证据。",
+        "stop_rule": "如果该路线是封闭的手动查看器，没有帧捕获或设备绑定证据，则停止。",
         "method": "show_hardware_bench_from_gui",
     },
     {
         "key": "capture_card",
-        "lane": "Capture card visual lane",
+        "lane": "采集卡视觉通道",
         "role": "benchmark_or_fallback",
-        "route_type": "external HDMI/capture card lane",
+        "route_type": "外部 HDMI/采集卡通道",
         "source": "docs/receiver_capture_selection.md",
-        "fit": "Good for screenshot-quality comparison and fallback visibility, weak for XP-style auto binding.",
-        "p1_gate": "receiver.route=capture_card, frame quality stable, latency and resolution recorded.",
-        "evidence": "capture card model, resolution, latency, artifact samples, and device mapping notes.",
-        "stop_rule": "Do not treat capture-card visibility as XP wired projection, hardware decode, or auto-binding parity.",
+        "fit": "适用于截图质量比较和备用可见性，在 XP 风格自动绑定方面较弱。",
+        "p1_gate": "receiver.route=capture_card、帧质量稳定、延迟和分辨率已记录。",
+        "evidence": "采集卡型号、分辨率、延迟、证据样本和设备映射备注。",
+        "stop_rule": "不要将采集卡可见性视为 XP 有线投屏、硬件解码或自动绑定对等。",
         "method": "run_capture_quality_bench_from_gui",
     },
     {
         "key": "ch9329_hid",
-        "lane": "CH9329/general USB HID",
+        "lane": "CH9329/通用 USB HID",
         "role": "prototype_hid",
-        "route_type": "USB mouse/keyboard injection",
+        "route_type": "USB 鼠标/键盘注入",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "fit": "Best low-cost P1 route for proving iOS pointer, click, swipe, and keyboard input.",
-        "p1_gate": "hid.route=ch9329, serial/HID id recorded, iPhone pointer settings checked, manual pass for click/swipe/type.",
-        "evidence": "serial/HID id, firmware/module id, cable/Hub port, manual observations, HID logs.",
-        "stop_rule": "Generic HID success does not prove XP dedicated hardware, 4.4 firmware, or auto-binding.",
+        "fit": "证明 iOS 指针、点击、滑动和键盘输入的最佳低成本 P1 路线。",
+        "p1_gate": "hid.route=ch9329、serial/HID ID 已记录、iPhone 指针设置已检查、点击/滑动/输入手动通过。",
+        "evidence": "serial/HID ID、固件/模块 ID、线缆/Hub 端口、手动观察、HID 日志。",
+        "stop_rule": "通用 HID 成功不能证明 XP 专用硬件、4.4 固件或自动绑定。",
         "method": "show_control_response_bench_from_gui",
     },
     {
         "key": "xp_hardware",
-        "lane": "XP dedicated hardware",
+        "lane": "XP 专用硬件",
         "role": "xp_parity_lane",
-        "route_type": "dedicated XP hardware/firmware",
+        "route_type": "专用 XP 硬件/固件",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "fit": "Required for strict XP hardware, 4.4 firmware, and auto-binding parity claims.",
-        "p1_gate": "hid.route=xp_hardware and legal hardware is compared side-by-side on the same iPhone/page.",
-        "evidence": "hardware id, firmware, authorization state, binding behavior, coordinate error, same-page comparison.",
-        "stop_rule": "Stop XP parity claims until legal XP hardware side-by-side evidence exists.",
+        "fit": "严格的 XP 硬件、4.4 固件和自动绑定对等声明所必需。",
+        "p1_gate": "hid.route=xp_hardware 且在同一 iPhone/页面上与合法硬件进行对比。",
+        "evidence": "硬件 ID、固件、授权状态、绑定行为、坐标误差、同页对比。",
+        "stop_rule": "在存在合法 XP 硬件对比证据之前停止 XP 对等声明。",
         "method": "show_hardware_bench_from_gui",
     },
     {
         "key": "wda_appium",
         "lane": "WDA/Appium/XCUITest",
         "role": "non_mainline",
-        "route_type": "automation test framework",
+        "route_type": "自动化测试框架",
         "source": "docs/industry_sop_playbook.md",
-        "fit": "Useful for own-app testing, not aligned with XP-style cross-app black-box control.",
-        "p1_gate": "Do not use as mainline for XP clone unless the product goal changes to own-app QA.",
-        "evidence": "Documented as rejected/auxiliary route; no iOS black-box control claim.",
-        "stop_rule": "Stop if this is being used to claim no-phone-app cross-app control.",
+        "fit": "适用于自有应用测试，不符合 XP 风格跨应用黑盒控制。",
+        "p1_gate": "除非产品目标变更为自有应用 QA，否则不要用作 XP 克隆主线。",
+        "evidence": "记录为拒绝/辅助路线；无 iOS 黑盒控制声明。",
+        "stop_rule": "如果被用于声明免手机应用跨应用控制，则停止。",
         "method": "show_gui_knowledge_center_from_gui",
     },
     {
         "key": "mdm_shortcuts",
         "lane": "MDM/Configurator/Shortcuts",
         "role": "auxiliary_ops",
-        "route_type": "device setup and operational helper",
+        "route_type": "设备设置和运维辅助",
         "source": "docs/industry_sop_playbook.md",
-        "fit": "Useful for enrollment, setup, network, and compliance, not pixel-level group control.",
-        "p1_gate": "Can support setup SOP but cannot replace receiver, screenshot, HID, and manual observation.",
-        "evidence": "Setup checklist and device state notes; no click/swipe/type proof.",
-        "stop_rule": "Stop if setup tooling is being counted as iOS control evidence.",
+        "fit": "适用于注册、设置、网络和合规，不适合像素级群组控制。",
+        "p1_gate": "可支持设置 SOP 但不能替代接收端、截图、HID 和手动观察。",
+        "evidence": "设置清单和设备状态备注；无点击/滑动/输入证明。",
+        "stop_rule": "如果设置工具被计入 iOS 控制证据，则停止。",
         "method": "show_field_kit_gate_from_gui",
     },
 )
@@ -323,118 +323,118 @@ MAINSTREAM_ROUTE_TOPICS = (
 XP_ARCHITECTURE_LAYERS = (
     {
         "key": "product_boundary",
-        "layer": "Product boundary",
-        "xp_signal": "XP is positioned as no-app/no-jailbreak iPhone control with dedicated virtual mouse/keyboard hardware, AirPlay/projection, Console, local Kernel/API, OpenCV, OCR, and Python automation.",
+        "layer": "产品边界",
+        "xp_signal": "XP 定位为免应用/免越狱 iPhone 控制，配备专用虚拟鼠标/键盘硬件、AirPlay/投屏、Console、本地 Kernel/API、OpenCV、OCR 和 Python 自动化。",
         "source": "https://www.imouse.cc/",
         "source_doc": "docs/imouse_xp_architecture_map.md",
-        "principle": "Treat XP as a hardware-backed black-box control stack, not as Appium/WDA-style app automation.",
-        "local_surface": "Knowledge, Industry, Routes, Core, XP Gap, Goals, and Follow-Along Test Method.",
-        "proof_gate": "Route Decision, receiver/capture evidence, HID/manual evidence, Acceptance, Readiness, and exact claim wording.",
-        "stop_rule": "Stop if a public XP claim is copied into local wording without same-run evidence.",
+        "principle": "将 XP 视为硬件支撑的黑盒控制栈，而非 Appium/WDA 风格的应用自动化。",
+        "local_surface": "Knowledge、Industry、Routes、Core、XP Gap、Goals 和 Follow-Along Test Method。",
+        "proof_gate": "Route Decision、接收端/捕获证据、HID/手动证据、Acceptance、Readiness 和精确声明措辞。",
+        "stop_rule": "如果公开 XP 声明被复制到本地措辞中且无同运行证据，则停止。",
         "method": "show_gui_goal_gate_from_gui",
         "gap_fragments": ("receiver/capture", "usb/hid", "kernel/api"),
     },
     {
         "key": "hardware_usb_hid",
-        "layer": "Hardware and USB/HID",
-        "xp_signal": "XP public Python material requires iMouse dedicated hardware; help/iteration material points to firmware and binding behavior.",
+        "layer": "硬件和 USB/HID",
+        "xp_signal": "XP 公开 Python 材料需要 iMouse 专用硬件；帮助/迭代材料指向固件和绑定行为。",
         "source": "https://www.imouse.cc/python-xp/",
         "source_doc": "docs/hid_hardware_protocol_benchmark.md",
-        "principle": "Input authority comes from hardware-backed mouse/keyboard behavior on the real iPhone.",
-        "local_surface": "CH9329/general HID prototype, Hardware Bench, Control Bench, P1 Trial, Manual observation.",
-        "proof_gate": "HID identity, firmware/module id, Hub/cable map, click/swipe/type/manual pass, release observation, and side-by-side XP hardware artifact for parity claims.",
-        "stop_rule": "Stop XP hardware/4.4/auto-binding claims without legal side-by-side XP hardware evidence.",
+        "principle": "输入权威来自真实 iPhone 上硬件支撑的鼠标/键盘行为。",
+        "local_surface": "CH9329/通用 HID 原型、Hardware Bench、Control Bench、P1 Trial、Manual 观察。",
+        "proof_gate": "HID 身份、固件/模块 ID、Hub/线缆映射、点击/滑动/输入/手动通过、释放观察，以及用于对等声明的对比 XP 硬件证据。",
+        "stop_rule": "在没有合法对比 XP 硬件证据的情况下停止 XP 硬件/4.4/自动绑定声明。",
         "method": "show_control_response_bench_from_gui",
         "gap_fragments": ("usb/hid", "mouse/keyboard"),
     },
     {
         "key": "projection_receiver",
-        "layer": "Projection and receiver",
-        "xp_signal": "XP depends on AirPlay/projection visibility and public help signals include Windows service, separated windows, wired projection, fast projection, and hardware decode.",
+        "layer": "投屏和接收端",
+        "xp_signal": "XP 依赖 AirPlay/投屏可见性，公开帮助信号包括 Windows 服务、分离窗口、有线投屏、快速投屏和硬件解码。",
         "source": "https://www.imouse.cc/XP%E7%89%88%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/",
         "source_doc": "docs/receiver_capture_selection.md",
-        "principle": "The receiver is a product lane: stable discovery, binding, capture, decode, reconnect, and logs.",
-        "local_surface": "UxPlay/Windows/wired/capture-card candidate routes, Rx Score, Rx Bootstrap, Rx Setup, Receiver Gate, Shot Bench.",
-        "proof_gate": "Receiver route metadata, Doctor/provider check, non-black current screenshots, window/device binding, fps/latency/log artifacts.",
-        "stop_rule": "Stop before HID if frame capture is black, stale, wrong-window, wrong-device, cropped, or undocumented.",
+        "principle": "接收端是产品通道：稳定发现、绑定、捕获、解码、重连和日志。",
+        "local_surface": "UxPlay/Windows/有线/采集卡候选路线、Rx Score、Rx Bootstrap、Rx Setup、Receiver Gate、Shot Bench。",
+        "proof_gate": "接收端路线元数据、Doctor/提供者检查、非黑当前截图、窗口/设备绑定、fps/延迟/日志证据。",
+        "stop_rule": "如果帧捕获为黑屏、过时、错误窗口、错误设备、裁剪或未记录，在 HID 之前停止。",
         "method": "show_receiver_candidate_scorecard_from_gui",
         "gap_fragments": ("receiver/capture",),
     },
     {
         "key": "capture_vision",
-        "layer": "Capture, vision, OCR",
-        "xp_signal": "XP advertises OpenCV image recognition and OCR; API/helper domains include screenshot, image, color, OCR/text-style automation.",
+        "layer": "捕获、视觉、OCR",
+        "xp_signal": "XP 宣传 OpenCV 图像识别和 OCR；API/辅助域包括截图、图像、颜色、OCR/文本风格自动化。",
         "source": "https://www.imouse.cc/",
         "source_doc": "docs/script_runner.md",
-        "principle": "Automation decisions are made from current screenshots and replayable visual artifacts.",
-        "local_surface": "Screenshot API, GUI preview, Template Asset Index, find-image/color/OCR helpers, Scenario Library.",
-        "proof_gate": "Current screenshot quality, saved assets, regions/thresholds, real OCR/image/color events, failure replay artifacts.",
-        "stop_rule": "Stop if a recognition miss cannot be replayed from saved screenshots and template/config artifacts.",
+        "principle": "自动化决策基于当前截图和可重放的视觉证据。",
+        "local_surface": "Screenshot API、GUI 预览、Template Asset Index、find-image/color/OCR 辅助、Scenario Library。",
+        "proof_gate": "当前截图质量、已保存资源、区域/阈值、真实 OCR/图像/颜色事件、故障重放证据。",
+        "stop_rule": "如果识别失败无法从保存的截图和模板/配置证据重放，则停止。",
         "method": "show_template_asset_manager",
         "gap_fragments": ("vision/image/color", "ocr"),
     },
     {
         "key": "kernel_api",
-        "layer": "Kernel/API service",
-        "xp_signal": "XP API docs expose a local 9911 service, HTTP/WebSocket, /api, fun, msgid, and status/message/data response contract.",
+        "layer": "Kernel/API 服务",
+        "xp_signal": "XP API 文档公开本地 9911 服务、HTTP/WebSocket、/api、fun、msgid 和 status/message/data 响应契约。",
         "source": "https://www.imouse.cc/XP%E7%89%88API%E6%96%87%E6%A1%A3/",
         "source_doc": "docs/xp_api_compat.md",
-        "principle": "Console, GUI, scripts, and Python helpers should cross the same service/evidence boundary.",
-        "local_surface": "FastAPI XP-compatible service, /api fun dispatch, WebSocket alias, XpApiClient, callback/event contract.",
-        "proof_gate": "API/client/WebSocket tests plus field events that preserve receiver/HID/capture error truth.",
-        "stop_rule": "Stop if HTTP 200 or GUI success hides device, receiver, capture, HID, callback, or log failure.",
+        "principle": "Console、GUI、脚本和 Python 辅助应跨越相同的服务/证据边界。",
+        "local_surface": "FastAPI XP 兼容服务、/api fun 调度、WebSocket 别名、XpApiClient、callback/事件契约。",
+        "proof_gate": "API/客户端/WebSocket 测试加上保留接收端/HID/捕获错误真相的现场事件。",
+        "stop_rule": "如果 HTTP 200 或 GUI 成功隐藏了设备、接收端、捕获、HID、callback 或日志故障，则停止。",
         "method": "show_xp_event_error_contract_from_gui",
         "gap_fragments": ("kernel/api",),
     },
     {
         "key": "python_sdk",
-        "layer": "Python helper and script runtime",
-        "xp_signal": "Python XP material exposes helper domains for console/device/AirPlay/USB/group/image/keyboard/mouse/shortcut/events/logging and requires XP hardware.",
+        "layer": "Python 辅助和脚本运行时",
+        "xp_signal": "Python XP 材料公开 console/device/AirPlay/USB/group/image/keyboard/mouse/shortcut/events/logging 辅助域，并需要 XP 硬件。",
         "source": "https://www.imouse.cc/python-xp/",
         "source_doc": "docs/xp_api_compat.md",
-        "principle": "SDK shape is an integration contract, not hardware proof.",
-        "local_surface": "XpApiClient, JSON script runner, command queue, dry-run guard, batch helpers, metrics and artifacts.",
-        "proof_gate": "Pinned helper behavior, local compatibility tests, dry-run, then real-run JSONL using the same helpers.",
-        "stop_rule": "Stop SDK parity claims if helper calls pass locally but no hardware-backed iPhone response is observed.",
+        "principle": "SDK 形态是集成契约，不是硬件证明。",
+        "local_surface": "XpApiClient、JSON 脚本运行器、命令队列、dry-run 守卫、批量辅助、指标和证据。",
+        "proof_gate": "固定辅助行为、本地兼容性测试、dry-run，然后使用相同辅助进行真实运行 JSONL。",
+        "stop_rule": "如果辅助调用本地通过但未观察到硬件支撑的 iPhone 响应，则停止 SDK 对等声明。",
         "method": "show_local_verification_from_gui",
         "gap_fragments": ("python sdk", "script runtime"),
     },
     {
         "key": "console_gui",
-        "layer": "Console/GUI operator layer",
-        "xp_signal": "XP separates kernel/service behavior from a Console-style operator surface.",
+        "layer": "Console/GUI 操作员层",
+        "xp_signal": "XP 将内核/服务行为与 Console 风格的操作员界面分离。",
         "source": "https://www.imouse.cc/",
         "source_doc": "docs/gui_prototype.md",
-        "principle": "The GUI must guide operators through evidence, route, bench, triage, and handoff, not manufacture proof.",
-        "local_surface": "Tkinter GUI, Live Probe, Home, Verify, Local, Coach, Transcript, Pack, Dashboard, XP Gap.",
-        "proof_gate": "Operator can follow the exported SOP and a second person can reproduce the same run from artifacts.",
-        "stop_rule": "Stop if a GUI export is being counted as a screenshot, HID, or real-iPhone observation.",
+        "principle": "GUI 必须引导操作员完成证据、路线、基准、分诊和交接，而非制造证明。",
+        "local_surface": "Tkinter GUI、Live Probe、Home、Verify、Local、Coach、Transcript、Pack、Dashboard、XP Gap。",
+        "proof_gate": "操作员可遵循导出的 SOP，第二人可从证据重现相同运行。",
+        "stop_rule": "如果 GUI 导出被计入截图、HID 或真实 iPhone 观察，则停止。",
         "method": "show_operator_home_from_gui",
         "gap_fragments": ("gui console",),
     },
     {
         "key": "evidence_readiness",
-        "layer": "Evidence and readiness",
-        "xp_signal": "A productized control stack needs traceable run state, logs, callbacks, failure categories, and stage gates.",
+        "layer": "证据和就绪",
+        "xp_signal": "产品化控制栈需要可追踪的运行状态、日志、callback、故障类别和阶段门控。",
         "source": "docs/validation_evidence.md",
         "source_doc": "docs/validation_evidence.md",
-        "principle": "Claims are derived from same-run evidence, not from intent, public sources, or green local checks alone.",
-        "local_surface": "ValidationRecorder JSONL, Acceptance, Readiness, Timeline, Matrix, Triage, Recovery, Evidence Pack.",
-        "proof_gate": "Component metadata, screenshot quality, manual observation, no unexplained fails, Acceptance PASS, Readiness PASS.",
-        "stop_rule": "Stop any control or parity claim when evidence, Acceptance, Readiness, or real_ios_verified is missing or stale.",
+        "principle": "声明源自同运行证据，而非意图、公开来源或仅本地通过的检查。",
+        "local_surface": "ValidationRecorder JSONL、Acceptance、Readiness、Timeline、Matrix、Triage、Recovery、Evidence Pack。",
+        "proof_gate": "组件元数据、截图质量、手动观察、无不解释的失败、Acceptance PASS、Readiness PASS。",
+        "stop_rule": "当证据、Acceptance、Readiness 或 real_ios_verified 缺失或过时时，停止任何控制或对等声明。",
         "method": "run_readiness_audit",
         "gap_fragments": ("observability",),
     },
     {
         "key": "group_ops",
-        "layer": "Group control and ops",
-        "xp_signal": "XP value expands through device/group management, LAN visibility, cloud groups, subaccounts, logs, shortcuts, and operations.",
+        "layer": "群组控制和运维",
+        "xp_signal": "XP 价值通过设备/群组管理、LAN 可见性、云群组、子账户、日志、快捷方式和运维扩展。",
         "source": "https://www.imouse.cc/XP%E7%89%88%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/",
         "source_doc": "docs/p2_p3_stability_runbook.md",
-        "principle": "Scale only after single-device proof; every group failure must stay per-device and explainable.",
-        "local_surface": "Groups, Matrix, Stage Dashboard, metrics, callback/log ingestion, Recovery, P2/P3/P4 runbooks.",
-        "proof_gate": "P2 stability, P3 pilot_4, P4 stable_10, per-device artifacts, metrics, logs, and recovery notes.",
-        "stop_rule": "Stop scaling if one device failure hides behind aggregate success.",
+        "principle": "仅在单设备证明之后扩展；每个群组故障必须保持单设备可解释。",
+        "local_surface": "Groups、Matrix、Stage Dashboard、指标、callback/日志摄取、Recovery、P2/P3/P4 Runbook。",
+        "proof_gate": "P2 稳定性、P3 pilot_4、P4 stable_10、单设备证据、指标、日志和恢复备注。",
+        "stop_rule": "如果一个设备故障隐藏在聚合成功之后，则停止扩展。",
         "method": "show_stage_dashboard_from_gui",
         "gap_fragments": ("device/group", "commercial/ops", "observability"),
     },
@@ -443,121 +443,121 @@ XP_ARCHITECTURE_LAYERS = (
 XP_HARDWARE_LAB_TOPICS = (
     {
         "key": "route_procurement_ledger",
-        "lane": "Route and procurement ledger",
+        "lane": "路线和采购台账",
         "source": "docs/mainstream_route_decision.md",
         "source_doc": "docs/mainstream_route_decision.md",
-        "buy_decision": "Pick one receiver lane, one HID lane, one iPhone, one hub/cable path, and one operator for the current run_id.",
-        "lab_test": "Route Init/Edit -> Checklist -> Validate -> Doctor before any real HID action.",
-        "evidence_required": "Route Decision JSON/report, Doctor report, and component metadata with no placeholders.",
-        "stop_rule": "Stop if route fields are copied, placeholder-shaped, or not tied to today's hardware.",
+        "buy_decision": "为当前 run_id 选择一个接收端通道、一个 HID 通道、一个 iPhone、一个 Hub/线缆路径和一个操作员。",
+        "lab_test": "Route Init/Edit -> Checklist -> Validate -> Doctor，然后才进行真实 HID 操作。",
+        "evidence_required": "Route Decision JSON/报告、Doctor 报告和无占位符的组件元数据。",
+        "stop_rule": "如果路由字段是复制的、占位符形状的或未绑定到今天的硬件，则停止。",
         "method": "edit_route_decision_from_gui",
         "gap_fragments": ("receiver/capture", "usb/hid", "observability"),
     },
     {
         "key": "receiver_capture_rig",
-        "lane": "Receiver/capture rig",
+        "lane": "接收端/捕获装置",
         "source": "docs/receiver_capture_selection.md",
         "source_doc": "docs/receiver_capture_selection.md",
-        "buy_decision": "Compare UxPlay, Windows receiver, wired projection, and capture-card fallback by automatable frame capture, device binding, logs, latency, and licensing.",
-        "lab_test": "Rx Score -> Rx Bootstrap -> Rx Setup -> Receiver -> Doctor -> Shot Bench with repeated non-black current frames.",
-        "evidence_required": "Receiver route/name/version/path/start command/AirPlay name/window binding plus screenshot artifacts.",
-        "stop_rule": "Stop before HID if frames are black, stale, cropped, wrong-window, or not bound to one iPhone.",
+        "buy_decision": "通过可自动化的帧捕获、设备绑定、日志、延迟和许可证比较 UxPlay、Windows 接收端、有线投屏和采集卡备选。",
+        "lab_test": "Rx Score -> Rx Bootstrap -> Rx Setup -> Receiver -> Doctor -> Shot Bench，使用重复的非黑当前帧。",
+        "evidence_required": "接收端路线/名称/版本/路径/启动命令/AirPlay 名称/窗口绑定加截图证据。",
+        "stop_rule": "如果帧为黑屏、过时、裁剪、错误窗口或未绑定到一个 iPhone，在 HID 之前停止。",
         "method": "show_receiver_candidate_scorecard_from_gui",
         "gap_fragments": ("receiver/capture",),
     },
     {
         "key": "windows_wired_decode_lane",
-        "lane": "Windows/wired/decode lane",
+        "lane": "Windows/有线/解码通道",
         "source": "docs/imouse_xp_iteration_lessons.md",
         "source_doc": "docs/imouse_xp_iteration_lessons.md",
-        "buy_decision": "Treat Windows receiver, wired projection, hardware decode, separated windows, and reconnect logs as productization work beyond the UxPlay prototype.",
-        "lab_test": "Bench selected receiver candidates with fps/latency/reconnect notes and a 100-screenshot stability run.",
-        "evidence_required": "Selected receiver candidate, capture method, decode/fps/latency notes, reconnect log, and screenshot sample set.",
-        "stop_rule": "Do not claim XP fast projection, wired route, or hardware decode until the selected route has measured artifacts.",
+        "buy_decision": "将 Windows 接收端、有线投屏、硬件解码、分离窗口和重连日志视为 UxPlay 原型之外的产品化工作。",
+        "lab_test": "使用 fps/延迟/重连备注和 100 张截图稳定性运行对选定接收端候选进行基准测试。",
+        "evidence_required": "选定的接收端候选、捕获方法、解码/fps/延迟备注、重连日志和截图样本集。",
+        "stop_rule": "在选定路线有测量证据之前，不要声明 XP 快速投屏、有线路线或硬件解码。",
         "method": "show_hardware_bench_from_gui",
         "gap_fragments": ("receiver/capture", "performance"),
     },
     {
         "key": "hid_controller_rig",
-        "lane": "HID controller rig",
+        "lane": "HID 控制器装置",
         "source": "docs/hid_hardware_protocol_benchmark.md",
         "source_doc": "docs/hid_hardware_protocol_benchmark.md",
-        "buy_decision": "Use CH9329/self-built HID for low-cost P1 proof; keep XP dedicated hardware and Bluetooth as separate lanes.",
-        "lab_test": "Control Bench and P1 Trial: safe click, visible swipe release, ASCII text input, focus/key behavior, and failure category.",
-        "evidence_required": "HID route/provider/id/firmware/serial, hub/cable map, manual click/swipe/type observations, and HID logs.",
-        "stop_rule": "Stop if serial/API success is not matched by visible iPhone response.",
+        "buy_decision": "使用 CH9329/自制 HID 进行低成本 P1 证明；将 XP 专用硬件和蓝牙保持为独立通道。",
+        "lab_test": "Control Bench 和 P1 Trial：安全点击、可见滑动释放、ASCII 文本输入、焦点/按键行为和故障类别。",
+        "evidence_required": "HID 路线/提供者/ID/固件/序列号、Hub/线缆映射、手动点击/滑动/输入观察和 HID 日志。",
+        "stop_rule": "如果 serial/API 成功未匹配到可见的 iPhone 响应，则停止。",
         "method": "show_control_response_bench_from_gui",
         "gap_fragments": ("usb/hid", "mouse/keyboard"),
     },
     {
         "key": "xp_dedicated_hardware_parity",
-        "lane": "XP dedicated hardware parity",
+        "lane": "XP 专用硬件对等",
         "source": "docs/hid_hardware_protocol_benchmark.md",
         "source_doc": "docs/hid_hardware_protocol_benchmark.md",
-        "buy_decision": "Acquire legal XP hardware only for comparison; do not infer XP firmware, 4.4 behavior, or auto-binding from CH9329.",
-        "lab_test": "Run the same iPhone, page, receiver, coordinates, click/swipe/type, release timing, and logs side by side when legal XP hardware is available.",
-        "evidence_required": "XP hardware id, firmware, authorization state, binding behavior, same-page artifacts, coordinate error, and operator transcript.",
-        "stop_rule": "Stop XP hardware parity wording without legal side-by-side hardware evidence.",
+        "buy_decision": "仅获取合法 XP 硬件用于比较；不要从 CH9329 推断 XP 固件、4.4 行为或自动绑定。",
+        "lab_test": "当合法 XP 硬件可用时，在同一 iPhone、页面、接收端、坐标、点击/滑动/输入、释放时序和日志上并行运行。",
+        "evidence_required": "XP 硬件 ID、固件、授权状态、绑定行为、同页证据、坐标误差和操作员记录。",
+        "stop_rule": "没有合法对比硬件证据时停止 XP 硬件对等措辞。",
         "method": "show_xp_architecture_map_from_gui",
         "gap_fragments": ("usb/hid", "mouse/keyboard"),
     },
     {
         "key": "iphone_settings_fixture",
-        "lane": "iPhone settings fixture",
+        "lane": "iPhone 设置装置",
         "source": "docs/ios_field_settings_sop.md",
         "source_doc": "docs/ios_field_settings_sop.md",
-        "buy_decision": "Treat iPhone model/iOS/AssistiveTouch/pointer speed/orientation as reusable lab fixtures, not operator memory.",
-        "lab_test": "iOS SOP -> baseline screenshot -> P1 Trial -> Control Bench for the selected iPhone and orientation.",
-        "evidence_required": "iPhone id/model/iOS/orientation, AssistiveTouch, pointer profile, baseline screenshot, and manual observations.",
-        "stop_rule": "Stop calibration or script reuse if settings are unknown, copied, or not tied to current evidence.",
+        "buy_decision": "将 iPhone 型号/iOS/AssistiveTouch/指针速度/方向视为可复用的实验室装置，而非操作员记忆。",
+        "lab_test": "iOS SOP -> 基准截图 -> P1 Trial -> Control Bench，针对选定 iPhone 和方向。",
+        "evidence_required": "iPhone ID/型号/iOS/方向、AssistiveTouch、指针配置、基准截图和手动观察。",
+        "stop_rule": "如果设置未知、复制或未绑定到当前证据，则停止校准或脚本复用。",
         "method": "show_ios_field_sop_from_gui",
         "gap_fragments": ("observability",),
     },
     {
         "key": "hub_cable_power_map",
-        "lane": "Hub, cable, and power map",
+        "lane": "Hub、线缆和电源映射",
         "source": "docs/hardware_test_bench_checklist.md",
         "source_doc": "docs/hardware_test_bench_checklist.md",
-        "buy_decision": "Label hub, port, cable, power, receiver PC, and operator before blaming scripts or vision.",
-        "lab_test": "Hardware Bench plus one unplug/replug or reconnect drill after baseline proof.",
-        "evidence_required": "bench.device_id, hub_id, hub_port, cable_id, operator, HID serial, receiver path, and recovery notes.",
-        "stop_rule": "Stop reruns if a failure cannot be isolated to a physical lane.",
+        "buy_decision": "在归咎脚本或视觉之前，标记 Hub、端口、线缆、电源、接收端 PC 和操作员。",
+        "lab_test": "Hardware Bench 加一次拔插或重连演练，在基准证明之后。",
+        "evidence_required": "bench.device_id、hub_id、hub_port、cable_id、操作员、HID 序列号、接收端路径和恢复备注。",
+        "stop_rule": "如果故障无法隔离到物理通道，则停止重跑。",
         "method": "show_hardware_bench_from_gui",
         "gap_fragments": ("observability",),
     },
     {
         "key": "capture_stability_metrics",
-        "lane": "Capture stability and metrics",
+        "lane": "捕获稳定性和指标",
         "source": "docs/p2_p3_stability_runbook.md",
         "source_doc": "docs/p2_p3_stability_runbook.md",
-        "buy_decision": "Move from first screenshot proof to repeated frame quality, latency, reconnect, CPU/GPU, and watchdog metrics before scale.",
-        "lab_test": "Shot Bench 10 samples for P1, then 100 screenshots and watchdog metrics for P2/P3/P4.",
-        "evidence_required": "Screenshot artifacts, dimensions/freshness checks, metrics samples, reconnect timings, and Stage Dashboard.",
-        "stop_rule": "Stop scale work if capture quality or metrics are missing.",
+        "buy_decision": "在扩展之前，从首次截图证明转移到重复帧质量、延迟、重连、CPU/GPU 和看门狗指标。",
+        "lab_test": "Shot Bench 10 个样本用于 P1，然后 100 张截图和看门狗指标用于 P2/P3/P4。",
+        "evidence_required": "截图证据、尺寸/新鲜度检查、指标样本、重连时序和 Stage Dashboard。",
+        "stop_rule": "如果捕获质量或指标缺失，则停止扩展工作。",
         "method": "run_capture_quality_bench_from_gui",
         "gap_fragments": ("receiver/capture", "observability"),
     },
     {
         "key": "logs_recovery_bridge",
-        "lane": "Logs and recovery bridge",
+        "lane": "日志和恢复桥梁",
         "source": "docs/xp_event_error_contract.md",
         "source_doc": "docs/xp_event_error_contract.md",
-        "buy_decision": "Require receiver/HID/script logs and callback parsing before longer reruns, because API success can hide component failure.",
-        "lab_test": "Attach Log -> Callback -> Triage -> Recovery -> Rerun with the smallest valid path.",
-        "evidence_required": "Raw logs, parsed callback rows, failure category, recovery result, and rerun decision.",
-        "stop_rule": "Stop rerun when logs exist but are not attached, parsed, and tied to JSONL evidence.",
+        "buy_decision": "在较长的重跑之前需要接收端/HID/脚本日志和 callback 解析，因为 API 成功可能隐藏组件故障。",
+        "lab_test": "Attach Log -> Callback -> Triage -> Recovery -> 使用最小有效路径重跑。",
+        "evidence_required": "原始日志、解析的 callback 行、故障类别、恢复结果和重跑决策。",
+        "stop_rule": "当日志存在但未附加、解析和绑定到 JSONL 证据时，停止重跑。",
         "method": "attach_callback_log_from_gui",
         "gap_fragments": ("observability",),
     },
     {
         "key": "scale_procurement_boundary",
-        "lane": "Scale procurement boundary",
+        "lane": "扩展采购边界",
         "source": "docs/p2_p3_stability_runbook.md",
         "source_doc": "docs/p2_p3_stability_runbook.md",
-        "buy_decision": "Do not buy or promise multi-device capacity until single-device proof and per-device isolation are stable.",
-        "lab_test": "P2 single-device stability -> P3 pilot_4 -> P4 stable_10 with per-device artifacts.",
-        "evidence_required": "Device/iOS matrix, per-device metadata, metrics, logs, recovery notes, and exact group-size readiness.",
-        "stop_rule": "Stop group-control claims if one device failure hides behind aggregate success.",
+        "buy_decision": "在单设备证明和单设备隔离稳定之前，不要购买或承诺多设备容量。",
+        "lab_test": "P2 单设备稳定性 -> P3 pilot_4 -> P4 stable_10，附带单设备证据。",
+        "evidence_required": "设备/iOS 矩阵、单设备元数据、指标、日志、恢复备注和确切的群组大小就绪。",
+        "stop_rule": "如果一个设备故障隐藏在聚合成功之后，则停止群组控制声明。",
         "method": "show_stage_dashboard_from_gui",
         "gap_fragments": ("device/group", "observability", "commercial/ops"),
     },
@@ -566,209 +566,209 @@ XP_HARDWARE_LAB_TOPICS = (
 XP_CORE_FUNCTION_TOPICS = (
     {
         "key": "product_route",
-        "domain": "XP-style product route",
+        "domain": "XP 风格产品路线",
         "layer": "product",
         "priority": "P0",
         "source": "docs/xp_parity_matrix.md",
-        "public_signal": "XP-style control is receiver/capture plus dedicated hardware HID plus local kernel/API/console.",
-        "local_support": "Prototype has receiver, screenshot, HID, API, script, GUI, evidence and SOP modules.",
-        "evidence_required": "Route Decision, Doctor, screenshot quality, manual click/swipe/type, Acceptance and Readiness.",
-        "gap": "Local modules do not prove Windows receiver, wired projection, XP hardware, or real iPhone response.",
+        "public_signal": "XP 风格控制是接收端/捕获加专用硬件 HID 加本地 kernel/API/console。",
+        "local_support": "原型具有接收端、截图、HID、API、脚本、GUI、证据和 SOP 模块。",
+        "evidence_required": "Route Decision、Doctor、截图质量、手动点击/滑动/输入、Acceptance 和 Readiness。",
+        "gap": "本地模块不能证明 Windows 接收端、有线投屏、XP 硬件或真实 iPhone 响应。",
         "method": "show_gui_goal_gate_from_gui",
         "gap_fragments": ("kernel/api", "receiver/capture", "usb/hid", "mouse/keyboard"),
     },
     {
         "key": "kernel_api",
-        "domain": "Kernel/API and WebSocket",
+        "domain": "Kernel/API 和 WebSocket",
         "layer": "service",
         "priority": "P0",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "XP exposes a local /api + fun HTTP/WebSocket service with msgid and unified response fields.",
-        "local_support": "FastAPI service, XP fun dispatch, WebSocket /api, XpApiClient and tests.",
-        "evidence_required": "XP API/client/WebSocket tests plus field actions routed through the same service.",
-        "gap": "Windows service packaging, long-run logs, callback semantics and hardware-backed errors still need field work.",
+        "public_signal": "XP 公开本地 /api + fun HTTP/WebSocket 服务，带 msgid 和统一响应字段。",
+        "local_support": "FastAPI 服务、XP fun 调度、WebSocket /api、XpApiClient 和测试。",
+        "evidence_required": "XP API/客户端/WebSocket 测试加上通过相同服务路由的现场操作。",
+        "gap": "Windows 服务打包、长时间运行日志、callback 语义和硬件支撑的错误仍需要现场工作。",
         "method": "write_xp_gap_audit_from_gui",
         "gap_fragments": ("kernel/api",),
     },
     {
         "key": "python_sdk",
-        "domain": "Python SDK/helper",
+        "domain": "Python SDK/辅助",
         "layer": "sdk",
         "priority": "P1",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "Python XP helper exposes console/device domains around device, AirPlay, USB, group, image, keyboard, mouse and shortcut.",
-        "local_support": "XpApiClient covers device, group, callback, config, user, shortcut, calibration, screenshot, vision, OCR and batch helpers.",
-        "evidence_required": "SDK helper tests and one field script using the same helpers as GUI actions.",
-        "gap": "Helper shape is local compatibility; receiver/HID callback truth and cloud/user/shortcut behavior remain unverified.",
+        "public_signal": "Python XP 辅助公开围绕设备、AirPlay、USB、群组、图像、键盘、鼠标和快捷方式的 console/device 域。",
+        "local_support": "XpApiClient 覆盖设备、群组、callback、配置、用户、快捷方式、校准、截图、视觉、OCR 和批量辅助。",
+        "evidence_required": "SDK 辅助测试和一个使用与 GUI 操作相同辅助的现场脚本。",
+        "gap": "辅助形态是本地兼容性；接收端/HID callback 真相和云/用户/快捷方式行为仍未验证。",
         "method": "write_xp_gap_audit_from_gui",
         "gap_fragments": ("python sdk",),
     },
     {
         "key": "device_group",
-        "domain": "Device/group ledger",
+        "domain": "设备/群组台账",
         "layer": "fleet",
         "priority": "P2",
         "source": "docs/xp_parity_matrix.md",
-        "public_signal": "XP product value includes device list, local/LAN grouping, cloud groups and subaccount operations.",
-        "local_support": "Local registry, JSON groups, per-device rows, device matrix and metadata profiles.",
-        "evidence_required": "P3/P4 per-device evidence with group isolation and no aggregate-only failures.",
-        "gap": "Cloud groups, LAN visibility, account permissions and 4/10-device group proof are not complete.",
+        "public_signal": "XP 产品价值包括设备列表、本地/LAN 分组、云群组和子账户操作。",
+        "local_support": "本地注册表、JSON 群组、单设备行、设备矩阵和元数据配置。",
+        "evidence_required": "P3/P4 单设备证据，附带群组隔离和无非聚合失败。",
+        "gap": "云群组、LAN 可见性、账户权限和 4/10 设备群组证明尚未完成。",
         "method": "show_device_evidence_matrix_from_gui",
         "gap_fragments": ("device/group", "component ledger"),
     },
     {
         "key": "receiver_capture",
-        "domain": "Receiver/capture route",
+        "domain": "接收端/捕获路线",
         "layer": "visual",
         "priority": "P0",
         "source": "docs/receiver_capture_selection.md",
-        "public_signal": "XP depends on stable projection/capture, with Windows/wired routes and hardware decode signals in public docs.",
-        "local_support": "UxPlay/receiver provider abstraction, screenshot API, capture bench and route decision metadata.",
-        "evidence_required": "Doctor clean or documented substitute plus repeated non-black screenshots and receiver identity.",
-        "gap": "UxPlay is currently missing locally; Windows receiver, wired projection, fps, reconnect and hardware decode are unverified.",
+        "public_signal": "XP 依赖稳定的投屏/捕获，公开文档中有 Windows/有线路线和硬件解码信号。",
+        "local_support": "UxPlay/接收端提供者抽象、截图 API、捕获基准和路线决策元数据。",
+        "evidence_required": "Doctor 干净或有文档的替代品，加上重复的非黑截图和接收端身份。",
+        "gap": "UxPlay 当前在本地缺失；Windows 接收端、有线投屏、fps、重连和硬件解码未验证。",
         "method": "run_capture_quality_bench_from_gui",
         "gap_fragments": ("receiver/capture",),
     },
     {
         "key": "screenshot_capture",
-        "domain": "Screenshot acquisition",
+        "domain": "截图获取",
         "layer": "visual",
         "priority": "P0",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "XP image APIs expose screenshot/picture capture as the basis for vision and automation.",
-        "local_support": "Screenshot API/client, GUI preview, capture quality bench and artifact export.",
-        "evidence_required": "Current-frame screenshot_quality PASS with saved artifacts for the selected iPhone.",
-        "gap": "A screenshot API response is not enough; frame freshness, window binding, crop/orientation and black-screen checks must pass.",
+        "public_signal": "XP 图像 API 公开截图/图片捕获作为视觉和自动化的基础。",
+        "local_support": "Screenshot API/客户端、GUI 预览、捕获质量基准和证据导出。",
+        "evidence_required": "选定 iPhone 的当前帧 screenshot_quality PASS，附带已保存证据。",
+        "gap": "截图 API 响应不够；帧新鲜度、窗口绑定、裁剪/方向和黑屏检查必须通过。",
         "method": "run_capture_quality_bench_from_gui",
         "gap_fragments": ("receiver/capture", "vision/image/color"),
     },
     {
         "key": "hid_control",
-        "domain": "USB/HID control",
+        "domain": "USB/HID 控制",
         "layer": "control",
         "priority": "P0",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "public_signal": "XP requires dedicated virtual mouse/keyboard hardware and firmware-backed iOS input behavior.",
-        "local_support": "CH9329/general USB HID click, swipe, text and bind prototypes.",
-        "evidence_required": "Manual real-iPhone click, swipe and text observations with HID identity and release behavior.",
-        "gap": "Generic HID success does not prove XP hardware, 4.4 firmware, auto-binding, or perfect iOS response.",
+        "public_signal": "XP 需要专用虚拟鼠标/键盘硬件和固件支撑的 iOS 输入行为。",
+        "local_support": "CH9329/通用 USB HID 点击、滑动、文本和绑定原型。",
+        "evidence_required": "手动真实 iPhone 点击、滑动和文本观察，附带 HID 身份和释放行为。",
+        "gap": "通用 HID 成功不能证明 XP 硬件、4.4 固件、自动绑定或完美 iOS 响应。",
         "method": "show_control_response_bench_from_gui",
         "gap_fragments": ("usb/hid", "mouse/keyboard"),
     },
     {
         "key": "calibration",
-        "domain": "Coordinate calibration",
+        "domain": "坐标校准",
         "layer": "control",
         "priority": "P0",
         "source": "docs/coordinate_calibration.md",
-        "public_signal": "XP highlights adaptive resolution and device configuration, which makes coordinate mapping a core domain.",
-        "local_support": "Calibration profiles, active-area mapping and GUI screenshot-based calibration flow.",
-        "evidence_required": "Five-point calibration, pixel-error notes and same-orientation manual click proof.",
-        "gap": "Safe area, landscape, Dynamic Island, high resolution and per-model drift still need field matrices.",
+        "public_signal": "XP 强调自适应分辨率和设备配置，使坐标映射成为核心域。",
+        "local_support": "校准配置、活动区域映射和基于 GUI 截图的校准流程。",
+        "evidence_required": "五点校准、像素误差备注和同方向手动点击证明。",
+        "gap": "安全区域、横屏、Dynamic Island、高分辨率和每型号漂移仍需要现场矩阵。",
         "method": "show_p1_trial_from_gui",
         "gap_fragments": ("coordinate calibration",),
     },
     {
         "key": "mouse_keyboard",
-        "domain": "Mouse/keyboard input",
+        "domain": "鼠标/键盘输入",
         "layer": "control",
         "priority": "P1",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "XP helper/API domains include mouse, keyboard, key, combo and batch input.",
-        "local_support": "Click, swipe, type, key, combo and batch API/GUI/script paths.",
-        "evidence_required": "Real iPhone input matrix for click, swipe, ASCII text, key/combo and later Chinese/Emoji.",
-        "gap": "Focus state, multilingual input, Emoji, pointer modes and firmware timing are not field-proven.",
+        "public_signal": "XP 辅助/API 域包括鼠标、键盘、按键、组合和批量输入。",
+        "local_support": "点击、滑动、输入、按键、组合和批量 API/GUI/脚本路径。",
+        "evidence_required": "真实 iPhone 输入矩阵，用于点击、滑动、ASCII 文本、按键/组合及后续中文/Emoji。",
+        "gap": "焦点状态、多语言输入、Emoji、指针模式和固件时序未在现场验证。",
         "method": "show_control_response_bench_from_gui",
         "gap_fragments": ("mouse/keyboard", "usb/hid"),
     },
     {
         "key": "vision_color",
-        "domain": "Vision/image/color",
+        "domain": "视觉/图像/颜色",
         "layer": "recognition",
         "priority": "P1",
         "source": "docs/validation_evidence.md",
-        "public_signal": "XP public material points to OpenCV image recognition, color search and screenshot-driven automation.",
-        "local_support": "Template, color, multi-color, crop quality checks, asset index and script runner integration.",
-        "evidence_required": "Real screenshot templates, regions, thresholds, failure replay artifacts and false-positive review.",
-        "gap": "Template library, transparent images, thresholds, regions and replay discipline are not mature.",
+        "public_signal": "XP 公开材料指向 OpenCV 图像识别、颜色搜索和截图驱动的自动化。",
+        "local_support": "模板、颜色、多颜色、裁剪质量检查、资源索引和脚本运行器集成。",
+        "evidence_required": "真实截图模板、区域、阈值、故障重放证据和误报审查。",
+        "gap": "模板库、透明图像、阈值、区域和重放纪律尚未成熟。",
         "method": "show_template_asset_manager",
         "gap_fragments": ("vision/image/color",),
     },
     {
         "key": "ocr_text",
-        "domain": "OCR/text recognition",
+        "domain": "OCR/文本识别",
         "layer": "recognition",
         "priority": "P1",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "XP image domains include OCR/find-text style capabilities.",
-        "local_support": "PaddleOCR-compatible result parsing, OCR/text API helpers and local cache defaults.",
-        "evidence_required": "Chinese, English and numeric OCR samples from real cropped screenshots.",
-        "gap": "Model availability, language accuracy, cropped performance and false-positive handling need field assets.",
+        "public_signal": "XP 图像域包括 OCR/find-text 风格功能。",
+        "local_support": "PaddleOCR 兼容结果解析、OCR/文本 API 辅助和本地缓存默认值。",
+        "evidence_required": "来自真实裁剪截图的中文、英文和数字 OCR 样本。",
+        "gap": "模型可用性、语言准确率、裁剪性能和误报处理需要现场资源。",
         "method": "show_template_asset_manager",
         "gap_fragments": ("ocr",),
     },
     {
         "key": "script_batch_runtime",
-        "domain": "Script/batch runtime",
+        "domain": "脚本/批量运行时",
         "layer": "automation",
         "priority": "P2",
         "source": "docs/script_runner.md",
-        "public_signal": "XP-style value includes Python/API automation, batch actions and repeatable business flows.",
-        "local_support": "JSON runner, command queue, dry-run guard, batch click/swipe/type, metrics and artifact capture.",
-        "evidence_required": "Replayable dry-run plus real-run JSONL with scenario, metrics, artifacts and operator observations.",
-        "gap": "Variables, conditions, business assertions, watchdog recovery and group-loop isolation remain incomplete.",
+        "public_signal": "XP 风格价值包括 Python/API 自动化、批量操作和可重复业务流程。",
+        "local_support": "JSON 运行器、命令队列、dry-run 守卫、批量点击/滑动/输入、指标和证据捕获。",
+        "evidence_required": "可重放的 dry-run 加真实运行 JSONL，附带场景、指标、证据和操作员观察。",
+        "gap": "变量、条件、业务断言、看门狗恢复和群组循环隔离尚未完成。",
         "method": "show_scenario_library_from_gui",
         "gap_fragments": ("script runtime", "device/group"),
     },
     {
         "key": "gui_console",
-        "domain": "GUI console and SOP surface",
+        "domain": "GUI 控制台和 SOP 界面",
         "layer": "operator",
         "priority": "P2",
         "source": "docs/gui_prototype.md",
-        "public_signal": "XP separates kernel and console, and product value depends on usable operator/debug surfaces.",
-        "local_support": "Tkinter GUI with Live Probe, dashboards, SOP boards, evidence pack, route, bench, wizard and exports.",
-        "evidence_required": "Operator can follow Start Pack and isolate failures with generated artifacts.",
-        "gap": "Realtime video grid, hotkeys, per-device logs, receiver status columns and replay UI remain future work.",
+        "public_signal": "XP 分离内核和控制台，产品价值取决于可用的操作员/调试界面。",
+        "local_support": "带 Live Probe、仪表盘、SOP 面板、证据包、路线、基准、向导和导出的 Tkinter GUI。",
+        "evidence_required": "操作员可遵循 Start Pack 并用生成的证据隔离故障。",
+        "gap": "实时视频网格、快捷键、单设备日志、接收端状态列和重放 UI 仍为未来工作。",
         "method": "show_first_run_packet_from_gui",
         "gap_fragments": ("gui console",),
     },
     {
         "key": "config_user_shortcut",
-        "domain": "Config/user/shortcut compatibility",
+        "domain": "配置/用户/快捷方式兼容性",
         "layer": "ops",
         "priority": "P3",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "XP Python helper exposes ImConfig, User and Shortcut domains.",
-        "local_support": "Local runtime config/user/shortcut state and compatibility fun names.",
-        "evidence_required": "Separate product design for accounts, permissions, licensing and real shortcut execution.",
-        "gap": "Local state is scaffolding only; it does not prove XP cloud account or shortcut parity.",
+        "public_signal": "XP Python 辅助公开 ImConfig、User 和 Shortcut 域。",
+        "local_support": "本地运行时配置/用户/快捷方式状态和兼容性 fun 名称。",
+        "evidence_required": "独立的账户、权限、许可证和真实快捷方式执行的产品设计。",
+        "gap": "本地状态仅为脚手架；不能证明 XP 云账户或快捷方式对等。",
         "method": "write_xp_gap_audit_from_gui",
         "gap_fragments": ("python sdk", "commercial/ops"),
     },
     {
         "key": "observability",
-        "domain": "Observability/callback/logs",
+        "domain": "可观测性/callback/日志",
         "layer": "ops",
         "priority": "P1",
         "source": "docs/validation_evidence.md",
-        "public_signal": "XP iteration signals emphasize logs, debug tools, callback events and failure isolation.",
-        "local_support": "Doctor, evidence JSONL, callback monitor, attach-log parser, review, timeline, metrics and readiness.",
-        "evidence_required": "Every failure has device id, category, artifact path, receiver/HID logs and rerun decision.",
-        "gap": "Receiver logs, fps/latency, reconnect timing and per-device log filters are still incomplete.",
+        "public_signal": "XP 迭代信号强调日志、调试工具、callback 事件和故障隔离。",
+        "local_support": "Doctor、证据 JSONL、callback 监控器、附加日志解析器、Review、Timeline、指标和 Readiness。",
+        "evidence_required": "每个故障都有设备 ID、类别、证据路径、接收端/HID 日志和重跑决策。",
+        "gap": "接收端日志、fps/延迟、重连时序和单设备日志过滤仍不完整。",
         "method": "attach_callback_log_from_gui",
         "gap_fragments": ("observability",),
     },
     {
         "key": "commercial_ops",
-        "domain": "Commercial/cloud ops",
+        "domain": "商业/云运维",
         "layer": "ops",
         "priority": "P3",
         "source": "docs/xp_core_backlog.md",
-        "public_signal": "XP public material includes cloud groups, subaccounts, LAN visibility, updates and service operations.",
-        "local_support": "Only local JSON, docs and backlog exist today.",
-        "evidence_required": "Post-P3 operations design and pilot records after core control is stable.",
-        "gap": "Do not spend P1/P2 effort here until receiver, HID, screenshot and SOP evidence pass.",
+        "public_signal": "XP 公开材料包括云群组、子账户、LAN 可见性、更新和服务运维。",
+        "local_support": "当前仅有本地 JSON、文档和待办事项。",
+        "evidence_required": "核心控制稳定后的 P3 后运维设计和试点记录。",
+        "gap": "在接收端、HID、截图和 SOP 证据通过之前，不要在此花费 P1/P2 精力。",
         "method": "show_stage_dashboard_from_gui",
         "gap_fragments": ("commercial/ops",),
     },
@@ -777,196 +777,196 @@ XP_CORE_FUNCTION_TOPICS = (
 XP_API_COVERAGE_TOPICS = (
     {
         "key": "api_envelope",
-        "domain": "API envelope and transport",
+        "domain": "API 信封和传输",
         "layer": "kernel",
         "priority": "P0",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP exposes local 9911 /api over HTTP/WebSocket with fun, msgid, status, message, data and data.code.",
-        "local_fun": "GET/POST /api, WebSocket /api, /ws debug alias, status/message/data/code/fun/msgid.",
-        "local_tests": "tests/test_xp_client.py plus server XP fun dispatch tests.",
-        "runtime_gate": "Local compatibility tests, WebSocket replay, callback/event contract export.",
-        "evidence_required": "P0 local API proof only; field actions must later use the same /api path and JSONL evidence.",
-        "claim_boundary": "API compatibility does not prove receiver, HID, screenshot freshness, real iPhone response, or XP hardware parity.",
+        "xp_signal": "XP 通过 HTTP/WebSocket 公开本地 9911 /api，带 fun、msgid、status、message、data 和 data.code。",
+        "local_fun": "GET/POST /api、WebSocket /api、/ws 调试别名、status/message/data/code/fun/msgid。",
+        "local_tests": "tests/test_xp_client.py 加服务器 XP fun 调度测试。",
+        "runtime_gate": "本地兼容性测试、WebSocket 重放、callback/事件契约导出。",
+        "evidence_required": "仅 P0 本地 API 证明；现场操作必须稍后使用相同 /api 路径和 JSONL 证据。",
+        "claim_boundary": "API 兼容性不能证明接收端、HID、截图新鲜度、真实 iPhone 响应或 XP 硬件对等。",
         "method": "show_xp_event_error_contract_from_gui",
         "gap_fragments": ("kernel/api",),
     },
     {
         "key": "device_registry",
-        "domain": "Device registry and profile",
+        "domain": "设备注册表和配置",
         "layer": "device",
         "priority": "P0",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP SDK/API material includes device list/register/remove and device metadata style helpers.",
-        "local_fun": "/device/list, /device/register, /device/remove, /profile/*, /metadata/*.",
-        "local_tests": "XP client profile/calibration/device helper tests and Device Evidence Matrix rows.",
-        "runtime_gate": "Component metadata event for each physical iPhone, receiver, capture method, HID and iOS version.",
-        "evidence_required": "device_id tied to the bench phone, receiver window, HID id, serial/hub/cable and run_id.",
-        "claim_boundary": "A registered device row is an inventory record, not proof that the phone is visible or controllable.",
+        "xp_signal": "XP SDK/API 材料包括设备列表/注册/删除和设备元数据风格辅助。",
+        "local_fun": "/device/list、/device/register、/device/remove、/profile/*、/metadata/*。",
+        "local_tests": "XP 客户端 profile/校准/设备辅助测试和 Device Evidence Matrix 行。",
+        "runtime_gate": "每个物理 iPhone、接收端、捕获方法、HID 和 iOS 版本的组件元数据事件。",
+        "evidence_required": "device_id 绑定到基准手机、接收端窗口、HID ID、序列号/Hub/线缆和 run_id。",
+        "claim_boundary": "已注册的设备行是库存记录，不是手机可见或可控制的证明。",
         "method": "show_device_evidence_matrix_from_gui",
         "gap_fragments": ("device/group", "component ledger"),
     },
     {
         "key": "receiver_airplay_capture",
-        "domain": "AirPlay/receiver/capture",
+        "domain": "AirPlay/接收端/捕获",
         "layer": "receiver",
         "priority": "P0",
         "source": "docs/receiver_capture_selection.md",
-        "xp_signal": "XP public material depends on projection/receiver capture and newer docs emphasize wired/Windows/fast/decode lanes.",
-        "local_fun": "/airplay/connect, /airplay/start, /airplay/disconnect, /airplay/stop, /capture/start.",
-        "local_tests": "Receiver provider checks, route decision validation and capture quality bench.",
-        "runtime_gate": "Doctor/route clean plus repeated non-black current screenshots bound to the selected iPhone.",
-        "evidence_required": "Receiver route/name/version/path/window/capture method, screenshot artifacts, quality status, and logs.",
-        "claim_boundary": "Receiver start success is not a screenshot, and screenshot API success is not proof of live current frames.",
+        "xp_signal": "XP 公开材料依赖投屏/接收端捕获，较新文档强调有线/Windows/快速/解码通道。",
+        "local_fun": "/airplay/connect、/airplay/start、/airplay/disconnect、/airplay/stop、/capture/start。",
+        "local_tests": "接收端提供者检查、路线决策验证和捕获质量基准。",
+        "runtime_gate": "Doctor/路线干净加重复的非黑当前截图绑定到选定 iPhone。",
+        "evidence_required": "接收端路线/名称/版本/路径/窗口/捕获方法、截图证据、质量状态和日志。",
+        "claim_boundary": "接收端启动成功不是截图，截图 API 成功也不是实时当前帧的证明。",
         "method": "run_capture_quality_bench_from_gui",
         "gap_fragments": ("receiver/capture",),
     },
     {
         "key": "usb_hid_binding",
-        "domain": "USB/HID binding",
+        "domain": "USB/HID 绑定",
         "layer": "control",
         "priority": "P0",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "xp_signal": "XP Python material requires dedicated iMouse hardware for iOS mouse/keyboard authority.",
-        "local_fun": "/hardware/scan, /usb/list, /usb/scan, /device/bind, /usb/bind, /device/unbind.",
-        "local_tests": "Hardware scan/bind helper tests, Doctor serial checks and Control Response Bench.",
-        "runtime_gate": "HID identity, firmware/provider, serial port, hub/cable map and visible real-iPhone response after bind.",
-        "evidence_required": "HID route/provider/id/firmware/serial plus click/swipe/type manual proof lanes.",
-        "claim_boundary": "Local CH9329/self-HID bind success does not prove XP hardware, firmware 4.4, auto-binding, or perfect iOS response.",
+        "xp_signal": "XP Python 材料需要专用 iMouse 硬件来实现 iOS 鼠标/键盘权限。",
+        "local_fun": "/hardware/scan、/usb/list、/usb/scan、/device/bind、/usb/bind、/device/unbind。",
+        "local_tests": "硬件扫描/绑定辅助测试、Doctor 串口检查和 Control Response Bench。",
+        "runtime_gate": "HID 身份、固件/提供者、串口、Hub/线缆映射和绑定后可见的真实 iPhone 响应。",
+        "evidence_required": "HID 路线/提供者/ID/固件/序列号加点击/滑动/输入手动证明通道。",
+        "claim_boundary": "本地 CH9329/自制 HID 绑定成功不能证明 XP 硬件、固件 4.4、自动绑定或完美 iOS 响应。",
         "method": "show_control_response_bench_from_gui",
         "gap_fragments": ("usb/hid",),
     },
     {
         "key": "mouse_control",
-        "domain": "Mouse click/swipe",
+        "domain": "鼠标点击/滑动",
         "layer": "control",
         "priority": "P0",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP helper/API domains include mouse click, swipe and batch mouse actions.",
-        "local_fun": "/mouse/click, /mouse/swipe, /batch/click, /batch/swipe and group aliases.",
-        "local_tests": "XpApiClient click/swipe/batch tests and Control Evidence Ledger lane checks.",
-        "runtime_gate": "Same-run Manual pass for HID click and HID swipe as separate lanes, with visible iPhone behavior.",
-        "evidence_required": "Click artifact, swipe release observation, coordinates, route metadata, Acceptance and Readiness.",
-        "claim_boundary": "One broad Manual note cannot close click and swipe; each lane needs its own observation.",
+        "xp_signal": "XP 辅助/API 域包括 mouse click、swipe 和 batch mouse 操作。",
+        "local_fun": "/mouse/click, /mouse/swipe, /batch/click, /batch/swipe 和群组别名。",
+        "local_tests": "XpApiClient click/swipe/batch 测试和控制证据台账通道检查。",
+        "runtime_gate": "HID 点击和 HID 滑动作为独立通道的同运行手动通过，附带可见 iPhone 行为。",
+        "evidence_required": "点击证据、滑动释放观察、坐标、路由元数据、验收和就绪。",
+        "claim_boundary": "一个笼统的手动备注不能同时关闭点击和滑动；每个通道需要各自的观察。",
         "method": "show_control_evidence_ledger_from_gui",
         "gap_fragments": ("mouse/keyboard", "usb/hid"),
     },
     {
         "key": "keyboard_text",
-        "domain": "Keyboard text/key input",
+        "domain": "键盘文本/按键输入",
         "layer": "control",
         "priority": "P1",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP helper/API domains include keyboard type, key, combo and batch text actions.",
+        "xp_signal": "XP 辅助/API 域包括 keyboard type、key、combo 和 batch text 操作。",
         "local_fun": "/keyboard/type, /key/type, /keyboard/key, /key/tap, /keyboard/combo, /key/combo, /batch/type.",
-        "local_tests": "XpApiClient keyboard/batch helper tests and lane-separated Manual text evidence checks.",
-        "runtime_gate": "Same-run Manual pass for Keyboard input with focus state, keyboard layout and visible inserted text.",
-        "evidence_required": "ASCII text first, then language/emoji/focus cases after P1; artifacts and failure categories.",
-        "claim_boundary": "Text API success is not text input proof until the physical iPhone visibly receives the text.",
+        "local_tests": "XpApiClient keyboard/batch 辅助测试和通道分离的手动文本证据检查。",
+        "runtime_gate": "同运行键盘输入手动通过，附带焦点状态、键盘布局和可见的已输入文本。",
+        "evidence_required": "先 ASCII 文本，然后 P1 后的语言/emoji/焦点案例；证据和故障类别。",
+        "claim_boundary": "文本 API 成功在物理 iPhone 可见地接收到文本之前不是文本输入证明。",
         "method": "show_control_evidence_ledger_from_gui",
         "gap_fragments": ("mouse/keyboard", "usb/hid"),
     },
     {
         "key": "picture_vision",
-        "domain": "Picture/image/color",
+        "domain": "图片/图像/颜色",
         "layer": "vision",
         "priority": "P1",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP advertises screenshot, image recognition, color search and OpenCV-style automation.",
+        "xp_signal": "XP 宣传截图、图像识别、颜色搜索和 OpenCV 风格自动化。",
         "local_fun": "/pic/screenshot, /pic/find-image, /pic/find_color, /pic/find_colors.",
-        "local_tests": "Screenshot/find-image/find-color helpers, template asset index and capture quality checks.",
-        "runtime_gate": "Fresh real screenshot artifacts, pinned templates/regions/thresholds and replayable failure assets.",
-        "evidence_required": "Non-black screenshot, template/color matches, false-positive review and artifact paths.",
-        "claim_boundary": "Vision API coverage is only as good as the current screenshot and replay assets for this run.",
+        "local_tests": "截图/find-image/find-color 辅助、模板资源索引和捕获质量检查。",
+        "runtime_gate": "新鲜的真实截图证据、固定的模板/区域/阈值和可重放的故障资源。",
+        "evidence_required": "非黑色截图、模板/颜色匹配、误报审查和证据路径。",
+        "claim_boundary": "视觉 API 覆盖度取决于当前截图和本次运行的重放资源。",
         "method": "show_template_asset_manager",
         "gap_fragments": ("vision/image/color", "receiver/capture"),
     },
     {
         "key": "ocr_text",
-        "domain": "OCR/find text",
+        "domain": "OCR/查找文本",
         "layer": "vision",
         "priority": "P1",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP image domains include OCR/find-text style functions for screen-driven automation.",
+        "xp_signal": "XP 图像域包括用于屏幕驱动自动化的 OCR/find-text 风格功能。",
         "local_fun": "/pic/ocr, /pic/find-text.",
-        "local_tests": "OCR and find-text helper tests with local parser/model fallback handling.",
-        "runtime_gate": "Real cropped screenshots for Chinese, English and numeric text plus model availability notes.",
-        "evidence_required": "OCR result rows, screenshot crop artifacts, thresholds and false-positive handling.",
-        "claim_boundary": "OCR helper availability does not prove language accuracy or business-state recognition.",
+        "local_tests": "OCR 和 find-text 辅助测试，附带本地解析器/模型回退处理。",
+        "runtime_gate": "中文、英文和数字文本的真实裁剪截图加上模型可用性备注。",
+        "evidence_required": "OCR 结果行、截图裁剪证据、阈值和误报处理。",
+        "claim_boundary": "OCR 辅助可用性不能证明语言准确率或业务状态识别。",
         "method": "show_template_asset_manager",
         "gap_fragments": ("ocr", "vision/image/color"),
     },
     {
         "key": "group_batch",
-        "domain": "Group and batch control",
+        "domain": "群组与批量控制",
         "layer": "fleet",
         "priority": "P2",
         "source": "docs/p2_p3_stability_runbook.md",
-        "xp_signal": "XP value grows through device groups, batch control, local/LAN grouping and later cloud operations.",
+        "xp_signal": "XP 价值通过设备群组、批量控制、本地/LAN 分组和后续云操作增长。",
         "local_fun": "/group/list, /group/save, /group/remove, /batch/click, /batch/swipe, /batch/type.",
-        "local_tests": "Group helper payload tests, local group persistence and Stage Dashboard.",
-        "runtime_gate": "P3/P4 per-device evidence, no aggregate-only success, metrics, logs and recovery notes.",
-        "evidence_required": "P3 pilot_4 and P4 stable_10 runs with per-device artifacts and failure isolation.",
-        "claim_boundary": "P1/P2 local group API coverage cannot be promoted to group-control proof.",
+        "local_tests": "群组辅助负载测试、本地群组持久化和阶段仪表盘。",
+        "runtime_gate": "P3/P4 单设备证据、无非聚合成功、指标、日志和恢复备注。",
+        "evidence_required": "P3 pilot_4 和 P4 stable_10 运行，附带单设备证据和故障隔离。",
+        "claim_boundary": "P1/P2 本地群组 API 覆盖不能提升为群组控制证明。",
         "method": "show_stage_dashboard_from_gui",
         "gap_fragments": ("device/group", "script runtime"),
     },
     {
         "key": "config_user_shortcut",
-        "domain": "Config/user/shortcut",
+        "domain": "配置/用户/快捷方式",
         "layer": "ops",
         "priority": "P3",
         "source": "docs/xp_api_compat.md",
-        "xp_signal": "XP Python helper exposes ImConfig, User and Shortcut domains.",
+        "xp_signal": "XP Python 辅助公开 ImConfig、User 和 Shortcut 域。",
         "local_fun": "/config/*, /imconfig/*, /user/*, /shortcut/*.",
-        "local_tests": "Config/user/shortcut helper tests and local runtime state callbacks.",
-        "runtime_gate": "Separate account, permission, license, shortcut execution and cloud design after control is proven.",
-        "evidence_required": "Product design and pilot records, not P1 control evidence.",
-        "claim_boundary": "This is local scaffolding only; it is not XP cloud, subaccount, license or real shortcut parity.",
+        "local_tests": "Config/user/shortcut 辅助测试和本地运行时状态回调。",
+        "runtime_gate": "控制验证后独立的账户、权限、许可证、快捷方式执行和云设计。",
+        "evidence_required": "产品设计和试点记录，非 P1 控制证据。",
+        "claim_boundary": "这仅是本地脚手架；不是 XP 云、子账户、许可证或真实快捷方式等效。",
         "method": "write_xp_gap_audit_from_gui",
         "gap_fragments": ("python sdk", "commercial/ops"),
     },
     {
         "key": "callback_event",
-        "domain": "Callback/event channel",
+        "domain": "回调/事件通道",
         "layer": "observability",
         "priority": "P1",
         "source": "docs/xp_event_error_contract.md",
-        "xp_signal": "XP-style APIs need callback/event visibility for device, receiver, HID, script and failure state.",
+        "xp_signal": "XP 风格 API 需要设备、接收端、HID、脚本和故障状态的回调/事件可见性。",
         "local_fun": "/callback/list, /callback/poll, /callback/push, /callback/clear, /event/list, /event/poll, /event/push.",
-        "local_tests": "Callback helper tests, WebSocket callback payloads and Event/Error Contract board.",
-        "runtime_gate": "Callback rows tied to device id, source, severity, log text and same-run JSONL evidence.",
-        "evidence_required": "Callback monitor export, Attach Log export, Timeline/Triage and failure categories.",
-        "claim_boundary": "Callback rows are diagnostic context; they do not prove real iPhone response by themselves.",
+        "local_tests": "回调辅助测试、WebSocket 回调负载和事件/错误契约看板。",
+        "runtime_gate": "回调行关联到设备 ID、来源、严重性、日志文本和同运行 JSONL 证据。",
+        "evidence_required": "回调监控导出、附加日志导出、时间线/分诊和故障类别。",
+        "claim_boundary": "回调行是诊断上下文；它们本身不能证明真实 iPhone 响应。",
         "method": "show_xp_event_error_contract_from_gui",
         "gap_fragments": ("observability", "kernel/api"),
     },
     {
         "key": "logs_triage",
-        "domain": "Logs and failure triage",
+        "domain": "日志与故障分诊",
         "layer": "observability",
         "priority": "P1",
         "source": "docs/xp_event_error_contract.md",
-        "xp_signal": "XP iteration signals emphasize logs, debug tooling, recovery and failure isolation.",
-        "local_fun": "Attach Log parser, callback push, Timeline, Triage, Recovery and Problem Ledger surfaces.",
-        "local_tests": "Callback log parsing tests and SOP Problem Ledger rows.",
-        "runtime_gate": "Receiver/HID/script logs parsed into categories and tied to rerun decisions.",
-        "evidence_required": "Raw logs, parsed callback events, failure category, recovery result and rerun decision.",
-        "claim_boundary": "A parsed log can explain a run; it cannot replace screenshot/manual/Acceptance/Readiness evidence.",
+        "xp_signal": "XP 迭代信号强调日志、调试工具、恢复和故障隔离。",
+        "local_fun": "附加日志解析器、回调推送、时间线、分诊、恢复和问题台账界面。",
+        "local_tests": "回调日志解析测试和 SOP 问题台账行。",
+        "runtime_gate": "接收端/HID/脚本日志解析为类别并关联到重跑决策。",
+        "evidence_required": "原始日志、解析的回调事件、故障类别、恢复结果和重跑决策。",
+        "claim_boundary": "解析的日志可以解释一次运行；但不能替代截图/手动/验收/就绪证据。",
         "method": "attach_callback_log_from_gui",
         "gap_fragments": ("observability",),
     },
     {
         "key": "cloud_ops",
-        "domain": "Cloud/LAN/account ops",
+        "domain": "云/LAN/账户运维",
         "layer": "ops",
         "priority": "P4",
         "source": "docs/xp_core_backlog.md",
-        "xp_signal": "XP public material mentions cloud groups, subaccounts, LAN visibility, updates and service operations.",
-        "local_fun": "No production cloud/LAN/account service in this prototype.",
-        "local_tests": "Backlog/docs only.",
-        "runtime_gate": "Post-P3 product design after single-device and group-control evidence are stable.",
-        "evidence_required": "Architecture decision, pilot ops records, security/licensing model and support SOP.",
-        "claim_boundary": "Do not spend or claim cloud/account parity before core control and group evidence are proven.",
+        "xp_signal": "XP 公开材料提及云群组、子账户、LAN 可见性、更新和服务运维。",
+        "local_fun": "此原型中无生产级云/LAN/账户服务。",
+        "local_tests": "仅待办事项/文档。",
+        "runtime_gate": "单设备和群组控制证据稳定后的 P3 后产品设计。",
+        "evidence_required": "架构决策、试点运维记录、安全/许可证模型和支持 SOP。",
+        "claim_boundary": "在核心控制和群组证据验证之前，不要花费或声称云/账户等效。",
         "method": "show_xp_roadmap_from_gui",
         "gap_fragments": ("commercial/ops",),
     },
@@ -975,155 +975,155 @@ XP_API_COVERAGE_TOPICS = (
 SCRIPT_COVERAGE_TOPICS = (
     {
         "key": "scenario_inventory",
-        "domain": "Scenario inventory and stage defaults",
+        "domain": "场景清单与阶段默认值",
         "stage_gate": "P0",
         "source": "docs/script_runner.md",
-        "xp_signal": "XP-style Console/SDK value comes from repeatable scripts, not one-off GUI clicks.",
-        "local_support": "scripts/*.json, Scenario Library, stage default scripts and JSON parser checks.",
-        "script_gate": "All scenario JSON files parse and the current stage default script exists.",
-        "field_gate": "Operators load the exact stage script for the current run_id before dry-run or real run.",
-        "evidence_required": "Scenario Library export, dry-run summary, and later JSONL rows from the same run_id.",
-        "claim_boundary": "Scenario files are reusable plans; they do not prove a real iPhone responded.",
+        "xp_signal": "XP 风格 Console/SDK 价值来自可重复的脚本，而非一次性 GUI 点击。",
+        "local_support": "scripts/*.json、场景库、阶段默认脚本和 JSON 解析器检查。",
+        "script_gate": "所有场景 JSON 文件解析通过且当前阶段默认脚本存在。",
+        "field_gate": "操作员在 dry-run 或真实运行之前加载当前 run_id 的确切阶段脚本。",
+        "evidence_required": "场景库导出、dry-run 摘要，以及后续来自同一 run_id 的 JSONL 行。",
+        "claim_boundary": "场景文件是可复用的计划；它们不能证明真实 iPhone 已响应。",
         "method": "show_scenario_library_from_gui",
         "actions": (),
     },
     {
         "key": "dry_run_contract",
-        "domain": "Dry-run and runner contract",
+        "domain": "Dry-run 与运行器契约",
         "stage_gate": "P0",
         "source": "docs/script_runner.md",
-        "xp_signal": "SDK/helper automation must be reproducible before it is trusted on hardware.",
-        "local_support": "ScriptRunner dry-run, unit tests, scenario summary and Load Probe Script.",
-        "script_gate": "Dry-run completes without client calls and reports every step shape.",
-        "field_gate": "Dry-run must be refreshed after editing coordinates, device ids, templates or record fields.",
-        "evidence_required": "Dry-run terminal/GUI summary plus Start Pack command transcript.",
-        "claim_boundary": "Dry-run proves only JSON structure and dispatch shape; it is not receiver, HID or iPhone evidence.",
+        "xp_signal": "SDK/辅助自动化在硬件上受信任之前必须是可复现的。",
+        "local_support": "ScriptRunner dry-run、单元测试、场景摘要和加载探测脚本。",
+        "script_gate": "Dry-run 在无客户端调用的情况下完成并报告每个步骤的形态。",
+        "field_gate": "编辑坐标、设备 ID、模板或记录字段后必须刷新 dry-run。",
+        "evidence_required": "Dry-run 终端/GUI 摘要加上启动包命令记录。",
+        "claim_boundary": "Dry-run 仅证明 JSON 结构和 dispatch 形态；不是接收端、HID 或 iPhone 证据。",
         "method": "run_live_probe_dry_run",
         "actions": (),
     },
     {
         "key": "real_run_guard",
-        "domain": "Real-run guard and route lock",
+        "domain": "真实运行守卫与路由锁定",
         "stage_gate": "P1",
         "source": "docs/verification_plan.md",
-        "xp_signal": "XP-like field automation needs a locked receiver, HID and device scope before scripts run live.",
-        "local_support": "Real-run Guard, Route Decision, Doctor, selected devices and dry-run toggles.",
-        "script_gate": "Real run is blocked until route, Doctor and stage device count are clean.",
-        "field_gate": "Use a fresh run_id when receiver/HID/device scope changes.",
-        "evidence_required": "Real-run Guard export, Route Decision report, Doctor report and selected device list.",
-        "claim_boundary": "Guard allow means the run may start; it does not prove the phone responded.",
+        "xp_signal": "XP 风格的现场自动化需要锁定的接收端、HID 和设备范围，然后脚本才能实时运行。",
+        "local_support": "真实运行守卫、路由决策、Doctor、选定设备和 dry-run 开关。",
+        "script_gate": "直到路由、Doctor 和阶段设备数量都通过，才允许真实运行。",
+        "field_gate": "当接收端/HID/设备范围变化时使用新的 run_id。",
+        "evidence_required": "真实运行守卫导出、路由决策报告、Doctor 报告和选定设备列表。",
+        "claim_boundary": "守卫允许意味着运行可以开始；不能证明手机已响应。",
         "method": "show_field_evidence_runner_from_gui",
         "actions": (),
     },
     {
         "key": "component_metadata",
-        "domain": "Component metadata and manual records",
+        "domain": "组件元数据与手动记录",
         "stage_gate": "P1",
         "source": "docs/validation_evidence.md",
-        "xp_signal": "Group-control failures are only diagnosable when receiver, HID, iPhone, hub, cable and operator are traceable.",
-        "local_support": "record steps, required_details, placeholder blocking, component metadata evidence and Operator Worksheet.",
-        "script_gate": "Stage scripts contain record steps for component and operator observations.",
-        "field_gate": "Real runs must replace every placeholder and bind metadata to the physical iPhone.",
-        "evidence_required": "component_traceability check, JSONL record rows and operator worksheet notes.",
-        "claim_boundary": "A metadata record is traceability, not proof of click, swipe or text input.",
+        "xp_signal": "群组控制故障只有在接收端、HID、iPhone、Hub、线缆和操作员可追踪时才能诊断。",
+        "local_support": "record 步骤、required_details、占位符阻止、组件元数据证据和操作员工作表。",
+        "script_gate": "阶段脚本包含组件和操作员观察的 record 步骤。",
+        "field_gate": "真实运行必须替换每个占位符并将元数据绑定到物理 iPhone。",
+        "evidence_required": "component_traceability 检查、JSONL record 行和操作员工作表备注。",
+        "claim_boundary": "元数据记录是可追溯性，不是点击、滑动或文本输入的证明。",
         "method": "show_device_evidence_matrix_from_gui",
         "actions": ("record",),
     },
     {
         "key": "receiver_screenshot",
-        "domain": "Receiver screenshot and capture probes",
+        "domain": "接收端截图与捕获探测",
         "stage_gate": "P1",
         "source": "docs/receiver_capture_selection.md",
-        "xp_signal": "XP-style control starts with current, correctly bound screen acquisition.",
-        "local_support": "screenshot actions, repeat probes, screenshot quality checks, Shot Bench and artifacts.",
-        "script_gate": "Current stage scripts include screenshot or capture probes before HID actions.",
-        "field_gate": "Shot Bench and Acceptance screenshot_quality pass with saved artifacts.",
-        "evidence_required": "Nonblack screenshots, stable dimensions, receiver/capture metadata and logs.",
-        "claim_boundary": "Screenshot success is screen proof only; it does not prove click/swipe/text response.",
+        "xp_signal": "XP 风格控制从当前正确绑定的屏幕获取开始。",
+        "local_support": "screenshot 操作、重复探测、截图质量检查、Shot Bench 和证据。",
+        "script_gate": "当前阶段脚本在 HID 操作之前包含截图或捕获探测。",
+        "field_gate": "Shot Bench 和验收 screenshot_quality 通过，附带保存的证据。",
+        "evidence_required": "非黑色截图、稳定尺寸、接收端/捕获元数据和日志。",
+        "claim_boundary": "截图成功仅是屏幕证明；不证明点击/滑动/文本响应。",
         "method": "run_capture_quality_bench_from_gui",
         "actions": ("screenshot",),
     },
     {
         "key": "hid_control_lanes",
-        "domain": "HID click, swipe and text lanes",
+        "domain": "HID 点击、滑动与文本通道",
         "stage_gate": "P1",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "xp_signal": "XP public material depends on hardware-backed mouse and keyboard control.",
-        "local_support": "click, swipe, type, Control Bench, Ctrl Ledger and P1 Trial.",
-        "script_gate": "P1/P2 scripts include click, swipe and type lanes with safe editable coordinates.",
-        "field_gate": "Lane-separated Manual pass for click, swipe release and text input on the real iPhone.",
-        "evidence_required": "Manual observations, action artifacts, HID identity, Acceptance and Readiness.",
-        "claim_boundary": "API/HID command success cannot close the lane without visible iPhone behavior.",
+        "xp_signal": "XP 公开材料依赖硬件支撑的鼠标和键盘控制。",
+        "local_support": "click、swipe、type、控制基准、Ctrl Ledger 和 P1 Trial。",
+        "script_gate": "P1/P2 脚本包含带安全可编辑坐标的点击、滑动和输入通道。",
+        "field_gate": "真实 iPhone 上点击、滑动释放和文本输入的通道分离手动通过。",
+        "evidence_required": "手动观察、操作证据、HID 身份、验收和就绪。",
+        "claim_boundary": "没有可见 iPhone 行为，API/HID 命令成功不能关闭该通道。",
         "method": "show_control_evidence_ledger_from_gui",
         "actions": ("click", "swipe", "type"),
     },
     {
         "key": "vision_flow",
-        "domain": "Vision, OCR and business guards",
+        "domain": "视觉、OCR 与业务守卫",
         "stage_gate": "P2",
         "source": "docs/script_runner.md",
-        "xp_signal": "XP automation uses screenshot, OpenCV, color, OCR and business-state recognition.",
-        "local_support": "find_image, find_image_then_click, find_color(s), OCR, find_text, Template Asset Index and artifacts.",
-        "script_gate": "Vision steps are dry-runable and tied to pinned templates, regions and thresholds.",
-        "field_gate": "Real screenshots and replayable failed assets prove template/OCR behavior before scale.",
-        "evidence_required": "Template index, screenshot crops, OCR/text/color results and false-positive review.",
-        "claim_boundary": "A vision helper existing in code is not business-flow reliability evidence.",
+        "xp_signal": "XP 自动化使用截图、OpenCV、颜色、OCR 和业务状态识别。",
+        "local_support": "find_image、find_image_then_click、find_color(s)、OCR、find_text、模板资源索引和证据。",
+        "script_gate": "视觉步骤可 dry-run 并绑定到固定的模板、区域和阈值。",
+        "field_gate": "真实截图和可重放失败资源在扩展前证明模板/OCR 行为。",
+        "evidence_required": "模板索引、截图裁剪、OCR/文本/颜色结果和误报审查。",
+        "claim_boundary": "代码中存在视觉辅助不是业务流程可靠性证据。",
         "method": "show_template_asset_manager",
         "actions": ("find_image", "find_image_then_click", "find_color", "find_colors", "ocr", "find_text"),
     },
     {
         "key": "metrics_stability",
-        "domain": "Repeat, metrics and stability scripts",
+        "domain": "重复、指标与稳定性脚本",
         "stage_gate": "P2",
         "source": "docs/p2_p3_stability_runbook.md",
-        "xp_signal": "XP iteration value includes long-run stability, logs and recovery rather than a single click.",
-        "local_support": "repeat, metrics/system_metrics, screenshot watchdog scripts, Timeline and Review.",
-        "script_gate": "P2/P3/P4 scripts include repeat rounds and metrics markers.",
-        "field_gate": "Metrics, screenshot samples, failure categories and recovery notes are present for the same run_id.",
-        "evidence_required": "metrics JSONL rows, repeated screenshots, callback/log rows and Review output.",
-        "claim_boundary": "Metrics help diagnose stability; they do not replace Manual iPhone observation.",
+        "xp_signal": "XP 迭代价值包括长时间运行稳定性、日志和恢复，而非单次点击。",
+        "local_support": "repeat、metrics/system_metrics、截图看门狗脚本、时间线和审查。",
+        "script_gate": "P2/P3/P4 脚本包含重复轮次和指标标记。",
+        "field_gate": "指标、截图样本、故障类别和恢复备注存在于同一 run_id 中。",
+        "evidence_required": "metrics JSONL 行、重复截图、回调/日志行和审查输出。",
+        "claim_boundary": "指标有助于诊断稳定性；不能替代手动 iPhone 观察。",
         "method": "show_stage_dashboard_from_gui",
         "actions": ("repeat", "metrics", "system_metrics"),
     },
     {
         "key": "group_batch",
-        "domain": "Group and batch script path",
+        "domain": "群组与批量脚本路径",
         "stage_gate": "P3",
         "source": "docs/p2_p3_stability_runbook.md",
-        "xp_signal": "Commercial group control depends on per-device batch dispatch and failure isolation.",
-        "local_support": "group_click, group_swipe, group_type, group save calls, Matrix and P3/P4 scripts.",
-        "script_gate": "P3/P4 scripts target multiple devices or groups and avoid aggregate-only success.",
-        "field_gate": "P3/P4 require per-device evidence, metrics, Matrix review and isolated failures.",
-        "evidence_required": "pilot_4/stable_10 JSONL, per-device artifacts, Matrix/Triage and recovery notes.",
-        "claim_boundary": "Local group API or dry-run does not prove iOS group control.",
+        "xp_signal": "商业群组控制依赖单设备批量分派和故障隔离。",
+        "local_support": "group_click、group_swipe、group_type、群组保存调用、矩阵和 P3/P4 脚本。",
+        "script_gate": "P3/P4 脚本面向多个设备或群组，避免仅聚合成功。",
+        "field_gate": "P3/P4 需要单设备证据、指标、矩阵审查和隔离的故障。",
+        "evidence_required": "pilot_4/stable_10 JSONL、单设备证据、矩阵/分诊和恢复备注。",
+        "claim_boundary": "本地群组 API 或 dry-run 不能证明 iOS 群组控制。",
         "method": "show_device_evidence_matrix_from_gui",
         "actions": ("group_click", "group_swipe", "group_type"),
     },
     {
         "key": "failure_replay",
-        "domain": "Failure replay and issue closure",
+        "domain": "故障重放与问题闭环",
         "stage_gate": "P1-P4",
         "source": "docs/sop_problem_ledger.md",
-        "xp_signal": "Mature group-control tools need logs, replay, triage and smallest rerun rules.",
-        "local_support": "failure screenshot capture, Timeline, Triage, Problems, Rerun, Recovery and Review.",
-        "script_gate": "Scripts name actions and failure screenshot devices so failures can be replayed.",
-        "field_gate": "Every fail event has device id, category, artifact and rerun decision.",
-        "evidence_required": "Timeline/Triage/Problems exports, raw logs, artifacts and fresh-run rule.",
-        "claim_boundary": "A rerun plan explains work remaining; it cannot promote a failed run.",
+        "xp_signal": "成熟的群组控制工具需要日志、重放、分诊和最小重跑规则。",
+        "local_support": "故障截图捕获、时间线、分诊、问题、重跑、恢复和审查。",
+        "script_gate": "脚本命名操作和故障截图设备以便故障可重放。",
+        "field_gate": "每个失败事件都有设备 ID、类别、证据和重跑决策。",
+        "evidence_required": "时间线/分诊/问题导出、原始日志、证据和全新运行规则。",
+        "claim_boundary": "重跑计划解释剩余工作；不能提升一次失败的运行。",
         "method": "show_issue_triage_from_gui",
         "actions": (),
     },
     {
         "key": "claim_boundary",
-        "domain": "Script claim boundary",
+        "domain": "脚本声明边界",
         "stage_gate": "P1-P4",
         "source": "docs/verification_plan.md",
-        "xp_signal": "Script automation is valuable only when evidence gates keep claims scoped.",
-        "local_support": "Acceptance, Readiness, Goals, Start Pack and Evidence Pack.",
-        "script_gate": "Script success is reviewed beside screenshot, manual lanes, logs and stage gates.",
-        "field_gate": "Acceptance and Readiness pass for the exact run_id, device/iOS scope and stage.",
-        "evidence_required": "Acceptance PASS, Readiness PASS, real_ios_verified, artifacts and exact scope.",
-        "claim_boundary": "No script summary, dry-run, API success or markdown export can claim perfect iOS control alone.",
+        "xp_signal": "脚本自动化仅在证据门控保持声明在范围内时才有价值。",
+        "local_support": "验收、就绪、目标、启动包和证据包。",
+        "script_gate": "脚本成功在截图、手动通道、日志和阶段门控旁进行审查。",
+        "field_gate": "针对确切 run_id、设备/iOS 范围和阶段的验收和就绪通过。",
+        "evidence_required": "验收通过、就绪通过、real_ios_verified、证据和确切范围。",
+        "claim_boundary": "没有脚本摘要、dry-run、API 成功或 markdown 导出能单独声称完美 iOS 控制。",
         "method": "run_readiness_audit",
         "actions": (),
     },
@@ -1135,11 +1135,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "run_scope",
         "source": "docs/follow_along_test_method.md",
-        "proof": "One run_id, exact physical device list, stage target, and evidence path.",
+        "proof": "一个 run_id、确切的物理设备列表、阶段目标和证据路径。",
         "readiness_link": "field_evidence",
-        "evidence_required": "run_id, selected device ids, evidence/<run_id>.jsonl and operator-visible device scope.",
-        "artifact": "Evidence JSONL and First Run Packet",
-        "stop_rule": "Stop if the operator cannot point to the exact iPhone, receiver, HID, Hub port, cable and run_id.",
+        "evidence_required": "run_id、选定设备 ID、evidence/<run_id>.jsonl 和操作员可见的设备范围。",
+        "artifact": "Evidence JSONL 和 First Run Packet",
+        "stop_rule": "如果操作员无法指向确切的 iPhone、接收端、HID、Hub 端口、线缆和 run_id，则停止。",
         "method": "prepare_live_probe_from_gui",
     },
     {
@@ -1147,11 +1147,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "route_doctor",
         "source": "docs/receiver_capture_selection.md",
-        "proof": "Route Decision is ready and Doctor has no fail for the same run_id.",
+        "proof": "Route Decision 已就绪且同一 run_id 的 Doctor 无失败。",
         "readiness_link": "doctor",
-        "evidence_required": "Route JSON/report, component metadata, route-aware Doctor report and no unresolved blocker.",
-        "artifact": "Route Decision Report and Doctor Report",
-        "stop_rule": "Stop before receiver/HID actions if route is not ready or Doctor fails.",
+        "evidence_required": "路由 JSON/报告、组件元数据、路线感知 Doctor 报告和无未解决的阻断项。",
+        "artifact": "Route Decision Report 和 Doctor Report",
+        "stop_rule": "如果路线未就绪或 Doctor 失败，在接收端/HID 操作之前停止。",
         "method": "show_receiver_route_gate_from_gui",
     },
     {
@@ -1159,11 +1159,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "evidence_exists",
         "source": "docs/validation_evidence.md",
-        "proof": "The current evidence JSONL exists and contains field events.",
+        "proof": "当前证据 JSONL 存在且包含现场事件。",
         "readiness_link": "field_evidence",
-        "evidence_required": "At least one JSONL event from the current real-device run.",
+        "evidence_required": "当前真实设备运行中至少一个 JSONL 事件。",
         "artifact": "evidence/<run_id>.jsonl",
-        "stop_rule": "Stop Acceptance/Readiness if the JSONL file is missing or empty.",
+        "stop_rule": "如果 JSONL 文件缺失或为空，则停止 Acceptance/Readiness。",
         "method": "show_field_evidence_runner_from_gui",
     },
     {
@@ -1171,11 +1171,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "no_fail_events",
         "source": "docs/validation_evidence.md",
-        "proof": "No unresolved fail events remain in the JSONL for this run.",
+        "proof": "此运行的 JSONL 中没有未解决的失败事件。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "Fresh run with zero unresolved fail events, plus Triage/Rerun notes for historical failures.",
-        "artifact": "Evidence Review, Timeline, Triage and Rerun Playbook",
-        "stop_rule": "Stop promotion when fail events are open; fix and rerun with a fresh run_id when needed.",
+        "evidence_required": "零未解决失败事件的新运行，加上历史失败的 Triage/Rerun 备注。",
+        "artifact": "Evidence Review、Timeline、Triage 和 Rerun Playbook",
+        "stop_rule": "当失败事件未关闭时停止提升；必要时修复并使用新 run_id 重跑。",
         "method": "show_issue_triage_from_gui",
     },
     {
@@ -1183,11 +1183,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "device_traceability",
         "source": "docs/validation_evidence.md",
-        "proof": "Unique device ids in JSONL meet the stage device count.",
+        "proof": "JSONL 中的唯一设备 ID 满足阶段设备数量要求。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "P1/P2 one device, P3 four devices, P4 ten devices, each tied to events.",
+        "evidence_required": "P1/P2 一台设备、P3 四台设备、P4 十台设备，每台关联到事件。",
         "artifact": "Device Evidence Matrix",
-        "stop_rule": "Stop group-control claims if any device id is missing, duplicated, or aggregate-only.",
+        "stop_rule": "如果任何设备 ID 缺失、重复或仅聚合，则停止群组控制声明。",
         "method": "show_device_evidence_matrix_from_gui",
     },
     {
@@ -1195,11 +1195,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "component_traceability",
         "source": "docs/validation_evidence.md",
-        "proof": "Receiver, capture, HID, iPhone identity and iOS version are recorded per device.",
+        "proof": "接收端、捕获、HID、iPhone 身份和 iOS 版本已按设备记录。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "Component metadata events with no placeholders for every required device.",
-        "artifact": "Route Decision, Metadata event and Operator Worksheet",
-        "stop_rule": "Stop if metadata is copied from another run or still contains placeholders.",
+        "evidence_required": "每个必需设备的组件元数据事件，无占位符。",
+        "artifact": "Route Decision、Metadata 事件和 Operator Worksheet",
+        "stop_rule": "如果元数据从另一运行复制或仍包含占位符，则停止。",
         "method": "show_device_evidence_matrix_from_gui",
     },
     {
@@ -1207,11 +1207,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P2",
         "check": "screenshot_quality",
         "source": "docs/receiver_capture_selection.md",
-        "proof": "Current screenshot quality passes on the selected real iPhone.",
+        "proof": "选定真实 iPhone 上的当前截图质量通过。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "Nonblack/nonwhite, correctly bound screenshot_quality.ok=true events and artifacts.",
-        "artifact": "Capture Quality Bench and screenshots",
-        "stop_rule": "Stop HID proof if frames are black, stale, cropped, rotated, or from the wrong device.",
+        "evidence_required": "非黑/非白、正确绑定的 screenshot_quality.ok=true 事件和证据。",
+        "artifact": "Capture Quality Bench 和截图",
+        "stop_rule": "如果帧为黑屏、过时、裁剪、旋转或来自错误设备，则停止 HID 证明。",
         "method": "run_capture_quality_bench_from_gui",
     },
     {
@@ -1219,11 +1219,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "manual_observation",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "proof": "Operator records visible real-iPhone response after control actions.",
+        "proof": "操作员在控制操作后记录可见的真实 iPhone 响应。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "Manual pass observation events for real iPhone response.",
-        "artifact": "Manual JSONL rows, P1 Trial and Control Bench",
-        "stop_rule": "Stop if API/HID success is not matched by visible iPhone behavior.",
+        "evidence_required": "真实 iPhone 响应的 Manual 通过观察事件。",
+        "artifact": "Manual JSONL 行、P1 Trial 和 Control Bench",
+        "stop_rule": "如果 API/HID 成功未匹配到可见 iPhone 行为，则停止。",
         "method": "show_p1_trial_from_gui",
     },
     {
@@ -1231,11 +1231,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1",
         "check": "lane_separation",
         "source": "docs/gui_control_evidence_ledger.md",
-        "proof": "HID click, HID swipe and keyboard input each have their own Manual pass lane.",
+        "proof": "HID 点击、HID 滑动和键盘输入各有独立的 Manual 通过通道。",
         "readiness_link": "claim boundary",
-        "evidence_required": "Action-specific Manual pass rows for click, swipe release and text input.",
+        "evidence_required": "针对点击、滑动释放和文本输入的操作特定 Manual 通过行。",
         "artifact": "Control Evidence Ledger",
-        "stop_rule": "Stop if one broad Manual pass is being used to close multiple control lanes.",
+        "stop_rule": "如果一个宽泛的 Manual 通过被用于关闭多个控制通道，则停止。",
         "method": "show_control_evidence_ledger_from_gui",
     },
     {
@@ -1243,11 +1243,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P2-P4",
         "check": "metrics",
         "source": "docs/p2_p3_stability_runbook.md",
-        "proof": "Metrics are present when the stage requires stability or scale evidence.",
+        "proof": "当阶段需要稳定性或扩展证据时，指标已存在。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "Metrics samples, repeated screenshots, callback/log rows and recovery notes for P2/P3/P4.",
-        "artifact": "Stage Dashboard, Timeline and Review",
-        "stop_rule": "Stop P2/P3/P4 if metrics or failure isolation are missing.",
+        "evidence_required": "P2/P3/P4 的指标样本、重复截图、callback/日志行和恢复备注。",
+        "artifact": "Stage Dashboard、Timeline 和 Review",
+        "stop_rule": "如果缺少指标或故障隔离，则停止 P2/P3/P4。",
         "method": "show_stage_dashboard_from_gui",
     },
     {
@@ -1255,11 +1255,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "acceptance_gate",
         "source": "docs/readiness_audit.md",
-        "proof": "Acceptance for the current stage is PASS.",
+        "proof": "当前阶段的 Acceptance 为 PASS。",
         "readiness_link": "acceptance:<stage>",
-        "evidence_required": "Acceptance report and Gap report when any check fails.",
-        "artifact": "Acceptance Report and Acceptance Gap",
-        "stop_rule": "Stop claim review if Acceptance is missing or FAIL.",
+        "evidence_required": "Acceptance 报告和任何检查失败时的 Gap 报告。",
+        "artifact": "Acceptance Report 和 Acceptance Gap",
+        "stop_rule": "如果 Acceptance 缺失或 FAIL，则停止声明审查。",
         "method": "run_acceptance_from_gui",
     },
     {
@@ -1267,11 +1267,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P0-P4",
         "check": "readiness_gate",
         "source": "docs/readiness_audit.md",
-        "proof": "Readiness for the target stage is PASS and claims match the intended scope.",
+        "proof": "目标阶段的 Readiness 为 PASS 且声明匹配预期范围。",
         "readiness_link": "target stage",
-        "evidence_required": "Readiness report with doctor, field evidence and acceptance blockers closed.",
+        "evidence_required": "Readiness 报告，Doctor、现场证据和 Acceptance 阻断项已关闭。",
         "artifact": "Readiness Report",
-        "stop_rule": "Stop any iOS perfect-control, broad compatibility or XP-parity statement if Readiness is FAIL.",
+        "stop_rule": "如果 Readiness 为 FAIL，则停止任何 iOS 完美控制、广泛兼容或 XP 对等声明。",
         "method": "run_readiness_audit",
     },
     {
@@ -1279,11 +1279,11 @@ ACCEPTANCE_PROOF_TOPICS = (
         "gate": "P1-P4",
         "check": "claim_boundary",
         "source": "docs/verification_plan.md",
-        "proof": "Claim text is limited to exact device/iOS/receiver/HID scope proven in this run.",
+        "proof": "声明文本限于此次运行中证明的确切设备/iOS/接收端/HID 范围。",
         "readiness_link": "claims.real_ios_control_verified",
-        "evidence_required": "Same-run screenshots, lane Manual observations, Acceptance PASS, Readiness PASS and exact scope.",
-        "artifact": "Evidence Pack, Goal Gate and Device/iOS Matrix",
-        "stop_rule": "Stop 'perfect control' or XP hardware parity claims without same-run physical iPhone evidence.",
+        "evidence_required": "同运行截图、通道 Manual 观察、Acceptance PASS、Readiness PASS 和确切范围。",
+        "artifact": "Evidence Pack、Goal Gate 和 Device/iOS Matrix",
+        "stop_rule": "没有同运行物理 iPhone 证据时，停止「完美控制」或 XP 硬件对等声明。",
         "method": "show_gui_goal_gate_from_gui",
     },
 )
@@ -1291,32 +1291,32 @@ ACCEPTANCE_PROOF_TOPICS = (
 VERIFICATION_WALKTHROUGH_STEPS = (
     {
         "key": "offline_self_check",
-        "phase": "P0 offline self-check",
+        "phase": "P0 离线自检",
         "scope": "repo",
         "command": ".\\.venv\\Scripts\\python -m unittest discover -s tests -v; .\\.venv\\Scripts\\python -m compileall -q imouse tests; .\\.venv\\Scripts\\python -m imouse.main --check",
-        "expected": "Full offline suite passes; dependency check can show uxplay missing as a receiver blocker, not as iOS control proof.",
-        "evidence": "Terminal transcript plus README/latest test count; no JSONL field evidence is created.",
-        "stop_rule": "Stop if tests or compileall fail; fix source before touching hardware.",
+        "expected": "完整离线套件通过；依赖检查可显示 uxplay 缺失作为接收端阻断项，而非 iOS 控制证明。",
+        "evidence": "终端记录加 README/最新测试数量；不创建 JSONL 现场证据。",
+        "stop_rule": "如果测试或 compileall 失败则停止；在接触硬件之前修复源码。",
         "method": "show_local_verification_from_gui",
     },
     {
         "key": "run_identity",
-        "phase": "Run identity and device scope",
+        "phase": "运行身份和设备范围",
         "scope": "p1+",
-        "command": "Set Evidence run_id, select exact device ids, click Prepare, then export Start Pack.",
-        "expected": "run_id is stable and selected devices meet the stage requirement.",
-        "evidence": "Route template path, selected device ids, Start Pack, future evidence JSONL path.",
-        "stop_rule": "Stop if the operator cannot point to the physical iPhone, Hub port, cable and device id.",
+        "command": "设置 Evidence run_id，选择确切设备 ID，点击 Prepare，然后导出 Start Pack。",
+        "expected": "run_id 稳定且选定设备满足阶段要求。",
+        "evidence": "路由模板路径、选定设备 ID、Start Pack、未来证据 JSONL 路径。",
+        "stop_rule": "如果操作员无法指向物理 iPhone、Hub 端口、线缆和设备 ID，则停止。",
         "method": "prepare_live_probe_from_gui",
     },
     {
         "key": "route_decision",
-        "phase": "Route Decision validation",
+        "phase": "Route Decision 验证",
         "scope": "p1+",
-        "command": "Route Init -> Edit -> Use Metadata -> Scan Issues -> Checklist -> Validate.",
-        "expected": "Receiver, capture method, HID route, iPhone, iOS, Hub, cable, operator and blockers are real values.",
-        "evidence": "evidence/<run_id>_route_decision.json and .md; component metadata event when validated.",
-        "stop_rule": "Stop if placeholders, open blockers, run_id mismatch, or Allow P1 real run is false.",
+        "command": "Route Init -> Edit -> Use Metadata -> Scan Issues -> Checklist -> Validate。",
+        "expected": "接收端、捕获方法、HID 路线、iPhone、iOS、Hub、线缆、操作员和阻断项为真实值。",
+        "evidence": "evidence/<run_id>_route_decision.json 和 .md；验证时的组件元数据事件。",
+        "stop_rule": "如果存在占位符、未关闭阻断项、run_id 不匹配或 Allow P1 real run 为 false，则停止。",
         "method": "edit_route_decision_from_gui",
     },
     {
@@ -1324,79 +1324,79 @@ VERIFICATION_WALKTHROUGH_STEPS = (
         "phase": "Preflight Doctor",
         "scope": "p1+",
         "command": ".\\.venv\\Scripts\\python -m imouse.doctor --json",
-        "expected": "Doctor has no fail, or the selected Route Decision documents a supported non-UxPlay receiver substitute.",
-        "evidence": "evidence/<run_id>_doctor.md plus JSON output; receiver/HID logs if fail.",
-        "stop_rule": "Stop before real HID actions if Doctor is fail.",
+        "expected": "Doctor 无失败，或选定的 Route Decision 记录了受支持的非 UxPlay 接收端替代品。",
+        "evidence": "evidence/<run_id>_doctor.md 加 JSON 输出；失败时附带接收端/HID 日志。",
+        "stop_rule": "如果 Doctor 失败，在真实 HID 操作之前停止。",
         "method": "run_preflight_doctor",
     },
     {
         "key": "receiver_capture",
-        "phase": "Receiver and screenshot proof",
+        "phase": "接收端和截图证明",
         "scope": "p1+",
-        "command": "Start AirPlay/receiver -> Start Capture -> Screenshot -> Shot Bench.",
-        "expected": "Current screenshot is non-black, non-white, not stale, correctly bound to the selected iPhone.",
-        "evidence": "screenshot_quality pass events, saved frame artifacts, capture bench markdown.",
-        "stop_rule": "Stop if frames are black, stale, wrong-device, wrong-window, cropped, or dimension-drifting.",
+        "command": "启动 AirPlay/接收端 -> 启动捕获 -> 截图 -> Shot Bench。",
+        "expected": "当前截图非黑、非白、非过时、正确绑定到选定 iPhone。",
+        "evidence": "screenshot_quality 通过事件、保存的帧证据、捕获基准 markdown。",
+        "stop_rule": "如果帧为黑屏、过时、错误设备、错误窗口、裁剪或尺寸漂移，则停止。",
         "method": "run_capture_quality_bench_from_gui",
     },
     {
         "key": "hid_manual_control",
-        "phase": "HID click/swipe/text proof",
+        "phase": "HID 点击/滑动/文本证明",
         "scope": "p1+",
-        "command": "Scan -> Bind -> safe Click -> Swipe -> Type -> Manual pass/fail -> Control Bench.",
-        "expected": "The real iPhone visibly responds to click, swipe release, and text input.",
-        "evidence": "Manual pass/fail observations with category and artifacts; control bench markdown.",
-        "stop_rule": "Stop if API/HID command success is not matched by visible iPhone behavior.",
+        "command": "Scan -> Bind -> 安全 Click -> Swipe -> Type -> Manual 通过/失败 -> Control Bench。",
+        "expected": "真实 iPhone 可见地响应点击、滑动释放和文本输入。",
+        "evidence": "带类别和证据的 Manual 通过/失败观察；控制基准 markdown。",
+        "stop_rule": "如果 API/HID 命令成功未匹配到可见 iPhone 行为，则停止。",
         "method": "show_control_response_bench_from_gui",
     },
     {
         "key": "acceptance_readiness",
-        "phase": "Acceptance and Readiness",
+        "phase": "Acceptance 和 Readiness",
         "scope": "p1+",
         "command": ".\\.venv\\Scripts\\python -m imouse.acceptance evidence\\<run_id>.jsonl --gate <stage>; .\\.venv\\Scripts\\python -m imouse.readiness --target <stage> --evidence evidence\\<run_id>.jsonl",
-        "expected": "Acceptance and Readiness pass for the current target; real_ios_verified is true before any control claim.",
-        "evidence": "acceptance markdown, gap markdown when failing, readiness markdown.",
-        "stop_rule": "Stop any perfect-control or XP-parity statement if Acceptance/Readiness fail or real_ios_verified is false.",
+        "expected": "当前目标的 Acceptance 和 Readiness 通过；在任何控制声明之前 real_ios_verified 为 true。",
+        "evidence": "acceptance markdown、失败时的 gap markdown、readiness markdown。",
+        "stop_rule": "如果 Acceptance/Readiness 失败或 real_ios_verified 为 false，则停止任何完美控制或 XP 对等声明。",
         "method": "run_readiness_audit",
     },
     {
         "key": "p2_stability",
-        "phase": "P2 single-device stability",
+        "phase": "P2 单设备稳定性",
         "scope": "p2",
-        "command": "Run 100-screenshot stability, watchdog metrics, repeated safe HID samples and Review.",
-        "expected": "One iPhone remains visible and controllable over the agreed duration with explainable failures only.",
-        "evidence": "metrics events, screenshot artifacts, Timeline, Matrix, Triage, Review.",
-        "stop_rule": "Stop P2 if metrics are missing, screenshots drift, or failures are uncategorized.",
+        "command": "运行 100 截图稳定性、看门狗指标、重复安全 HID 样本和 Review。",
+        "expected": "一台 iPhone 在约定时长内保持可见和可控，仅有可解释的失败。",
+        "evidence": "指标事件、截图证据、Timeline、Matrix、Triage、Review。",
+        "stop_rule": "如果指标缺失、截图漂移或失败未分类，则停止 P2。",
         "method": "show_stage_dashboard_from_gui",
     },
     {
         "key": "p3_group",
-        "phase": "P3 four-device group pilot",
+        "phase": "P3 四设备群组试点",
         "scope": "p3",
-        "command": "Select four devices, load group, run pilot_4 script, inspect Matrix and Triage per device.",
-        "expected": "Every selected device has traceable component metadata, screenshots, manual observations and isolated failures.",
-        "evidence": "P3 acceptance, device matrix, group scenario summary, per-device artifacts.",
-        "stop_rule": "Stop scaling if any failure cannot be tied to one device, receiver, HID, Hub port or artifact.",
+        "command": "选择四台设备，加载群组，运行 pilot_4 脚本，检查每台设备的 Matrix 和 Triage。",
+        "expected": "每台选定设备都有可追踪的组件元数据、截图、手动观察和隔离的故障。",
+        "evidence": "P3 Acceptance、设备矩阵、群组场景摘要、单设备证据。",
+        "stop_rule": "如果任何故障无法关联到一台设备、接收端、HID、Hub 端口或证据，则停止扩展。",
         "method": "show_device_evidence_matrix_from_gui",
     },
     {
         "key": "xp_parity_review",
-        "phase": "XP parity review",
+        "phase": "XP 对等审查",
         "scope": "p1-p4",
-        "command": "Open Core, Routes, Sources, Iter Radar, XP Timeline, and XP Gap after every field run.",
-        "expected": "Local API/SDK readiness is separated from receiver/HID/iPhone proof and XP dedicated hardware proof.",
-        "evidence": "Core matrix, route matrix, source ledger, iteration radar, XP gap audit.",
-        "stop_rule": "Stop XP hardware, 4.4 firmware, wired projection, Windows receiver or hardware decode claims without side-by-side evidence.",
+        "command": "每次现场运行后打开 Core、Routes、Sources、Iter Radar、XP Timeline 和 XP Gap。",
+        "expected": "本地 API/SDK 就绪与接收端/HID/iPhone 证明和 XP 专用硬件证明分离。",
+        "evidence": "Core 矩阵、路线矩阵、源台账、迭代雷达、XP 差距审计。",
+        "stop_rule": "没有对比证据时停止 XP 硬件、4.4 固件、有线投屏、Windows 接收端或硬件解码声明。",
         "method": "show_xp_core_function_matrix_from_gui",
     },
     {
         "key": "handoff_pack",
-        "phase": "Review handoff pack",
+        "phase": "审查交接包",
         "scope": "all",
-        "command": "Export Pack, Start Pack, Runbook, Worksheet, Timeline, Matrix, Triage, Review and Session.",
-        "expected": "Required artifacts are present and recommended gaps are explicitly acknowledged.",
-        "evidence": "evidence/<run_id>_<stage>_evidence_pack.md and listed artifacts.",
-        "stop_rule": "Stop review if required artifacts are missing; markdown presence still does not prove iPhone control.",
+        "command": "导出 Pack、Start Pack、Runbook、Worksheet、Timeline、Matrix、Triage、Review 和 Session。",
+        "expected": "必需的证据存在且建议的差距被明确确认。",
+        "evidence": "evidence/<run_id>_<stage>_evidence_pack.md 和列出的证据。",
+        "stop_rule": "如果必需证据缺失则停止审查；markdown 存在仍不能证明 iPhone 控制。",
         "method": "write_evidence_pack_from_gui",
     },
 )
@@ -1404,72 +1404,72 @@ VERIFICATION_WALKTHROUGH_STEPS = (
 LOCAL_VERIFICATION_STEPS = (
     {
         "key": "unit_tests",
-        "check": "Unit test suite",
+        "check": "单元测试套件",
         "command": ".\\.venv\\Scripts\\python -m unittest discover -s tests -v",
-        "expected": "All tests finish with OK. Treat count changes as a review signal, not as pass/fail by itself.",
-        "failure_meaning": "Core helpers, API compatibility, GUI state tables, or evidence gates are untrusted.",
-        "next_action": "Fix the first failing test before changing field SOP or hardware steps.",
-        "boundary": "Unit tests are local confidence only; they do not prove receiver capture or iPhone control.",
+        "expected": "所有测试以 OK 完成。将数量变化视为审查信号，而非仅通过/失败。",
+        "failure_meaning": "核心辅助、API 兼容性、GUI 状态表或证据门控不可信。",
+        "next_action": "在更改现场 SOP 或硬件步骤之前修复第一个失败的测试。",
+        "boundary": "单元测试仅为本地信心；不能证明接收端捕获或 iPhone 控制。",
         "method": "show_verification_walkthrough_from_gui",
     },
     {
         "key": "compileall",
         "check": "Python compileall",
         "command": ".\\.venv\\Scripts\\python -m compileall -q imouse tests",
-        "expected": "Command exits 0 with no output.",
-        "failure_meaning": "At least one Python file cannot be imported/compiled reliably.",
-        "next_action": "Fix syntax/import errors, then rerun unit tests.",
-        "boundary": "Compile success does not mean dependencies, receiver, HID, or real-device proof are available.",
+        "expected": "命令退出码 0 且无输出。",
+        "failure_meaning": "至少一个 Python 文件无法可靠地导入/编译。",
+        "next_action": "修复语法/导入错误，然后重新运行单元测试。",
+        "boundary": "编译成功不代表依赖、接收端、HID 或真实设备证明可用。",
         "method": "show_verification_walkthrough_from_gui",
     },
     {
         "key": "dependency_check",
-        "check": "Dependency check",
+        "check": "依赖检查",
         "command": ".\\.venv\\Scripts\\python -m imouse.main --check",
-        "expected": "Python-side dependencies are present; missing receiver binaries such as uxplay stay visible.",
-        "failure_meaning": "Local environment is not ready, or the selected receiver route is not installed.",
-        "next_action": "Install the missing dependency or lock a supported alternate receiver route.",
-        "boundary": "A clean dependency check still does not prove screenshot quality or HID response.",
+        "expected": "Python 端依赖存在；缺失的接收端二进制如 uxplay 保持可见。",
+        "failure_meaning": "本地环境未就绪，或选定的接收端路线未安装。",
+        "next_action": "安装缺失的依赖或锁定受支持的替代接收端路线。",
+        "boundary": "干净的依赖检查仍不能证明截图质量或 HID 响应。",
         "method": "run_preflight_doctor",
     },
     {
         "key": "doctor_default",
         "check": "Preflight doctor",
         "command": ".\\.venv\\Scripts\\python -m imouse.doctor --json",
-        "expected": "Overall is ok or a route-specific warn with no hard fail.",
-        "failure_meaning": "Do not start real HID actions; the bench cannot be trusted for P1.",
-        "next_action": "Fix fail checks, attach receiver/HID logs, then rerun Doctor.",
-        "boundary": "Doctor is preflight only; it does not write JSONL field evidence.",
+        "expected": "整体 ok 或路线特定的 warn，无硬失败。",
+        "failure_meaning": "不要开始真实 HID 操作；基准不可用于 P1。",
+        "next_action": "修复失败的检查，附加接收端/HID 日志，然后重新运行 Doctor。",
+        "boundary": "Doctor 仅用于 preflight；不写入 JSONL 现场证据。",
         "method": "run_preflight_doctor",
     },
     {
         "key": "doctor_route",
-        "check": "Route-aware doctor",
+        "check": "路线感知 doctor",
         "command": ".\\.venv\\Scripts\\python -m imouse.doctor --route-decision evidence\\<run_id>_route_decision.json --json",
-        "expected": "Valid Windows receiver, wired, or capture-card route may downgrade missing uxplay to warn.",
-        "failure_meaning": "The route decision is missing, placeholder-shaped, or not accepted by Doctor.",
-        "next_action": "Open Receiver Gate and Route Edit, then rerun this exact command.",
-        "boundary": "Alternate-route preflight does not prove the receiver window is showing the selected iPhone.",
+        "expected": "有效的 Windows 接收端、有线或采集卡路线可将缺失的 uxplay 降级为 warn。",
+        "failure_meaning": "路线决策缺失、占位符形状或未被 Doctor 接受。",
+        "next_action": "打开 Receiver Gate 和 Route Edit，然后重新运行此确切命令。",
+        "boundary": "替代路线 preflight 不能证明接收端窗口正在显示选定的 iPhone。",
         "method": "show_receiver_route_gate_from_gui",
     },
     {
         "key": "scenario_dry_run",
-        "check": "Scenario dry-run",
+        "check": "场景 dry-run",
         "command": ".\\.venv\\Scripts\\python -m imouse.script_runner scripts\\p1_single_device_control_probe.json --dry-run --run-id <run_id>",
-        "expected": "Scenario summary ok=true without sending real HID actions.",
-        "failure_meaning": "Script JSON, placeholders, API route, or command mapping is broken before field execution.",
-        "next_action": "Open Scenario Library or Load Probe Script, keep Dry Run enabled, and fix the failing step.",
-        "boundary": "Dry-run confirms orchestration only; it cannot prove the iPhone moved or accepted text.",
+        "expected": "场景摘要 ok=true，不发送真实 HID 操作。",
+        "failure_meaning": "脚本 JSON、占位符、API 路线或命令映射在现场执行之前已损坏。",
+        "next_action": "打开 Scenario Library 或 Load Probe Script，保持 Dry Run 启用，修复失败的步骤。",
+        "boundary": "Dry-run 仅确认编排；不能证明 iPhone 移动了或接受了文本。",
         "method": "load_probe_script_from_gui",
     },
     {
         "key": "readiness_p1",
-        "check": "Readiness audit",
+        "check": "Readiness 审计",
         "command": ".\\.venv\\Scripts\\python -m imouse.readiness --target <stage> --evidence evidence\\<run_id>.jsonl",
-        "expected": "FAIL until real evidence JSONL, Acceptance, Doctor, screenshots, and manual observations are present.",
-        "failure_meaning": "The project is not ready to claim the target stage or XP parity.",
-        "next_action": "Follow the first blocker, then rerun Acceptance and Readiness.",
-        "boundary": "Readiness can only pass with real field evidence; reports alone are not control proof.",
+        "expected": "在真实证据 JSONL、Acceptance、Doctor、截图和手动观察存在之前为 FAIL。",
+        "failure_meaning": "项目未准备好声明目标阶段或 XP 对等。",
+        "next_action": "跟随第一个阻断项，然后重新运行 Acceptance 和 Readiness。",
+        "boundary": "Readiness 仅在真实现场证据下能通过；仅报告不是控制证明。",
         "method": "run_readiness_audit",
     },
 )
@@ -1495,11 +1495,11 @@ STAGE_PRIMARY_SCENARIOS = {
 STAGE_DASHBOARD_ORDER = ("p0", "p1", "p2", "p3", "p4")
 
 STAGE_DASHBOARD_LABELS = {
-    "p0": "Offline assets",
-    "p1": "Single iPhone control",
-    "p2": "Single-device stability",
-    "p3": "4-device group pilot",
-    "p4": "10-device stability",
+    "p0": "离线资产",
+    "p1": "单 iPhone 控制",
+    "p2": "单设备稳定性",
+    "p3": "4 设备群组试点",
+    "p4": "10 设备稳定性",
 }
 
 STAGE_DASHBOARD_GATES = {
@@ -1516,66 +1516,66 @@ CAPTURE_BENCH_WAIT_SECONDS = 0.2
 GUI_KNOWLEDGE_TOPICS = (
     {
         "key": "xp_public_model",
-        "topic": "XP public product model",
+        "topic": "XP 公开产品模型",
         "source": "docs/imouse_xp_research.md",
-        "public_signal": "Dedicated hardware + AirPlay + kernel server + console + HTTP/WebSocket API.",
-        "sop_action": "Keep kernel/API, GUI console, receiver/capture, HID, vision, and evidence gates separate.",
+        "public_signal": "专用硬件 + AirPlay + 内核服务 + Console + HTTP/WebSocket API。",
+        "sop_action": "保持 kernel/API、GUI 控制台、接收端/捕获、HID、视觉和证据门控各自独立。",
         "method": "write_xp_gap_audit_from_gui",
     },
     {
         "key": "industry_route",
-        "topic": "Mainstream iOS group-control route",
+        "topic": "主流 iOS 群控路线",
         "source": "docs/industry_landscape_2026.md",
-        "public_signal": "Receiver/capture + HID injection + vision recognition + SOP is the practical no-jailbreak route.",
-        "sop_action": "Use MDM only for initialization; do not treat it as pixel-level business-page control.",
+        "public_signal": "接收端/捕获 + HID 注入 + 视觉识别 + SOP 是实用的免越狱路线。",
+        "sop_action": "MDM 仅用于初始化；不要将其视为像素级业务页面控制。",
         "method": "show_gui_control_center_from_gui",
     },
     {
         "key": "p1_route_decision",
-        "topic": "P1 receiver/HID decision",
+        "topic": "P1 接收端/HID 决策",
         "source": "docs/mainstream_route_decision.md",
-        "public_signal": "P1 must lock receiver, HID route, iPhone, hub, cable, operator, and blockers before real run.",
-        "sop_action": "Fill Route Decision with real bench values, then run Doctor before any real HID action.",
+        "public_signal": "P1 必须在真实运行之前锁定接收端、HID 路线、iPhone、Hub、线缆、操作员和阻断项。",
+        "sop_action": "用真实基准值填写 Route Decision，然后在进行任何真实 HID 操作之前运行 Doctor。",
         "method": "edit_route_decision_from_gui",
     },
     {
         "key": "field_sop",
-        "topic": "Field SOP and stage gates",
+        "topic": "现场 SOP 和阶段门控",
         "source": "docs/ios_group_control_sop.md",
-        "public_signal": "Stage promotion depends on evidence, acceptance, readiness, and manual real-iPhone observation.",
-        "sop_action": "Follow Live Probe, P1 Trial, SOP Board, Field Runbook, Acceptance, Gap, and Readiness in order.",
+        "public_signal": "阶段提升取决于证据、Acceptance、Readiness 和手动真实 iPhone 观察。",
+        "sop_action": "按顺序执行 Live Probe、P1 Trial、SOP Board、Field Runbook、Acceptance、Gap 和 Readiness。",
         "method": "show_field_runbook_from_gui",
     },
     {
         "key": "hardware_bench",
-        "topic": "Hardware bench and procurement",
+        "topic": "硬件基准和采购",
         "source": "docs/hardware_test_bench_checklist.md",
-        "public_signal": "Hub power, cable labels, serial visibility, firmware, pointer settings, and receiver logs drive field stability.",
-        "sop_action": "Record component metadata and attach receiver/HID logs before rerunning failures.",
+        "public_signal": "Hub 电源、线缆标签、序列号可见性、固件、指针设置和接收端日志驱动现场稳定性。",
+        "sop_action": "在重跑失败之前记录组件元数据并附加接收端/HID 日志。",
         "method": "attach_callback_log_from_gui",
     },
     {
         "key": "xp_api_helper",
-        "topic": "XP API and helper parity",
+        "topic": "XP API 和辅助对等",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "Public Python helper exposes console/device domains, events, image, mouse, keyboard, shortcuts, config, and user state.",
-        "sop_action": "Audit missing fun/helper domains and avoid claiming XP parity from a few REST endpoints.",
+        "public_signal": "公开 Python 辅助公开 console/device 域、事件、图像、鼠标、键盘、快捷方式、配置和用户状态。",
+        "sop_action": "审计缺失的 fun/辅助域，避免仅从几个 REST 端点声明 XP 对等。",
         "method": "write_xp_gap_audit_from_gui",
     },
     {
         "key": "iteration_pitfalls",
-        "topic": "Iteration pitfalls",
+        "topic": "迭代陷阱",
         "source": "docs/imouse_xp_iteration_lessons.md",
-        "public_signal": "Stable product value is failure isolation, logs, recovery, grouping, evidence, and operator SOP, not one click call.",
-        "sop_action": "Use Timeline, Matrix, Triage, Callback, and Attach Log to classify and rerun the smallest failing path.",
+        "public_signal": "稳定的产品价值是故障隔离、日志、恢复、分组、证据和操作员 SOP，而非一次点击调用。",
+        "sop_action": "使用 Timeline、Matrix、Triage、Callback 和 Attach Log 来分类并重跑最小失败路径。",
         "method": "show_issue_triage_from_gui",
     },
     {
         "key": "claim_boundary",
-        "topic": "Claim boundary",
+        "topic": "声明边界",
         "source": "docs/verification_plan.md",
-        "public_signal": "Offline tests, docs, API compatibility, and GUI dashboards do not prove real iOS perfect control.",
-        "sop_action": "Only discuss promotion after real iPhone evidence, Acceptance PASS, Readiness PASS, and no unexplained failures.",
+        "public_signal": "离线测试、文档、API 兼容性和 GUI 仪表盘不能证明真实 iOS 完美控制。",
+        "sop_action": "仅在真实 iPhone 证据、Acceptance PASS、Readiness PASS 和无不解释失败之后才讨论提升。",
         "method": "run_readiness_audit",
     },
 )
@@ -1583,101 +1583,101 @@ GUI_KNOWLEDGE_TOPICS = (
 INDUSTRY_CURRENT_SNAPSHOT_TOPICS = (
     {
         "key": "public_source_snapshot",
-        "area": "Current public-source snapshot",
+        "area": "当前公开源快照",
         "source": "docs/industry_current_state_snapshot_2026.md",
-        "current_signal": "iMouse XP public model still centers on dedicated hardware, AirPlay/receiver, local Kernel/API, Console/SDK, vision, and evidence boundaries; website compatibility wording is a public claim to test, not local coverage.",
-        "sop_gate": "Review this snapshot before procurement, route switching, demo wording, or field handoff.",
-        "main_risk": "Public-source intelligence can drift and is not a substitute for same-run evidence.",
-        "evidence_required": "Source refresh note, exact source date, and later run-specific JSONL evidence for every local claim.",
-        "stop_rule": "Stop if a public compatibility or XP capability claim is copied into product wording without local proof.",
+        "current_signal": "iMouse XP 公开模型仍以专用硬件、AirPlay/接收端、本地 Kernel/API、Console/SDK、视觉和证据边界为中心；网站兼容性措辞是需要测试的公开声明，而非本地覆盖。",
+        "sop_gate": "在采购、路线切换、演示措辞或现场交接之前审查此快照。",
+        "main_risk": "公开源情报会漂移，不能替代同运行证据。",
+        "evidence_required": "源刷新备注、确切源日期，以及每个本地声明的后续运行特定 JSONL 证据。",
+        "stop_rule": "如果公开兼容性或 XP 能力声明被复制到产品措辞中且无本地证明，则停止。",
         "method": "show_xp_source_refresh_from_gui",
     },
     {
         "key": "mainstream_route_choice",
-        "area": "Mainstream route choice",
+        "area": "主流路线选择",
         "source": "docs/mainstream_route_decision.md",
-        "current_signal": "The practical XP-style route is receiver/capture plus HID plus vision plus local API; WDA/Appium/MDM are auxiliary.",
-        "sop_gate": "Choose one receiver lane and one HID lane in Route Decision before P1.",
-        "main_risk": "Using an auxiliary route as the main control proof hides the hard receiver/HID problems.",
-        "evidence_required": "Route JSON/report, receiver provider, HID provider, Doctor, screenshot, Manual observation, Acceptance, Readiness.",
-        "stop_rule": "Stop if route choice is missing, placeholder-shaped, or not connected to physical bench hardware.",
+        "current_signal": "实用的 XP 风格路线是接收端/捕获加 HID 加视觉加本地 API；WDA/Appium/MDM 是辅助。",
+        "sop_gate": "在 P1 之前在 Route Decision 中选择一个接收端通道和一个 HID 通道。",
+        "main_risk": "使用辅助路线作为主要控制证明会隐藏困难的接收端/HID 问题。",
+        "evidence_required": "路由 JSON/报告、接收端提供者、HID 提供者、Doctor、截图、Manual 观察、Acceptance、Readiness。",
+        "stop_rule": "如果路线选择缺失、占位符形状或未连接到物理基准硬件，则停止。",
         "method": "show_mainstream_route_matrix_from_gui",
     },
     {
         "key": "receiver_capture_barrier",
-        "area": "Receiver/capture barrier",
+        "area": "接收端/捕获瓶颈",
         "source": "docs/receiver_capture_selection.md",
-        "current_signal": "The first product bottleneck is stable visible frames, device/window binding, reconnect behavior, latency, and logs.",
-        "sop_gate": "Run Receiver, Rx Bootstrap, Rx Setup, Doctor, Screenshot, and Shot Bench before HID claims.",
-        "main_risk": "A human-visible receiver window may not be a code-capturable, current, correct iPhone frame.",
-        "evidence_required": "Receiver route/version/path/window/capture method, screenshot artifacts, quality status, and logs.",
-        "stop_rule": "Stop before HID if frames are black, stale, cropped, wrong-window, wrong-device, or unrepeatable.",
+        "current_signal": "第一个产品瓶颈是稳定可见帧、设备/窗口绑定、重连行为、延迟和日志。",
+        "sop_gate": "在 HID 声明之前运行 Receiver、Rx Bootstrap、Rx Setup、Doctor、Screenshot 和 Shot Bench。",
+        "main_risk": "人眼可见的接收端窗口可能不是代码可捕获的、当前的、正确的 iPhone 帧。",
+        "evidence_required": "接收端路线/版本/路径/窗口/捕获方法、截图证据、质量状态和日志。",
+        "stop_rule": "如果帧为黑屏、过时、裁剪、错误窗口、错误设备或不可重复，在 HID 之前停止。",
         "method": "show_receiver_route_gate_from_gui",
     },
     {
         "key": "hid_hardware_barrier",
-        "area": "HID and hardware barrier",
+        "area": "HID 和硬件瓶颈",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "current_signal": "CH9329 can prove generic HID direction; XP dedicated hardware, 4.4 firmware, wired projection, and auto-binding remain separate parity lanes.",
-        "sop_gate": "Record HID serial/firmware/Hub/cable/iPhone settings, then observe click, swipe, text, and release on the real phone.",
-        "main_risk": "API success or serial write success can be mistaken for visible iPhone response.",
-        "evidence_required": "Manual pass/fail, HID metadata, serial logs, iPhone settings, release observation, and XP side-by-side evidence when available.",
-        "stop_rule": "Stop any XP hardware or perfect-control wording without real-iPhone Manual pass and hardware-specific evidence.",
+        "current_signal": "CH9329 可证明通用 HID 方向；XP 专用硬件、4.4 固件、有线投屏和自动绑定仍为独立对等通道。",
+        "sop_gate": "记录 HID 序列号/固件/Hub/线缆/iPhone 设置，然后在真实手机上观察点击、滑动、文本和释放。",
+        "main_risk": "API 成功或串口写入成功可能被误认为可见 iPhone 响应。",
+        "evidence_required": "Manual 通过/失败、HID 元数据、串口日志、iPhone 设置、释放观察和可用时的 XP 对比证据。",
+        "stop_rule": "没有真实 iPhone Manual 通过和硬件特定证据时，停止任何 XP 硬件或完美控制措辞。",
         "method": "show_control_response_bench_from_gui",
     },
     {
         "key": "ios_settings_gate",
-        "area": "iPhone settings gate",
+        "area": "iPhone 设置门控",
         "source": "docs/ios_field_settings_sop.md",
-        "current_signal": "AssistiveTouch, Full Keyboard Access, pointer/mouse parameters, lock/brightness, rotation, network, and AirPlay identity are part of the control chain.",
-        "sop_gate": "Run iOS SOP and Transcript before the first real HID action.",
-        "main_risk": "A second operator cannot reproduce the run because phone settings or physical wiring were not recorded.",
-        "evidence_required": "iPhone model/iOS, settings checklist, Hub/cable/receiver/HID ledger, baseline screenshot, operator transcript.",
-        "stop_rule": "Stop if settings are unknown, copied from another device, or not tied to the selected device id.",
+        "current_signal": "AssistiveTouch、Full Keyboard Access、指针/鼠标参数、锁定/亮度、旋转、网络和 AirPlay 身份是控制链的一部分。",
+        "sop_gate": "在第一次真实 HID 操作之前运行 iOS SOP 和 Transcript。",
+        "main_risk": "第二个操作员无法重现运行，因为手机设置或物理接线未记录。",
+        "evidence_required": "iPhone 型号/iOS、设置清单、Hub/线缆/接收端/HID 台账、基准截图、操作员记录。",
+        "stop_rule": "如果设置未知、从另一设备复制或未绑定到选定设备 ID，则停止。",
         "method": "show_ios_field_sop_from_gui",
     },
     {
         "key": "kernel_console_productization",
-        "area": "Kernel/API/Console productization",
+        "area": "Kernel/API/Console 产品化",
         "source": "docs/xp_event_error_contract.md",
-        "current_signal": "XP-like productization separates Kernel service, Console GUI, HTTP/WebSocket API, callbacks, logs, and recovery.",
-        "sop_gate": "Keep GUI actions on the API/evidence path and audit Events before SDK or parity claims.",
-        "main_risk": "GUI shortcuts bypass the service boundary and hide device, receiver, HID, or callback failures.",
-        "evidence_required": "API/WebSocket tests, callback rows, Attach Log, Events export, XP Gap API status, and later real events.",
-        "stop_rule": "Stop SDK/API parity wording when success can hide receiver or HID truth.",
+        "current_signal": "XP 风格产品化分离 Kernel 服务、Console GUI、HTTP/WebSocket API、callback、日志和恢复。",
+        "sop_gate": "保持 GUI 操作在 API/证据路径上，在 SDK 或对等声明之前审计 Events。",
+        "main_risk": "GUI 快捷方式绕过服务边界并隐藏设备、接收端、HID 或 callback 故障。",
+        "evidence_required": "API/WebSocket 测试、callback 行、Attach Log、Events 导出、XP Gap API 状态和后续真实事件。",
+        "stop_rule": "当成功可能隐藏接收端或 HID 真相时，停止 SDK/API 对等措辞。",
         "method": "show_xp_event_error_contract_from_gui",
     },
     {
         "key": "vision_asset_replay",
-        "area": "Vision/OCR asset replay",
+        "area": "视觉/OCR 资源重放",
         "source": "docs/script_runner.md",
-        "current_signal": "Vision/OCR value comes from screenshot artifacts, regions, thresholds, templates, OCR crops, and replayable failures.",
-        "sop_gate": "Use Assets, Scenario Library, dry-run, artifacts, Triage, and Review.",
-        "main_risk": "Calling OpenCV/OCR once is mistaken for a reusable black-box automation lane.",
-        "evidence_required": "Saved screenshots, template index, region/threshold notes, OCR output, failure screenshot, scenario JSON.",
-        "stop_rule": "Stop if a vision miss cannot be replayed from saved artifacts.",
+        "current_signal": "视觉/OCR 价值来自截图证据、区域、阈值、模板、OCR 裁剪和可重放的失败。",
+        "sop_gate": "使用 Assets、Scenario Library、dry-run、证据、Triage 和 Review。",
+        "main_risk": "调用一次 OpenCV/OCR 被误认为可复用的黑盒自动化通道。",
+        "evidence_required": "保存的截图、模板索引、区域/阈值备注、OCR 输出、失败截图、场景 JSON。",
+        "stop_rule": "如果视觉失败无法从保存的证据重放，则停止。",
         "method": "show_scenario_library_from_gui",
     },
     {
         "key": "group_failure_isolation",
-        "area": "Group failure isolation",
+        "area": "群组故障隔离",
         "source": "docs/p2_p3_stability_runbook.md",
-        "current_signal": "P3/P4 value is per-device evidence, metrics, logs, recovery, and failure isolation, not aggregate success.",
-        "sop_gate": "Only scale after P1/P2; use Dashboard, Matrix, Timeline, Attach Log, Rerun, and Recovery.",
-        "main_risk": "One bad receiver, Hub port, cable, HID, or stale frame is hidden behind a group-level pass.",
-        "evidence_required": "Per-device JSONL, device ids, metrics, logs, artifacts, failure categories, recovery notes.",
-        "stop_rule": "Stop scale claims if any failure lacks device id, component lane, category, and artifact.",
+        "current_signal": "P3/P4 价值是单设备证据、指标、日志、恢复和故障隔离，而非聚合成功。",
+        "sop_gate": "仅在 P1/P2 之后扩展；使用 Dashboard、Matrix、Timeline、Attach Log、Rerun 和 Recovery。",
+        "main_risk": "一个不良接收端、Hub 端口、线缆、HID 或过时帧隐藏在群组级通过之后。",
+        "evidence_required": "单设备 JSONL、设备 ID、指标、日志、证据、故障类别、恢复备注。",
+        "stop_rule": "如果任何故障缺少设备 ID、组件通道、类别和证据，则停止扩展声明。",
         "method": "show_stage_dashboard_from_gui",
     },
     {
         "key": "claim_boundary",
-        "area": "Claim boundary",
+        "area": "声明边界",
         "source": "docs/verification_plan.md",
-        "current_signal": "Docs, source refresh, green unit tests, and GUI exports are P0 assets; they do not prove real iOS control.",
-        "sop_gate": "Run Goals, Acceptance, Readiness, Device/iOS Matrix, and XP Gap before any external claim.",
-        "main_risk": "Offline readiness is reworded as P1 pass, broad iOS compatibility, or XP parity.",
-        "evidence_required": "Same-run JSONL, screenshot quality, Manual/P1 Trial, Acceptance PASS, Readiness PASS, exact device/iOS coverage.",
-        "stop_rule": "Stop perfect-control, broad-compatibility, or XP-parity wording until all same-run gates agree.",
+        "current_signal": "文档、源刷新、通过的单元测试和 GUI 导出是 P0 资产；不能证明真实 iOS 控制。",
+        "sop_gate": "在任何外部声明之前运行 Goals、Acceptance、Readiness、Device/iOS Matrix 和 XP Gap。",
+        "main_risk": "离线就绪被重新措辞为 P1 通过、广泛 iOS 兼容性或 XP 对等。",
+        "evidence_required": "同运行 JSONL、截图质量、Manual/P1 Trial、Acceptance PASS、Readiness PASS、确切设备/iOS 覆盖。",
+        "stop_rule": "直到所有同运行门控一致时，才停止完美控制、广泛兼容或 XP 对等措辞。",
         "method": "show_gui_goal_gate_from_gui",
     },
 )
@@ -1685,112 +1685,112 @@ INDUSTRY_CURRENT_SNAPSHOT_TOPICS = (
 INDUSTRY_SOP_RADAR_TOPICS = (
     {
         "key": "mainstream_route_boundary",
-        "topic": "Mainstream route boundary",
+        "topic": "主流路线边界",
         "layer": "strategy",
         "source": "docs/industry_sop_radar.md",
-        "public_signal": "XP-like iOS group control is a black-box route: receiver/capture, USB HID, vision/OCR, local API, and field SOP.",
-        "sop_decision": "Treat WDA/Appium/MDM/Shortcuts as auxiliary setup or own-app QA, not the main XP clone route.",
-        "evidence_gate": "Routes, Route Decision, Doctor, screenshot quality, manual HID observations, Acceptance, and Readiness.",
-        "stop_rule": "Stop if the selected path is only API, GUI, WDA, MDM, or documentation without real iPhone observation.",
+        "public_signal": "XP 风格 iOS 群控是黑盒路线：接收端/捕获、USB HID、视觉/OCR、本地 API 和现场 SOP。",
+        "sop_decision": "将 WDA/Appium/MDM/Shortcuts 视为辅助设置或自有应用 QA，而非 XP 克隆主线。",
+        "evidence_gate": "Routes、Route Decision、Doctor、截图质量、手动 HID 观察、Acceptance 和 Readiness。",
+        "stop_rule": "如果选定路径仅是 API、GUI、WDA、MDM 或文档而无真实 iPhone 观察，则停止。",
         "method": "show_mainstream_route_matrix_from_gui",
     },
     {
         "key": "xp_product_boundary",
-        "topic": "iMouse XP product boundary",
+        "topic": "iMouse XP 产品边界",
         "layer": "benchmark",
         "source": "docs/xp_public_source_refresh.md",
-        "public_signal": "Official and help-page signals center on dedicated hardware, AirPlay/receiver, Kernel/Console, HTTP/WebSocket API, 4.4 firmware, wired projection, auto-binding, and hardware decode.",
-        "sop_decision": "Benchmark XP as a productized receiver/HID/ops stack, not as a single click endpoint.",
-        "evidence_gate": "Core, Sources, Iter Radar, XP Timeline, XP Gap, legal side-by-side hardware evidence when available.",
-        "stop_rule": "Stop XP parity wording without Windows/wired receiver proof, XP hardware or firmware proof, and side-by-side artifacts.",
+        "public_signal": "官方和帮助页面信号以专用硬件、AirPlay/接收端、Kernel/Console、HTTP/WebSocket API、4.4 固件、有线投屏、自动绑定和硬件解码为中心。",
+        "sop_decision": "将 XP 作为产品化的接收端/HID/运维栈进行基准比较，而非单一点击端点。",
+        "evidence_gate": "Core、Sources、Iter Radar、XP Timeline、XP Gap、可用时的合法对比硬件证据。",
+        "stop_rule": "没有 Windows/有线接收端证明、XP 硬件或固件证明和对比证据时停止 XP 对等措辞。",
         "method": "show_xp_core_function_matrix_from_gui",
     },
     {
         "key": "iphone_field_settings",
-        "topic": "iPhone field settings SOP",
+        "topic": "iPhone 现场设置 SOP",
         "layer": "field_setup",
         "source": "docs/ios_group_control_sop.md",
-        "public_signal": "Field farms depend on AssistiveTouch, Full Keyboard Access, Trackpad & Mouse behavior, brightness/lock settings, network identity, cable/hub power, and visible pointer response.",
-        "sop_decision": "Record the iPhone model, iOS version, settings, Hub port, cable, receiver identity, HID id, and operator before any run.",
-        "evidence_gate": "Component metadata, P1 Trial click/swipe/type manual pass, screenshot artifacts, and operator worksheet.",
-        "stop_rule": "Stop if the operator cannot reproduce phone settings and physical wiring for the selected device id.",
+        "public_signal": "现场农场依赖 AssistiveTouch、Full Keyboard Access、触控板与鼠标行为、亮度/锁定设置、网络身份、线缆/Hub 电源和可见指针响应。",
+        "sop_decision": "在任何运行之前记录 iPhone 型号、iOS 版本、设置、Hub 端口、线缆、接收端身份、HID ID 和操作员。",
+        "evidence_gate": "组件元数据、P1 Trial 点击/滑动/输入手动通过、截图证据和操作员工作表。",
+        "stop_rule": "如果操作员无法为选定设备 ID 重现手机设置和物理接线，则停止。",
         "method": "show_field_kit_gate_from_gui",
     },
     {
         "key": "receiver_capture_lane",
-        "topic": "Receiver/capture product lane",
+        "topic": "接收端/捕获产品通道",
         "layer": "receiver",
         "source": "docs/receiver_capture_selection.md",
-        "public_signal": "Wireless AirPlay is useful for P1, but XP-class productization pushes toward stable Windows receiver, wired route, capture identity, low latency, and recoverable logs.",
-        "sop_decision": "Pick one receiver lane per run and record provider, version, process/window, capture method, AirPlay name, latency, and logs.",
-        "evidence_gate": "Doctor clean or documented substitute, 10 screenshot samples for P1, 100 screenshot samples for P2, no black/stale/wrong-window frames.",
-        "stop_rule": "Stop before HID if frames are black, stale, wrong-device, wrong-window, cropped, or dimension-drifting.",
+        "public_signal": "无线 AirPlay 适用于 P1，但 XP 级产品化推动稳定 Windows 接收端、有线路线、捕获身份、低延迟和可恢复日志。",
+        "sop_decision": "每次运行选择一个接收端通道并记录提供者、版本、进程/窗口、捕获方法、AirPlay 名称、延迟和日志。",
+        "evidence_gate": "Doctor 干净或有文档的替代品、P1 的 10 个截图样本、P2 的 100 个截图样本、无黑屏/过时/错误窗口帧。",
+        "stop_rule": "如果帧为黑屏、过时、错误设备、错误窗口、裁剪或尺寸漂移，在 HID 之前停止。",
         "method": "run_capture_quality_bench_from_gui",
     },
     {
         "key": "hid_hardware_lane",
-        "topic": "HID hardware and firmware lane",
+        "topic": "HID 硬件和固件通道",
         "layer": "control",
         "source": "docs/hid_hardware_protocol_benchmark.md",
-        "public_signal": "The differentiator is visible iOS pointer/click/swipe/text behavior and firmware timing, not a successful local serial write.",
-        "sop_decision": "Use CH9329 or self-built HID for generic P1, keep XP dedicated hardware and 4.4 firmware as a separate parity lane.",
-        "evidence_gate": "Serial/HID id, firmware/module id, cable/Hub port, manual click/swipe/type pass, release observation, and failure category.",
-        "stop_rule": "Stop if API/HID success is not matched by visible real-iPhone response.",
+        "public_signal": "差异化在于可见的 iOS 指针/点击/滑动/文本行为和固件时序，而非成功的本地串口写入。",
+        "sop_decision": "使用 CH9329 或自制 HID 进行通用 P1，将 XP 专用硬件和 4.4 固件保持为独立对等通道。",
+        "evidence_gate": "串口/HID ID、固件/模块 ID、线缆/Hub 端口、手动点击/滑动/输入通过、释放观察和故障类别。",
+        "stop_rule": "如果 API/HID 成功未匹配到可见的真实 iPhone 响应，则停止。",
         "method": "show_control_response_bench_from_gui",
     },
     {
         "key": "api_sdk_lane",
-        "topic": "API and SDK compatibility lane",
+        "topic": "API 和 SDK 兼容性通道",
         "layer": "service",
         "source": "docs/xp_api_compat.md",
-        "public_signal": "XP exposes local HTTP/WebSocket `/api` + `fun`, msgid, image/key/mouse/group/config/user/shortcut/callback-style domains.",
-        "sop_decision": "Keep protocol compatibility as the integration surface while requiring field evidence for hardware-backed behavior.",
-        "evidence_gate": "XP API/client/WebSocket tests, XP Gap audit, and later real receiver/HID callback events.",
-        "stop_rule": "Stop if REST tests are being used as proof of real iOS control or XP hardware parity.",
+        "public_signal": "XP 公开本地 HTTP/WebSocket `/api` + `fun`、msgid、image/key/mouse/group/config/user/shortcut/callback 风格域。",
+        "sop_decision": "保持协议兼容性作为集成面，同时要求硬件支撑行为的现场证据。",
+        "evidence_gate": "XP API/客户端/WebSocket 测试、XP Gap 审计和后续真实接收端/HID callback 事件。",
+        "stop_rule": "如果 REST 测试被用作真实 iOS 控制或 XP 硬件对等的证明，则停止。",
         "method": "write_xp_gap_audit_from_gui",
     },
     {
         "key": "vision_ocr_lane",
-        "topic": "Vision/OCR asset lane",
+        "topic": "视觉/OCR 资源通道",
         "layer": "recognition",
         "source": "docs/script_runner.md",
-        "public_signal": "Screenshot-driven automation needs OpenCV image matching, color search, OCR, fixed regions, thresholds, and replayable failure artifacts.",
-        "sop_decision": "Build templates from real screenshots, restrict regions, keep failed artifacts, and replay recognition before blaming HID.",
-        "evidence_gate": "Template Asset Index, screenshot artifacts, find-image/color/OCR events, false-positive review, and scenario replay.",
-        "stop_rule": "Stop if recognition misses cannot be replayed from saved artifacts.",
+        "public_signal": "截图驱动的自动化需要 OpenCV 图像匹配、颜色搜索、OCR、固定区域、阈值和可重放的失败证据。",
+        "sop_decision": "从真实截图构建模板、限制区域、保留失败证据、在归咎于 HID 之前重放识别。",
+        "evidence_gate": "Template Asset Index、截图证据、find-image/color/OCR 事件、误报审查和场景重放。",
+        "stop_rule": "如果识别失败无法从保存的证据重放，则停止。",
         "method": "show_template_asset_manager",
     },
     {
         "key": "observability_recovery",
-        "topic": "Observability and recovery lane",
+        "topic": "可观测性和恢复通道",
         "layer": "ops",
         "source": "docs/validation_evidence.md",
-        "public_signal": "Commercial group-control value is logs, callbacks, metrics, failure isolation, rerun decisions, and recovery discipline.",
-        "sop_decision": "Attach receiver/HID logs, collect callback events, categorize every failure, and rerun only the smallest failed path.",
-        "evidence_gate": "Timeline, Callback, Attach Log, Matrix, Triage, Review, metrics, and per-device artifacts.",
-        "stop_rule": "Stop P2/P3/P4 promotion if any failure lacks device id, category, component, log, and artifact.",
+        "public_signal": "商业群控价值是日志、callback、指标、故障隔离、重跑决策和恢复纪律。",
+        "sop_decision": "附加接收端/HID 日志、收集 callback 事件、分类每个故障、仅重跑最小失败路径。",
+        "evidence_gate": "Timeline、Callback、Attach Log、Matrix、Triage、Review、指标和单设备证据。",
+        "stop_rule": "如果任何故障缺少设备 ID、类别、组件、日志和证据，则停止 P2/P3/P4 提升。",
         "method": "attach_callback_log_from_gui",
     },
     {
         "key": "scale_ops_lane",
-        "topic": "Scale and operations lane",
+        "topic": "扩展和运维通道",
         "layer": "scale",
         "source": "docs/p2_p3_stability_runbook.md",
-        "public_signal": "Scaling is a staged discipline: P1 single iPhone, P2 one-device stability, P3 four-device pilot, P4 ten-device stability, then commercial ops.",
-        "sop_decision": "Do not scale device count until the previous stage has acceptance/readiness evidence and explainable failures.",
-        "evidence_gate": "Stage Dashboard, P2/P3/P4 acceptance, metrics, device matrix, per-device artifacts, and runbook.",
-        "stop_rule": "Stop scaling if any failure cannot be isolated to a device, receiver, HID, Hub port, cable, script, or business state.",
+        "public_signal": "扩展是分阶段纪律：P1 单 iPhone、P2 单设备稳定性、P3 四设备试点、P4 十设备稳定性，然后商业运维。",
+        "sop_decision": "在前一阶段有 Acceptance/Readiness 证据和可解释失败之前不要扩展设备数量。",
+        "evidence_gate": "Stage Dashboard、P2/P3/P4 Acceptance、指标、设备矩阵、单设备证据和 Runbook。",
+        "stop_rule": "如果任何故障无法隔离到设备、接收端、HID、Hub 端口、线缆、脚本或业务状态，则停止扩展。",
         "method": "show_stage_dashboard_from_gui",
     },
     {
         "key": "claim_boundary",
-        "topic": "Claim and compliance boundary",
+        "topic": "声明和合规边界",
         "layer": "governance",
         "source": "docs/verification_plan.md",
-        "public_signal": "Public XP claims, offline tests, GUI dashboards, and docs are research inputs, not evidence that our software controls a real iPhone.",
-        "sop_decision": "Phrase every claim from the strongest verified gate only: P0 offline, P1 one iPhone, P2 stability, P3 group pilot, P4 scale.",
-        "evidence_gate": "Goal Gate, Acceptance, Readiness, real_ios_verified, evidence JSONL, manual observations, and no unexplained failures.",
-        "stop_rule": "Stop any iOS perfect-control, broad compatibility, XP hardware, wired projection, or hard-decode claim unless its exact evidence exists.",
+        "public_signal": "公开 XP 声明、离线测试、GUI 仪表盘和文档是研究输入，不是我们的软件控制真实 iPhone 的证据。",
+        "sop_decision": "仅从最强的已验证门控措辞每个声明：P0 离线、P1 单 iPhone、P2 稳定性、P3 群组试点、P4 扩展。",
+        "evidence_gate": "Goal Gate、Acceptance、Readiness、real_ios_verified、证据 JSONL、手动观察和不无解释的失败。",
+        "stop_rule": "停止任何 iOS 完美控制、广泛兼容、XP 硬件、有线投屏或硬解码声明，除非其确切证据存在。",
         "method": "show_gui_goal_gate_from_gui",
     },
 )
@@ -1799,20 +1799,20 @@ INDUSTRY_SOP_RADAR_TOPICS = (
 INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     {
         "key": "route_lock",
-        "lane": "Mainstream route lock",
+        "lane": "主流路线锁定",
         "layer": "route",
         "source": "docs/mainstream_route_decision.md",
         "source_doc": "docs/mainstream_route_decision.md",
-        "industry_signal": "The practical XP-style route is receiver/capture plus HID plus vision and local API; MDM, WDA, Appium, and Shortcuts are auxiliary lanes.",
-        "vendor_questions": "Which receiver lane, HID lane, iPhone model/iOS, capture method, API/log surface, and failure support are in scope for this purchase?",
-        "local_sop": "Open Routes, fill Route Decision with one receiver lane and one HID lane, then validate before procurement or field work.",
-        "evidence_required": "Route Decision JSON/report, Route Matrix export, Doctor, selected device ids, receiver/HID/iPhone metadata.",
-        "stop_rule": "Stop procurement if route or HID is still placeholder-shaped or if an auxiliary lane is being counted as XP-style control.",
+        "industry_signal": "实用的 XP 风格路线是接收端/捕获加 HID 加视觉和本地 API；MDM、WDA、Appium 和 Shortcuts 是辅助通道。",
+        "vendor_questions": "哪些接收端通道、HID 通道、iPhone 型号/iOS、捕获方法、API/日志界面和故障支持在本次采购范围内？",
+        "local_sop": "打开 Routes，用一条接收端通道和一条 HID 通道填写 Route Decision，然后在采购或现场工作之前验证。",
+        "evidence_required": "Route Decision JSON/报告、Route Matrix 导出、Doctor、选定设备 ID、接收端/HID/iPhone 元数据。",
+        "stop_rule": "如果路线或 HID 仍为占位符形状，或辅助通道被计入 XP 风格控制，则停止采购。",
         "method": "show_mainstream_route_matrix_from_gui",
     },
     {
         "key": "receiver_procurement",
-        "lane": "Receiver and capture procurement",
+        "lane": "接收端和捕获采购",
         "layer": "receiver",
         "source": "docs/receiver_capture_selection.md",
         "source_doc": "docs/receiver_capture_selection.md",
@@ -1825,7 +1825,7 @@ INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     },
     {
         "key": "hid_procurement",
-        "lane": "HID hardware procurement",
+        "lane": "HID 硬件采购",
         "layer": "hid",
         "source": "docs/hid_hardware_protocol_benchmark.md",
         "source_doc": "docs/hid_hardware_protocol_benchmark.md",
@@ -1838,7 +1838,7 @@ INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     },
     {
         "key": "xp_parity_purchase",
-        "lane": "XP hardware parity purchase",
+        "lane": "XP 硬件对等采购",
         "layer": "benchmark",
         "source": "docs/gui_xp_hardware_lab.md",
         "source_doc": "docs/gui_xp_hardware_lab.md",
@@ -1851,7 +1851,7 @@ INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     },
     {
         "key": "iphone_fixture_matrix",
-        "lane": "iPhone fixture and iOS matrix",
+        "lane": "iPhone 装置和 iOS 矩阵",
         "layer": "iphone",
         "source": "docs/ios_field_settings_sop.md",
         "source_doc": "docs/ios_field_settings_sop.md",
@@ -1864,7 +1864,7 @@ INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     },
     {
         "key": "bench_materials",
-        "lane": "Bench materials and replacement policy",
+        "lane": "基准材料和替换策略",
         "layer": "lab",
         "source": "docs/hardware_test_bench_checklist.md",
         "source_doc": "docs/hardware_test_bench_checklist.md",
@@ -1877,7 +1877,7 @@ INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     },
     {
         "key": "source_refresh_contract",
-        "lane": "Source refresh and package hygiene",
+        "lane": "源刷新和包卫生",
         "layer": "source",
         "source": "docs/xp_public_source_refresh.md",
         "source_doc": "docs/xp_public_source_refresh.md",
@@ -1890,7 +1890,7 @@ INDUSTRY_ROUTE_PROCUREMENT_TOPICS = (
     },
     {
         "key": "claim_and_scale_stop",
-        "lane": "Claim, scale, and spend stop line",
+        "lane": "声明、扩展和支出停止线",
         "layer": "governance",
         "source": "docs/verification_plan.md",
         "source_doc": "docs/verification_plan.md",
@@ -3037,23 +3037,23 @@ def route_decision_issue_brief(data: dict) -> str:
     for row in rows:
         counts[row["issue"]] = counts.get(row["issue"], 0) + 1
     count_text = ", ".join(f"{key}={value}" for key, value in sorted(counts.items())) or "none"
-    return f"Route checklist: issues={len(rows)}; {count_text}"
+    return f"路线检查清单: issues={len(rows)}; {count_text}"
 
 
 def write_route_decision_issue_markdown(data: dict, path: str | Path) -> Path:
     rows = route_decision_issue_rows(data)
     out_path = Path(path)
     lines = [
-        "# Route Decision Fill Checklist",
+        "# Route Decision 填写检查清单",
         "",
         f"- Run ID: `{data.get('run_id', '')}`",
         f"- Target: `{str(data.get('target_stage', 'p1') or 'p1').upper()}`",
         f"- Issue count: `{len(rows)}`",
         "- Real iOS control verified: `False`",
         "",
-        "This checklist is for filling the route decision record only. It does not write evidence and does not prove AirPlay, HID, screenshots, or real iPhone response.",
+        "此检查清单仅用于填写路线决策记录。不写入证据，不证明 AirPlay、HID、截图或真实 iPhone 响应。",
         "",
-        "## Items",
+        "## 项目",
         "",
         "| Field | Issue | Current value | Action |",
         "|---|---|---|---|",
@@ -3063,13 +3063,13 @@ def write_route_decision_issue_markdown(data: dict, path: str | Path) -> Path:
             value = row["value"].replace("|", "\\|")
             lines.append(f"| `{row['path']}` | {row['issue']} | `{value}` | {row['action']} |")
     else:
-        lines.append("| None | none |  | Route form has no GUI-detected issue. Run Validate before real testing. |")
+        lines.append("| None | none |  | 路线表单无 GUI 检测到的问题。在真实测试之前运行 Validate。 |")
     lines.extend([
         "",
-        "## Next Step",
+        "## 下一步",
         "",
-        "After every item is cleared, use GUI `Validate` or `python -m imouse.route_decision validate --require-ready`.",
-        "If validation fails and is recorded into evidence, treat that run_id as blocked and start a fresh run_id after fixing blockers.",
+        "所有项目清除后，使用 GUI `Validate` 或 `python -m imouse.route_decision validate --require-ready`。",
+        "如果验证失败并记录到证据中，将该 run_id 视为已阻断，修复阻断项后启动新 run_id。",
         "",
     ])
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -3154,7 +3154,7 @@ def _normalize_hid_route(value: str) -> str:
 
 def fit_image_to_canvas(image_width: int, image_height: int,
                         canvas_width: int, canvas_height: int) -> tuple[float, int, int, int, int]:
-    """Return scale, display width/height, and x/y offsets for centered preview."""
+    """返回缩放比例、显示宽高和居中预览的 x/y 偏移。"""
     if image_width <= 0 or image_height <= 0 or canvas_width <= 0 or canvas_height <= 0:
         return 1.0, 0, 0, 0, 0
     scale = min(canvas_width / image_width, canvas_height / image_height)
@@ -3168,7 +3168,7 @@ def fit_image_to_canvas(image_width: int, image_height: int,
 def canvas_to_image_point(canvas_x: int, canvas_y: int,
                           image_width: int, image_height: int,
                           canvas_width: int, canvas_height: int) -> Optional[tuple[int, int]]:
-    """Map a canvas click to original image coordinates."""
+    """将画布点击映射到原始图像坐标。"""
     scale, display_width, display_height, offset_x, offset_y = fit_image_to_canvas(
         image_width,
         image_height,
@@ -3191,7 +3191,7 @@ def canvas_to_image_point(canvas_x: int, canvas_y: int,
 def canvas_rect_to_image_rect(x1: int, y1: int, x2: int, y2: int,
                               image_width: int, image_height: int,
                               canvas_width: int, canvas_height: int) -> Optional[tuple[int, int, int, int]]:
-    """Map a canvas drag rectangle to an image-space (x, y, w, h)."""
+    """将画布拖拽矩形映射到图像空间 (x, y, w, h)。"""
     p1 = canvas_to_image_point(x1, y1, image_width, image_height, canvas_width, canvas_height)
     p2 = canvas_to_image_point(x2, y2, image_width, image_height, canvas_width, canvas_height)
     if p1 is None or p2 is None:
@@ -3208,7 +3208,7 @@ def canvas_rect_to_image_rect(x1: int, y1: int, x2: int, y2: int,
 
 
 def doctor_brief(report: dict) -> str:
-    """Return one-line status text for a doctor report."""
+    """返回 Doctor 报告的一行状态文本。"""
     counts = report.get("counts", {})
     return (
         f"Doctor {report.get('overall', 'unknown')}: "
@@ -3217,7 +3217,7 @@ def doctor_brief(report: dict) -> str:
 
 
 def _doctor_allows_real_run(report: dict) -> bool:
-    """Return whether Doctor has no hard fail for a guarded real run."""
+    """返回 Doctor 是否无硬失败以允许受保护的真实运行。"""
     overall = str(report.get("overall", "") or "").lower()
     counts = report.get("counts", {}) if isinstance(report.get("counts"), dict) else {}
     try:
@@ -3228,7 +3228,7 @@ def _doctor_allows_real_run(report: dict) -> bool:
 
 
 def scenario_brief(summary: dict) -> str:
-    """Return one-line status text for a script scenario summary."""
+    """返回脚本场景摘要的一行状态文本。"""
     status = "ok" if summary.get("ok") else "fail"
     return (
         f"Scenario {status}: "
@@ -3239,7 +3239,7 @@ def scenario_brief(summary: dict) -> str:
 
 
 def evidence_review_brief(summary: dict) -> str:
-    """Return one-line status text for a field evidence review."""
+    """返回现场证据审查的一行状态文本。"""
     by_status = summary.get("by_status", {})
     categories = summary.get("by_failure_category", {})
     metrics = summary.get("metrics", {})
@@ -3259,7 +3259,7 @@ def evidence_review_brief(summary: dict) -> str:
 
 
 def evidence_timeline_rows(events: list[dict], *, detail_limit: int = 180) -> list[dict[str, str]]:
-    """Return compact display rows for GUI evidence events."""
+    """返回 GUI 证据事件的紧凑显示行。"""
     rows = []
     for index, event in enumerate(events, start=1):
         status = str(event.get("status", "") or "")
@@ -3312,13 +3312,13 @@ def write_evidence_timeline_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        f"# GUI Evidence Timeline {run_id}",
+        f"# GUI 证据 Timeline {run_id}",
         "",
         f"- Evidence: `{evidence_path}`",
         "- Real iOS control verified: `False`",
-        "- This timeline is a read-only evidence index. It does not write evidence or prove real iPhone response.",
+        "- 此 Timeline 为只读证据索引。不写入证据，不证明真实 iPhone 响应。",
         "",
-        "## Events",
+        "## 事件",
         "",
         "| # | Time | Status | Step | Devices | Category | Artifacts | Detail |",
         "|---|---|---|---|---|---|---|---|",
@@ -3334,7 +3334,7 @@ def write_evidence_timeline_markdown(
         lines.append("| - | - | missing | No evidence events loaded | - | - | - | Record evidence first |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Before promotion, every real device action must be traceable to device id, component metadata, screenshot quality, manual observation, and any failure artifact.",
         "",
@@ -3398,14 +3398,14 @@ def write_callback_events_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        "# GUI Callback Monitor",
+        "# GUI Callback 监控器",
         "",
         f"- Run ID: `{run_id}`",
         f"- Server: `{server_url}`",
         "- Real iOS control verified: `False`",
-        "- This callback monitor is an API/ops event index. It does not write JSONL evidence or prove real iPhone response.",
+        "- 此 callback 监控器是 API/运维事件索引。不写入 JSONL 证据，不证明真实 iPhone 响应。",
         "",
-        "## Events",
+        "## 事件",
         "",
         "| Seq | Time | Event | Device | Source | Severity | Detail |",
         "|---|---|---|---|---|---|---|",
@@ -3418,10 +3418,10 @@ def write_callback_events_markdown(
             f"{_md_cell(row.get('detail', ''))} |"
         )
     if not rows:
-        lines.append("| - | - | none | - | - | info | No callback events returned |")
+        lines.append("| - | - | none | - | - | info | 无 callback 事件返回 |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use callback events to debug API, receiver, HID, and console flow. Promotion still requires JSONL evidence, Acceptance, Readiness, screenshot quality, component metadata, and manual real-iPhone observation.",
         "",
@@ -3592,7 +3592,7 @@ def write_callback_log_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        "# GUI Callback Log Attach",
+        "# GUI Callback 日志附加",
         "",
         f"- Run ID: `{run_id}`",
         f"- Source file: `{source_path}`",
@@ -3603,7 +3603,7 @@ def write_callback_log_markdown(
         "- Real iOS control verified: `False`",
         "- This log attach is a debug index. It does not write JSONL evidence or prove real iPhone response.",
         "",
-        "## Events",
+        "## 事件",
         "",
         "| Line | Event | Device | Source | Severity | Detail |",
         "|---|---|---|---|---|---|",
@@ -3619,7 +3619,7 @@ def write_callback_log_markdown(
         lines.append("| - | none | - | - | `info` | No non-empty log lines parsed |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use attached logs to map receiver, capture, HID, USB, and device issues before rerunning field evidence. Promotion still requires JSONL evidence, Acceptance, Readiness, screenshot quality, component metadata, and manual real-iPhone observation.",
         "",
@@ -3695,13 +3695,13 @@ def write_issue_triage_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        f"# GUI Issue Triage {run_id}",
+        f"# GUI 问题分诊 {run_id}",
         "",
         f"- Evidence: `{evidence_path}`",
         "- Real iOS control verified: `False`",
         "- This triage groups failed evidence events. It does not write evidence or prove real iPhone response.",
         "",
-        "## Failure Buckets",
+        "## 故障桶",
         "",
         "| Category | Count | Devices | Steps | First | Last | Artifacts | Next action | Recommendation |",
         "|---|---|---|---|---|---|---|---|---|",
@@ -3718,7 +3718,7 @@ def write_issue_triage_markdown(
         lines.append("| none | 0 | - | - | - | - | - | Keep monitoring | No failed non-aggregate events recorded. |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use this triage after Timeline and Matrix. Fix the top failure bucket, record new evidence with a fresh run_id when route blockers were written, then rerun Acceptance and Readiness.",
         "",
@@ -4042,7 +4042,7 @@ def write_rerun_playbook_markdown(
     out_path = Path(path)
     real_ios_verified = bool((readiness_report or {}).get("claims", {}).get("real_ios_control_verified"))
     lines = [
-        f"# GUI Rerun Playbook {stage.upper()}",
+        f"# GUI 重跑手册 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -4354,7 +4354,7 @@ def write_recovery_drill_markdown(
     out_path = Path(path)
     real_ios_verified = bool((readiness_report or {}).get("claims", {}).get("real_ios_control_verified"))
     lines = [
-        f"# GUI Recovery Drill {stage.upper()}",
+        f"# GUI 恢复演练 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -4599,7 +4599,7 @@ def write_pitfall_library_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Pitfall Library {stage.upper()}",
+        f"# GUI 陷阱库 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -4623,7 +4623,7 @@ def write_pitfall_library_markdown(
         lines.append("| none | `pending` | no rows built | - | - | Refresh Pitfalls | - | Do not promote | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use Pitfalls before reruns and after every failed trial. It is a SOP index, not evidence. Convert each row into JSONL evidence, artifacts, Issue Triage, Acceptance, and Readiness before changing any product claim.",
         "",
@@ -4835,7 +4835,7 @@ def write_sop_problem_ledger_markdown(
     out_path = Path(path)
     real_ios_verified = bool((readiness_report or {}).get("claims", {}).get("real_ios_control_verified"))
     lines = [
-        f"# GUI SOP Problem Ledger {stage.upper()}",
+        f"# GUI SOP 问题台账 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -5189,7 +5189,7 @@ def write_device_ios_compatibility_markdown(
         )
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Do not convert public iMouse compatibility claims into our claims until each model/iOS row has local component metadata, screenshot quality, manual real-iPhone observations, no unexplained failures, Acceptance PASS, and Readiness PASS for the target stage.",
         "",
@@ -5285,7 +5285,7 @@ def real_run_guard_brief(report: dict) -> str:
 def write_real_run_guard_markdown(report: dict, path: str | Path, *, run_id: str = "") -> Path:
     out_path = Path(path)
     lines = [
-        f"# GUI Real-run Guard {str(report.get('stage', 'p1')).upper()}",
+        f"# GUI 真实运行守卫 {str(report.get('stage', 'p1')).upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Allowed: `{bool(report.get('ok'))}`",
@@ -5349,7 +5349,7 @@ def write_device_evidence_matrix_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        f"# GUI Device Evidence Matrix {run_id}",
+        f"# GUI 设备证据矩阵 {run_id}",
         "",
         f"- Evidence: `{evidence_path}`",
         "- Real iOS control verified: `False`",
@@ -5374,7 +5374,7 @@ def write_device_evidence_matrix_markdown(
         lines.append("| - | - | missing | - | - | - | missing | 0 | 0 | - | - | - | - | no_devices |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "For P3/P4 group-control promotion, every target device should be PASS. Pending rows require component metadata, screenshot quality, manual observation, or event coverage before promotion.",
         "",
@@ -5799,7 +5799,7 @@ def write_live_probe_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Live Probe {stage.upper()}",
+        f"# GUI 实时探测 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -6298,7 +6298,7 @@ def write_control_response_bench_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Control Response Bench {stage.upper()}",
+        f"# GUI 控制响应基准 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -6322,7 +6322,7 @@ def write_control_response_bench_markdown(
         lines.append("| none | `pending` | no rows built | Refresh Control Bench | - | - | - | - | - | Do not promote |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "API/HID command success is not enough. Each lane needs a Manual pass recorded after the operator sees the real iPhone respond. Any fail row must keep category and artifact context before rerun.",
         "",
@@ -6575,7 +6575,7 @@ def write_control_evidence_ledger_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Control Evidence Ledger {stage.upper()}",
+        f"# GUI 控制证据台账 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -6727,7 +6727,7 @@ def write_stage_dashboard_markdown(
     real_ios_verified = bool(claims.get("real_ios_control_verified"))
     group_verified = bool(claims.get("ios_group_control_verified"))
     lines = [
-        f"# GUI Stage Dashboard {target_stage.upper()}",
+        f"# GUI 阶段仪表盘 {target_stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -7017,7 +7017,7 @@ def write_field_runbook_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Field Runbook {stage.upper()}",
+        f"# GUI 现场手册 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -7328,7 +7328,7 @@ def write_stage_sop_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        f"# GUI SOP Board {stage.upper()}",
+        f"# GUI SOP 面板 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -7833,7 +7833,7 @@ def write_gui_evidence_pack_markdown(
 ) -> Path:
     out_path = Path(path)
     lines = [
-        f"# GUI Evidence Pack {stage.upper()}",
+        f"# GUI 证据包 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         "- Real iOS control verified: `False`",
@@ -8154,7 +8154,7 @@ def write_gui_control_center_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Control Center {stage.upper()}",
+        f"# GUI 控制中心 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -8583,7 +8583,7 @@ def write_operator_home_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Operator Home {stage.upper()}",
+        f"# GUI 操作员主页 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -8977,7 +8977,7 @@ def write_receiver_route_gate_markdown(
         lines.append("| None | `pending` | no rows built | Refresh Receiver Gate | - | - | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Treat this as a provider/route preflight. P1 still requires a visible screenshot, real iPhone manual observations, no unexplained failures, Acceptance PASS, and Readiness PASS before claiming iOS control.",
         "",
@@ -9443,7 +9443,7 @@ def write_receiver_setup_wizard_markdown(
         lines.append("- No terminal command is available yet; complete the route decision first.")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Treat this as a setup and routing guide. P1 still requires JSONL evidence, visible screenshots, manual real-iPhone observations, Acceptance PASS, and Readiness PASS before claiming iOS control or XP parity.",
         "",
@@ -9882,7 +9882,7 @@ def write_receiver_evidence_checklist_markdown(
         lines.append("- No terminal command is available yet; complete the route decision first.")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use this checklist after Rx Setup and before P1 Trial. It can organize receiver evidence, but only same-run JSONL events, saved artifacts, lane-separated Manual observations, Acceptance PASS, Readiness PASS, and exact device/iOS/receiver/HID scope can support an iOS control claim.",
         "",
@@ -10503,7 +10503,7 @@ def write_receiver_candidate_scorecard_markdown(
         lines.append("- No score parts available.")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use the recommended row only to choose the next receiver route to validate. A receiver recommendation still needs route validation, Doctor, visible screenshot quality, Manual/P1 Trial JSONL, Acceptance PASS, and Readiness PASS before any iOS control claim.",
         "",
@@ -10661,7 +10661,7 @@ def write_gui_knowledge_center_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Knowledge Center {stage.upper()}",
+        f"# GUI 知识中心 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -10875,7 +10875,7 @@ def write_industry_current_snapshot_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Industry Current Snapshot {stage.upper()}",
+        f"# GUI 行业当前快照 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -11150,7 +11150,7 @@ def write_industry_sop_radar_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Industry SOP Radar {stage.upper()}",
+        f"# GUI 行业 SOP 雷达 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -11426,7 +11426,7 @@ def write_industry_route_procurement_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Route Procurement SOP {stage.upper()}",
+        f"# GUI 路线采购 SOP {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -11692,7 +11692,7 @@ def write_mainstream_route_matrix_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Mainstream Route Matrix {stage.upper()}",
+        f"# GUI 主流路线矩阵 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -11950,7 +11950,7 @@ def write_xp_architecture_map_markdown(
         lines.append("| none | `pending` | `-` | no rows built | Refresh XP Arch | - | - | - | Do not promote | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use XP Arch before Core, Roadmap, and XP Gap reviews. Architecture rows explain how the system should be built; only same-run field evidence, Acceptance, Readiness, logs, and exact device/iOS coverage can close a capability claim.",
         "",
@@ -12573,7 +12573,7 @@ def write_xp_core_function_matrix_markdown(
         lines.append("| none | - | - | `pending` | `pending` | no rows built | Refresh Core | - | - | - | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use Core with XP Gap, Sources, Routes and Goals. API/SDK readiness is not the same as real iPhone control; HID, receiver, screenshot, calibration and input domains need JSONL evidence, saved artifacts, Acceptance, Readiness and manual observation before promotion.",
         "",
@@ -12863,7 +12863,7 @@ def write_xp_api_coverage_board_markdown(
         lines.append("| none | - | - | `pending` | `not_built` | `-` | no rows built | Refresh API Coverage | - | - | - | Do not claim parity | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use API Coverage before SDK/API parity or XP-core review. A local helper test can close only a P0 compatibility row. Receiver, HID, mouse, keyboard, screenshot, vision and group rows remain blocked until same-run field evidence, artifacts, lane-separated Manual observations, Acceptance and Readiness support the exact scope.",
         "",
@@ -13204,7 +13204,7 @@ def write_script_coverage_board_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Script Coverage Board {stage.upper()}",
+        f"# GUI 脚本覆盖面板 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -13229,7 +13229,7 @@ def write_script_coverage_board_markdown(
         lines.append("| none | - | `pending` | `not_built` | - | Refresh Script Cov | Run dry-run first | - | - | Do not claim control | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use Script Cov before real scenario execution and before group-control claims. A dry-run, scenario summary, API success, or GUI queue can close only script readiness. Real iOS control still requires current screenshots, lane-separated click/swipe/text Manual observations, logs or failure triage when needed, Acceptance PASS, Readiness PASS, and exact device/iOS scope.",
         "",
@@ -13484,7 +13484,7 @@ def write_acceptance_proof_map_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Acceptance Proof Map {stage.upper()}",
+        f"# GUI Acceptance 证明图 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -13818,7 +13818,7 @@ def write_claim_scope_markdown(
     real_ios_verified = bool((readiness_report or {}).get("claims", {}).get("real_ios_control_verified"))
     group_verified = bool((readiness_report or {}).get("claims", {}).get("ios_group_control_verified"))
     lines = [
-        f"# GUI Claim Scope {stage.upper()}",
+        f"# GUI 声明范围 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -14069,7 +14069,7 @@ def write_verification_walkthrough_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Verification Walkthrough {stage.upper()}",
+        f"# GUI 验证演练 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -14258,7 +14258,7 @@ def write_local_verification_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Local Verification {stage.upper()}",
+        f"# GUI 本地验证 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -14850,7 +14850,7 @@ def write_xp_public_source_ledger_markdown(
         lines.append("| none | - | `pending` | - | - | no rows built | Refresh Sources | Refresh | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Treat public source claims as backlog inputs until they are backed by local route, hardware, evidence, Acceptance, Readiness, logs, and operator observations. Broad compatibility claims require a device/iOS matrix, not a single clean run.",
         "",
@@ -15065,7 +15065,7 @@ def write_xp_public_source_action_map_markdown(
         lines.append("| none | `pending` | no rows built | Refresh Action Map | Refresh | Stop claims | no local state | Action Map | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Start from the first fail, pending, or warn row. Use the GUI owner to open the next operational panel, then refresh this map after creating evidence or artifacts. Public-source claims stay outside Acceptance and Readiness until the same run has real-device JSONL evidence, saved artifacts, and manual observations.",
         "",
@@ -15377,7 +15377,7 @@ def write_xp_event_error_contract_markdown(
         lines.append("| none | - | `pending` | `-` | no rows built | Refresh Events | - | - | - | Do not promote | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use Events before rerun and before SDK/API parity claims. A callback, log row, or API success is only diagnostic context until it is tied to device id, route, screenshot quality, manual real-iPhone observation, Acceptance, Readiness, and a categorized failure or pass for the same run_id.",
         "",
@@ -15600,7 +15600,7 @@ def write_xp_iteration_timeline_markdown(
         lines.append("| - | none | `pending` | `-` | no rows built | - | Refresh XP Timeline | - | - | - | Do not promote | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use XP Timeline after source refresh and before roadmap or parity planning. A timeline row explains an observed iteration lesson; it is closed only by same-run field evidence, Acceptance, Readiness, logs, and exact claim scope.",
         "",
@@ -15824,7 +15824,7 @@ def write_xp_iteration_radar_markdown(
         lines.append("| none | `pending` | no rows built | Refresh Radar | - | - | - | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Do not turn public XP iteration claims into product claims. Each radar row must be converted into local receiver/HID/iPhone evidence, Acceptance, Readiness, logs, and operator observations before promotion.",
         "",
@@ -16603,7 +16603,7 @@ def write_gui_goal_gate_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Goal Gate {stage.upper()}",
+        f"# GUI 目标门控 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -16626,7 +16626,7 @@ def write_gui_goal_gate_markdown(
         lines.append("| None | `pending` | no rows built | Refresh Goal Gate | Refresh | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Do not mark the project complete unless all four rows are PASS and the iOS control row is backed by real-device evidence, Proof Map closure, Claim Scope pass wording, Acceptance PASS, Readiness PASS, and no unexplained fail events.",
         "",
@@ -16980,7 +16980,7 @@ def write_field_kit_gate_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Field Kit Gate {stage.upper()}",
+        f"# GUI Field Kit 门控 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -17003,7 +17003,7 @@ def write_field_kit_gate_markdown(
         lines.append("| None | `pending` | no rows built | Refresh Kit Gate | Refresh | Do not run | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Use this gate before the first real HID action. Generic P1 can only start when the Open P1 stop line is PASS. XP hardware parity still needs a separate side-by-side comparison even when generic P1 is allowed.",
         "",
@@ -17583,7 +17583,7 @@ def write_hardware_bench_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI Hardware Bench {stage.upper()}",
+        f"# GUI 硬件基准 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -17606,7 +17606,7 @@ def write_hardware_bench_markdown(
         lines.append("| None | `pending` | no rows built | Refresh Hardware Bench | Refresh | - | - |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Do not run real HID actions until route, Doctor, and bench ledger rows are clean. Do not promote from P1 unless screenshot/control evidence and manual real-iPhone observations are present.",
         "",
@@ -17999,7 +17999,7 @@ def write_field_evidence_wizard_markdown(
         lines.append("| - | none | `pending` | no rows built | Refresh Wizard | - | - | Do not promote |")
     lines.extend([
         "",
-        "## Review Rule",
+        "## 审查规则",
         "",
         "Follow the rows in order. When a row is FAIL, PENDING, or unexplained WARN, stop the field run, attach the smallest useful evidence, and rerun from the first affected row with a new run_id if hardware or route changed.",
         "",
@@ -18755,7 +18755,7 @@ def write_p1_test_coach_markdown(
         (readiness_report or {}).get("claims", {}).get("real_ios_control_verified")
     )
     lines = [
-        f"# GUI P1 Test Coach {stage.upper()}",
+        f"# GUI P1 测试教练 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Evidence: `{evidence_path}`",
@@ -19217,7 +19217,7 @@ def write_capture_quality_bench_markdown(
     out_path = Path(path)
     bench_status = capture_quality_bench_status(rows, sample_goal=sample_goal)
     lines = [
-        f"# GUI Capture Quality Bench {stage.upper()}",
+        f"# GUI 捕获质量基准 {stage.upper()}",
         "",
         f"- Run ID: `{run_id}`",
         f"- Device: `{device_id or '-'}`",
@@ -19913,7 +19913,7 @@ def write_first_run_packet_markdown(
     evidence_text = str(evidence_path or Path("evidence") / f"{safe_run_id}.jsonl")
     route_text = str(route_decision_path or Path("evidence") / f"{safe_run_id}_route_decision.json")
     lines = [
-        f"# GUI First Run Packet {normalized_stage.upper()}",
+        f"# GUI 首次运行包 {normalized_stage.upper()}",
         "",
         f"- Run ID: `{safe_run_id}`",
         f"- Evidence: `{evidence_text}`",
@@ -20393,7 +20393,7 @@ def write_gui_session_snapshot_markdown(snapshot: dict, path: str | Path) -> Pat
     evidence_summary = snapshot.get("evidence_summary", {}) if isinstance(snapshot.get("evidence_summary"), dict) else {}
     status_counts = evidence_summary.get("by_status", {}) if isinstance(evidence_summary.get("by_status"), dict) else {}
     lines = [
-        f"# GUI Session Snapshot {str(snapshot.get('stage', 'p1')).upper()}",
+        f"# GUI 会话快照 {str(snapshot.get('stage', 'p1')).upper()}",
         "",
         f"- Run ID: `{snapshot.get('run_id', '')}`",
         f"- Generated at: `{snapshot.get('generated_at', '')}`",
@@ -20710,11 +20710,11 @@ def _md_cell(value: Any) -> str:
 
 
 class ImouseGui(tk.Tk):
-    """Early desktop GUI for device setup and smoke testing."""
+    """用于设备设置和冒烟测试的早期桌面 GUI。"""
 
     def __init__(self):
         super().__init__()
-        self.title("iMouse XP Prototype Console")
+        self.title("iMouse XP 原型控制台")
         self.geometry("1160x740")
         self.minsize(980, 620)
 
@@ -20766,11 +20766,11 @@ class ImouseGui(tk.Tk):
         self.queue_repeat = tk.IntVar(value=1)
         self.queue_wait_between = tk.DoubleVar(value=0.5)
         self.queue_stop_on_error = tk.BooleanVar(value=True)
-        self.command_queue_status = tk.StringVar(value="Command queue is empty")
+        self.command_queue_status = tk.StringVar(value="命令队列为空")
         self.route_decision_path = tk.StringVar(value="")
         self.field_stage = tk.StringVar(value="p1")
         self.acceptance_gate = tk.StringVar(value="p1")
-        self.manual_step = tk.StringVar(value="Manual observation")
+        self.manual_step = tk.StringVar(value="人工观察")
         self.manual_status = tk.StringVar(value="pass")
         self.manual_category = tk.StringVar(value="")
         self.manual_note = tk.StringVar(value="")
@@ -20801,27 +20801,27 @@ class ImouseGui(tk.Tk):
         top.grid(row=0, column=0, columnspan=2, sticky="ew")
         top.columnconfigure(1, weight=1)
 
-        ttk.Label(top, text="Server").grid(row=0, column=0, sticky="w")
+        ttk.Label(top, text="服务器").grid(row=0, column=0, sticky="w")
         ttk.Entry(top, textvariable=self.server_url).grid(row=0, column=1, sticky="ew", padx=6)
-        ttk.Button(top, text="Apply", command=self._apply_server_url).grid(row=0, column=2, padx=3)
-        ttk.Button(top, text="Start Local", command=self._start_local_server).grid(row=0, column=3, padx=3)
-        ttk.Button(top, text="Stop Local", command=self._stop_local_server).grid(row=0, column=4, padx=3)
+        ttk.Button(top, text="应用", command=self._apply_server_url).grid(row=0, column=2, padx=3)
+        ttk.Button(top, text="启动本地", command=self._start_local_server).grid(row=0, column=3, padx=3)
+        ttk.Button(top, text="停止本地", command=self._stop_local_server).grid(row=0, column=4, padx=3)
         ttk.Button(top, text="Ping", command=self.refresh_devices).grid(row=0, column=5, padx=3)
 
-        ttk.Label(top, text="Evidence").grid(row=1, column=0, sticky="w", pady=(6, 0))
+        ttk.Label(top, text="证据").grid(row=1, column=0, sticky="w", pady=(6, 0))
         ttk.Entry(top, textvariable=self.evidence_run_id).grid(
             row=1, column=1, sticky="ew", padx=6, pady=(6, 0)
         )
-        ttk.Checkbutton(top, text="Record", variable=self.evidence_enabled).grid(
+        ttk.Checkbutton(top, text="记录", variable=self.evidence_enabled).grid(
             row=1, column=2, sticky="w", pady=(6, 0)
         )
-        ttk.Button(top, text="Summary", command=self.write_evidence_summary).grid(
+        ttk.Button(top, text="摘要", command=self.write_evidence_summary).grid(
             row=1, column=3, sticky="w", padx=3, pady=(6, 0)
         )
         ttk.Button(top, text="Doctor", command=self.run_preflight_doctor).grid(
             row=1, column=4, sticky="w", padx=3, pady=(6, 0)
         )
-        ttk.Button(top, text="Review", command=self.write_evidence_review).grid(
+        ttk.Button(top, text="审查", command=self.write_evidence_review).grid(
             row=1, column=5, sticky="w", padx=3, pady=(6, 0)
         )
         ttk.Button(top, text="Readiness", command=self.run_readiness_audit).grid(
@@ -20843,7 +20843,7 @@ class ImouseGui(tk.Tk):
             row=1, column=11, sticky="w", padx=3, pady=(6, 0)
         )
 
-        devices_frame = ttk.LabelFrame(self, text="Devices", padding=8)
+        devices_frame = ttk.LabelFrame(self, text="设备", padding=8)
         devices_frame.grid(row=1, column=0, sticky="nsew", padx=(10, 5), pady=(0, 8))
         devices_frame.rowconfigure(0, weight=1)
         devices_frame.columnconfigure(0, weight=1)
@@ -20857,12 +20857,12 @@ class ImouseGui(tk.Tk):
             selectmode="extended",
         )
         headings = {
-            "device_id": "Device",
-            "state": "State",
-            "hardware_id": "Hardware",
-            "screen": "Screen",
+            "device_id": "设备",
+            "state": "状态",
+            "hardware_id": "硬件",
+            "screen": "屏幕",
             "iphone": "iPhone",
-            "errors": "Errors",
+            "errors": "错误",
         }
         widths = {
             "device_id": 130,
@@ -20884,20 +20884,20 @@ class ImouseGui(tk.Tk):
 
         actions = ttk.Frame(devices_frame)
         actions.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 0))
-        ttk.Button(actions, text="Refresh", command=self.refresh_devices).pack(side="left")
-        ttk.Label(actions, text="Device ID").pack(side="left", padx=(12, 4))
+        ttk.Button(actions, text="刷新", command=self.refresh_devices).pack(side="left")
+        ttk.Label(actions, text="设备 ID").pack(side="left", padx=(12, 4))
         ttk.Entry(actions, textvariable=self.device_id, width=18).pack(side="left")
-        ttk.Button(actions, text="Register", command=self.register_device).pack(side="left", padx=3)
-        ttk.Button(actions, text="Remove", command=self.remove_device).pack(side="left", padx=3)
+        ttk.Button(actions, text="注册", command=self.register_device).pack(side="left", padx=3)
+        ttk.Button(actions, text="移除", command=self.remove_device).pack(side="left", padx=3)
 
         groups = ttk.Frame(devices_frame)
         groups.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(8, 0))
-        ttk.Button(groups, text="Groups", command=self.refresh_groups).pack(side="left")
+        ttk.Button(groups, text="群组", command=self.refresh_groups).pack(side="left")
         self.group_combo = ttk.Combobox(groups, textvariable=self.group_name, values=[], width=20)
         self.group_combo.pack(side="left", padx=(8, 3))
-        ttk.Button(groups, text="Save Selected", command=self.save_group).pack(side="left", padx=3)
-        ttk.Button(groups, text="Load", command=self.load_group).pack(side="left", padx=3)
-        ttk.Button(groups, text="Delete", command=self.remove_group).pack(side="left", padx=3)
+        ttk.Button(groups, text="保存选中", command=self.save_group).pack(side="left", padx=3)
+        ttk.Button(groups, text="加载", command=self.load_group).pack(side="left", padx=3)
+        ttk.Button(groups, text="删除", command=self.remove_group).pack(side="left", padx=3)
 
         right = ttk.Frame(self, padding=(5, 0, 10, 8))
         right.grid(row=1, column=1, sticky="nsew")
@@ -20913,70 +20913,70 @@ class ImouseGui(tk.Tk):
         self._build_log_panel()
 
     def _build_hardware_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="Hardware", padding=8)
+        frame = ttk.LabelFrame(parent, text="硬件", padding=8)
         frame.grid(row=0, column=0, sticky="ew", pady=(0, 8))
         frame.columnconfigure(1, weight=1)
 
-        ttk.Button(frame, text="Scan", command=self.scan_hardware).grid(row=0, column=0, sticky="w")
+        ttk.Button(frame, text="扫描", command=self.scan_hardware).grid(row=0, column=0, sticky="w")
         self.hardware_combo = ttk.Combobox(frame, textvariable=self.hardware_port, values=[], state="readonly")
         self.hardware_combo.grid(row=0, column=1, sticky="ew", padx=6)
-        ttk.Label(frame, text="Baud").grid(row=0, column=2, padx=(6, 4))
+        ttk.Label(frame, text="波特率").grid(row=0, column=2, padx=(6, 4))
         ttk.Entry(frame, textvariable=self.baudrate, width=8).grid(row=0, column=3)
 
-        ttk.Button(frame, text="Bind", command=self.bind_hardware).grid(row=1, column=0, pady=(8, 0), sticky="w")
-        ttk.Button(frame, text="Unbind", command=self.unbind_hardware).grid(row=1, column=1, pady=(8, 0), sticky="w")
+        ttk.Button(frame, text="绑定", command=self.bind_hardware).grid(row=1, column=0, pady=(8, 0), sticky="w")
+        ttk.Button(frame, text="解绑", command=self.unbind_hardware).grid(row=1, column=1, pady=(8, 0), sticky="w")
 
     def _build_capture_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="AirPlay / Capture", padding=8)
+        frame = ttk.LabelFrame(parent, text="AirPlay / 捕获", padding=8)
         frame.grid(row=1, column=0, sticky="ew", pady=(0, 8))
 
-        ttk.Button(frame, text="Start AirPlay", command=self.start_airplay).pack(side="left", padx=(0, 4))
-        ttk.Button(frame, text="Stop AirPlay", command=self.stop_airplay).pack(side="left", padx=4)
-        ttk.Button(frame, text="Start Capture", command=self.start_capture).pack(side="left", padx=4)
-        ttk.Button(frame, text="Screenshot", command=self.screenshot).pack(side="left", padx=4)
+        ttk.Button(frame, text="启动 AirPlay", command=self.start_airplay).pack(side="left", padx=(0, 4))
+        ttk.Button(frame, text="停止 AirPlay", command=self.stop_airplay).pack(side="left", padx=4)
+        ttk.Button(frame, text="开始捕获", command=self.start_capture).pack(side="left", padx=4)
+        ttk.Button(frame, text="截图", command=self.screenshot).pack(side="left", padx=4)
 
     def _build_input_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="Input Smoke Tests", padding=8)
+        frame = ttk.LabelFrame(parent, text="输入冒烟测试", padding=8)
         frame.grid(row=2, column=0, sticky="ew")
         for idx in range(6):
             frame.columnconfigure(idx, weight=1)
 
-        ttk.Label(frame, text="Click X").grid(row=0, column=0, sticky="w")
+        ttk.Label(frame, text="点击 X").grid(row=0, column=0, sticky="w")
         ttk.Entry(frame, textvariable=self.click_x, width=8).grid(row=0, column=1, sticky="w")
         ttk.Label(frame, text="Y").grid(row=0, column=2, sticky="w")
         ttk.Entry(frame, textvariable=self.click_y, width=8).grid(row=0, column=3, sticky="w")
-        ttk.Button(frame, text="Click", command=self.click_device).grid(row=0, column=4, sticky="ew", padx=4)
+        ttk.Button(frame, text="点击", command=self.click_device).grid(row=0, column=4, sticky="ew", padx=4)
 
-        ttk.Label(frame, text="Swipe").grid(row=1, column=0, sticky="w", pady=(8, 0))
+        ttk.Label(frame, text="滑动").grid(row=1, column=0, sticky="w", pady=(8, 0))
         ttk.Entry(frame, textvariable=self.swipe_x1, width=8).grid(row=1, column=1, pady=(8, 0), sticky="w")
         ttk.Entry(frame, textvariable=self.swipe_y1, width=8).grid(row=1, column=2, pady=(8, 0), sticky="w")
         ttk.Entry(frame, textvariable=self.swipe_x2, width=8).grid(row=1, column=3, pady=(8, 0), sticky="w")
         ttk.Entry(frame, textvariable=self.swipe_y2, width=8).grid(row=1, column=4, pady=(8, 0), sticky="w")
-        ttk.Button(frame, text="Swipe", command=self.swipe_device).grid(row=1, column=5, pady=(8, 0), sticky="ew")
+        ttk.Button(frame, text="滑动", command=self.swipe_device).grid(row=1, column=5, pady=(8, 0), sticky="ew")
 
-        ttk.Label(frame, text="Text").grid(row=2, column=0, sticky="w", pady=(8, 0))
+        ttk.Label(frame, text="文本").grid(row=2, column=0, sticky="w", pady=(8, 0))
         ttk.Entry(frame, textvariable=self.text_input).grid(row=2, column=1, columnspan=4, pady=(8, 0), sticky="ew")
-        ttk.Button(frame, text="Type", command=self.type_text).grid(row=2, column=5, pady=(8, 0), sticky="ew")
+        ttk.Button(frame, text="输入", command=self.type_text).grid(row=2, column=5, pady=(8, 0), sticky="ew")
 
     def _build_calibration_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="Coordinate Calibration", padding=8)
+        frame = ttk.LabelFrame(parent, text="坐标校准", padding=8)
         frame.grid(row=4, column=0, sticky="ew", pady=(8, 0))
         for idx in range(10):
             frame.columnconfigure(idx, weight=1)
 
-        ttk.Checkbutton(frame, text="Enabled", variable=self.calibration_enabled).grid(
+        ttk.Checkbutton(frame, text="启用", variable=self.calibration_enabled).grid(
             row=0, column=0, sticky="w"
         )
-        ttk.Label(frame, text="Active").grid(row=0, column=1, sticky="e")
+        ttk.Label(frame, text="当前").grid(row=0, column=1, sticky="e")
         ttk.Entry(frame, textvariable=self.calibration_active_x, width=6).grid(row=0, column=2, sticky="w")
         ttk.Entry(frame, textvariable=self.calibration_active_y, width=6).grid(row=0, column=3, sticky="w")
         ttk.Entry(frame, textvariable=self.calibration_active_w, width=6).grid(row=0, column=4, sticky="w")
         ttk.Entry(frame, textvariable=self.calibration_active_h, width=6).grid(row=0, column=5, sticky="w")
-        ttk.Label(frame, text="Target").grid(row=0, column=6, sticky="e")
+        ttk.Label(frame, text="目标").grid(row=0, column=6, sticky="e")
         ttk.Entry(frame, textvariable=self.calibration_target_w, width=6).grid(row=0, column=7, sticky="w")
         ttk.Entry(frame, textvariable=self.calibration_target_h, width=6).grid(row=0, column=8, sticky="w")
 
-        ttk.Label(frame, text="Orient").grid(row=1, column=0, sticky="w", pady=(6, 0))
+        ttk.Label(frame, text="方向").grid(row=1, column=0, sticky="w", pady=(6, 0))
         ttk.Combobox(
             frame,
             textvariable=self.calibration_orientation,
@@ -20984,55 +20984,55 @@ class ImouseGui(tk.Tk):
             width=18,
             state="readonly",
         ).grid(row=1, column=1, columnspan=3, sticky="ew", pady=(6, 0), padx=(4, 6))
-        ttk.Button(frame, text="Use Screenshot", command=self.calibration_from_screenshot).grid(
+        ttk.Button(frame, text="使用截图", command=self.calibration_from_screenshot).grid(
             row=1, column=4, sticky="ew", pady=(6, 0), padx=3
         )
-        ttk.Button(frame, text="Load", command=self.load_calibration).grid(
+        ttk.Button(frame, text="加载", command=self.load_calibration).grid(
             row=1, column=5, sticky="ew", pady=(6, 0), padx=3
         )
-        ttk.Button(frame, text="Save", command=self.save_calibration).grid(
+        ttk.Button(frame, text="保存", command=self.save_calibration).grid(
             row=1, column=6, sticky="ew", pady=(6, 0), padx=3
         )
 
     def _build_command_queue_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="Command Queue", padding=8)
+        frame = ttk.LabelFrame(parent, text="命令队列", padding=8)
         frame.grid(row=3, column=0, sticky="ew", pady=(8, 0))
         for idx in range(9):
             frame.columnconfigure(idx, weight=1)
 
-        ttk.Button(frame, text="Add Click", command=lambda: self.queue_current_action("click")).grid(
+        ttk.Button(frame, text="添加点击", command=lambda: self.queue_current_action("click")).grid(
             row=0, column=0, sticky="ew", padx=(0, 3)
         )
-        ttk.Button(frame, text="Add Swipe", command=lambda: self.queue_current_action("swipe")).grid(
+        ttk.Button(frame, text="添加滑动", command=lambda: self.queue_current_action("swipe")).grid(
             row=0, column=1, sticky="ew", padx=3
         )
-        ttk.Button(frame, text="Add Type", command=lambda: self.queue_current_action("type")).grid(
+        ttk.Button(frame, text="添加输入", command=lambda: self.queue_current_action("type")).grid(
             row=0, column=2, sticky="ew", padx=3
         )
-        ttk.Button(frame, text="Add Shot", command=lambda: self.queue_current_action("screenshot")).grid(
+        ttk.Button(frame, text="添加截图", command=lambda: self.queue_current_action("screenshot")).grid(
             row=0, column=3, sticky="ew", padx=3
         )
-        ttk.Button(frame, text="Add Find+Click", command=lambda: self.queue_current_action("find_image_then_click")).grid(
+        ttk.Button(frame, text="添加查找+点击", command=lambda: self.queue_current_action("find_image_then_click")).grid(
             row=0, column=4, sticky="ew", padx=3
         )
-        ttk.Label(frame, text="Repeat").grid(row=0, column=5, sticky="e", padx=(6, 3))
+        ttk.Label(frame, text="重复").grid(row=0, column=5, sticky="e", padx=(6, 3))
         ttk.Entry(frame, textvariable=self.queue_repeat, width=5).grid(row=0, column=6, sticky="w")
-        ttk.Label(frame, text="Wait").grid(row=0, column=7, sticky="e", padx=(6, 3))
+        ttk.Label(frame, text="等待").grid(row=0, column=7, sticky="e", padx=(6, 3))
         ttk.Entry(frame, textvariable=self.queue_wait_between, width=6).grid(row=0, column=8, sticky="w")
 
-        ttk.Checkbutton(frame, text="Dry Run", variable=self.queue_dry_run).grid(
+        ttk.Checkbutton(frame, text="模拟运行", variable=self.queue_dry_run).grid(
             row=1, column=0, sticky="w", pady=(5, 0)
         )
-        ttk.Checkbutton(frame, text="Stop on fail", variable=self.queue_stop_on_error).grid(
+        ttk.Checkbutton(frame, text="失败时停止", variable=self.queue_stop_on_error).grid(
             row=1, column=1, sticky="w", pady=(5, 0)
         )
-        ttk.Button(frame, text="Run", command=self.run_command_queue_from_gui).grid(
+        ttk.Button(frame, text="运行", command=self.run_command_queue_from_gui).grid(
             row=1, column=2, sticky="ew", padx=3, pady=(5, 0)
         )
-        ttk.Button(frame, text="Save JSON", command=self.save_command_queue_json_from_gui).grid(
+        ttk.Button(frame, text="保存 JSON", command=self.save_command_queue_json_from_gui).grid(
             row=1, column=3, sticky="ew", padx=3, pady=(5, 0)
         )
-        ttk.Button(frame, text="Clear", command=self.clear_command_queue).grid(
+        ttk.Button(frame, text="清除", command=self.clear_command_queue).grid(
             row=1, column=4, sticky="ew", padx=3, pady=(5, 0)
         )
         ttk.Label(frame, textvariable=self.command_queue_status).grid(
@@ -21043,16 +21043,16 @@ class ImouseGui(tk.Tk):
         self.command_queue_tree = ttk.Treeview(frame, columns=columns, show="headings", height=3)
         for column, label, width in (
             ("index", "#", 42),
-            ("action", "Action", 120),
-            ("devices", "Devices", 170),
-            ("payload", "Payload", 300),
+            ("action", "操作", 120),
+            ("devices", "设备", 170),
+            ("payload", "参数", 300),
         ):
             self.command_queue_tree.heading(column, text=label)
             self.command_queue_tree.column(column, width=width, anchor="w")
         self.command_queue_tree.grid(row=2, column=0, columnspan=9, sticky="ew", pady=(5, 0))
 
     def _build_preview_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="Screenshot Preview", padding=8)
+        frame = ttk.LabelFrame(parent, text="截图预览", padding=8)
         frame.grid(row=5, column=0, sticky="nsew", pady=(8, 0))
         frame.rowconfigure(0, weight=1)
         frame.columnconfigure(0, weight=1)
@@ -21064,33 +21064,33 @@ class ImouseGui(tk.Tk):
         self.preview_canvas.bind("<ButtonRelease-1>", self._on_preview_release)
         self.preview_canvas.bind("<Configure>", lambda _event: self._render_preview())
 
-        self.preview_status = tk.StringVar(value="No screenshot loaded")
+        self.preview_status = tk.StringVar(value="未加载截图")
         ttk.Label(frame, textvariable=self.preview_status).grid(row=1, column=0, columnspan=3, sticky="w", pady=(6, 0))
-        ttk.Button(frame, text="Assets", command=self.show_template_asset_manager).grid(
+        ttk.Button(frame, text="素材库", command=self.show_template_asset_manager).grid(
             row=1, column=3, sticky="e", pady=(6, 0), padx=4
         )
-        ttk.Button(frame, text="Save", command=self.save_screenshot).grid(row=1, column=4, sticky="e", pady=(6, 0), padx=4)
-        ttk.Button(frame, text="Clear", command=self.clear_preview).grid(row=1, column=5, sticky="e", pady=(6, 0))
+        ttk.Button(frame, text="保存", command=self.save_screenshot).grid(row=1, column=4, sticky="e", pady=(6, 0), padx=4)
+        ttk.Button(frame, text="清除", command=self.clear_preview).grid(row=1, column=5, sticky="e", pady=(6, 0))
 
-        ttk.Label(frame, text="Template").grid(row=2, column=0, sticky="w", pady=(8, 0))
+        ttk.Label(frame, text="模板").grid(row=2, column=0, sticky="w", pady=(8, 0))
         ttk.Entry(frame, textvariable=self.template_path).grid(row=2, column=1, columnspan=2, sticky="ew", pady=(8, 0), padx=4)
-        ttk.Button(frame, text="Browse", command=self.browse_template).grid(row=2, column=3, sticky="ew", pady=(8, 0), padx=4)
-        ttk.Button(frame, text="Save Crop", command=self.save_template_crop).grid(row=2, column=4, sticky="ew", pady=(8, 0), padx=4)
-        ttk.Button(frame, text="Find", command=self.find_template).grid(row=2, column=5, sticky="ew", pady=(8, 0))
+        ttk.Button(frame, text="浏览", command=self.browse_template).grid(row=2, column=3, sticky="ew", pady=(8, 0), padx=4)
+        ttk.Button(frame, text="保存裁剪", command=self.save_template_crop).grid(row=2, column=4, sticky="ew", pady=(8, 0), padx=4)
+        ttk.Button(frame, text="查找", command=self.find_template).grid(row=2, column=5, sticky="ew", pady=(8, 0))
 
-        ttk.Label(frame, text="Threshold").grid(row=3, column=0, sticky="w", pady=(8, 0))
+        ttk.Label(frame, text="阈值").grid(row=3, column=0, sticky="w", pady=(8, 0))
         ttk.Entry(frame, textvariable=self.find_threshold, width=8).grid(row=3, column=1, sticky="w", pady=(8, 0))
-        ttk.Label(frame, text="Tolerance").grid(row=3, column=2, sticky="e", pady=(8, 0))
+        ttk.Label(frame, text="容差").grid(row=3, column=2, sticky="e", pady=(8, 0))
         ttk.Entry(frame, textvariable=self.color_tolerance, width=8).grid(row=3, column=3, sticky="w", pady=(8, 0), padx=4)
-        ttk.Button(frame, text="Find Color", command=self.find_picked_color).grid(row=3, column=4, sticky="ew", pady=(8, 0), padx=4)
+        ttk.Button(frame, text="查找颜色", command=self.find_picked_color).grid(row=3, column=4, sticky="ew", pady=(8, 0), padx=4)
         ttk.Button(frame, text="OCR", command=self.run_ocr).grid(row=3, column=5, sticky="ew", pady=(8, 0))
 
-        ttk.Label(frame, text="Text").grid(row=4, column=0, sticky="w", pady=(8, 0))
+        ttk.Label(frame, text="文本").grid(row=4, column=0, sticky="w", pady=(8, 0))
         ttk.Entry(frame, textvariable=self.find_text_query).grid(row=4, column=1, columnspan=4, sticky="ew", pady=(8, 0), padx=4)
-        ttk.Button(frame, text="Find Text", command=self.find_text_on_screen).grid(row=4, column=5, sticky="ew", pady=(8, 0))
+        ttk.Button(frame, text="查找文本", command=self.find_text_on_screen).grid(row=4, column=5, sticky="ew", pady=(8, 0))
 
     def _build_log_panel(self) -> None:
-        frame = ttk.LabelFrame(self, text="Operation Log", padding=8)
+        frame = ttk.LabelFrame(self, text="操作日志", padding=8)
         frame.grid(row=2, column=0, columnspan=2, sticky="nsew", padx=10, pady=(0, 10))
         frame.rowconfigure(5, weight=1)
         frame.columnconfigure(0, weight=1)
@@ -21098,20 +21098,20 @@ class ImouseGui(tk.Tk):
         scenario = ttk.Frame(frame)
         scenario.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 6))
         scenario.columnconfigure(1, weight=1)
-        ttk.Label(scenario, text="Scenario").grid(row=0, column=0, sticky="w")
+        ttk.Label(scenario, text="场景").grid(row=0, column=0, sticky="w")
         ttk.Entry(scenario, textvariable=self.scenario_path).grid(
             row=0, column=1, sticky="ew", padx=(4, 6)
         )
-        ttk.Button(scenario, text="Browse", command=self.browse_scenario).grid(
+        ttk.Button(scenario, text="浏览", command=self.browse_scenario).grid(
             row=0, column=2, sticky="ew", padx=(0, 4)
         )
         ttk.Button(scenario, text="Library", command=self.show_scenario_library_from_gui).grid(
             row=0, column=3, sticky="ew", padx=(0, 4)
         )
-        ttk.Checkbutton(scenario, text="Dry Run", variable=self.scenario_dry_run).grid(
+        ttk.Checkbutton(scenario, text="模拟运行", variable=self.scenario_dry_run).grid(
             row=0, column=4, sticky="w", padx=(0, 4)
         )
-        ttk.Button(scenario, text="Run", command=self.run_scenario_from_gui).grid(
+        ttk.Button(scenario, text="运行", command=self.run_scenario_from_gui).grid(
             row=0, column=5, sticky="ew"
         )
 
@@ -21129,28 +21129,28 @@ class ImouseGui(tk.Tk):
         ttk.Entry(sop, textvariable=self.route_decision_path).grid(
             row=0, column=2, sticky="ew", padx=(0, 6)
         )
-        ttk.Button(sop, text="Route Init", command=self.init_route_decision_from_gui).grid(
+        ttk.Button(sop, text="路由初始化", command=self.init_route_decision_from_gui).grid(
             row=0, column=3, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(sop, text="Browse", command=self.browse_route_decision).grid(
+        ttk.Button(sop, text="浏览", command=self.browse_route_decision).grid(
             row=0, column=4, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(sop, text="Edit", command=self.edit_route_decision_from_gui).grid(
+        ttk.Button(sop, text="编辑", command=self.edit_route_decision_from_gui).grid(
             row=0, column=5, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(sop, text="Checklist", command=self.write_route_issue_checklist_from_gui).grid(
+        ttk.Button(sop, text="检查清单", command=self.write_route_issue_checklist_from_gui).grid(
             row=0, column=6, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(sop, text="Validate", command=self.validate_route_decision_from_gui).grid(
+        ttk.Button(sop, text="验证", command=self.validate_route_decision_from_gui).grid(
             row=0, column=7, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(sop, text="Field Packet", command=self.generate_field_packet_from_gui).grid(
+        ttk.Button(sop, text="现场包", command=self.generate_field_packet_from_gui).grid(
             row=0, column=8, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(sop, text="Worksheet", command=self.generate_operator_worksheet_from_gui).grid(
+        ttk.Button(sop, text="工作表", command=self.generate_operator_worksheet_from_gui).grid(
             row=0, column=9, sticky="ew", padx=(0, 8)
         )
-        ttk.Label(sop, text="Gate").grid(row=0, column=10, sticky="e")
+        ttk.Label(sop, text="关卡").grid(row=0, column=10, sticky="e")
         ttk.Combobox(
             sop,
             textvariable=self.acceptance_gate,
@@ -21170,11 +21170,11 @@ class ImouseGui(tk.Tk):
         manual.columnconfigure(1, weight=1)
         manual.columnconfigure(5, weight=2)
         manual.columnconfigure(7, weight=1)
-        ttk.Label(manual, text="Manual").grid(row=0, column=0, sticky="w")
+        ttk.Label(manual, text="人工").grid(row=0, column=0, sticky="w")
         ttk.Entry(manual, textvariable=self.manual_step, width=22).grid(
             row=0, column=1, sticky="ew", padx=(4, 6)
         )
-        ttk.Label(manual, text="Status").grid(row=0, column=2, sticky="w")
+        ttk.Label(manual, text="状态").grid(row=0, column=2, sticky="w")
         ttk.Combobox(
             manual,
             textvariable=self.manual_status,
@@ -21182,7 +21182,7 @@ class ImouseGui(tk.Tk):
             width=7,
             state="readonly",
         ).grid(row=0, column=3, sticky="w", padx=(4, 6))
-        ttk.Label(manual, text="Category").grid(row=0, column=4, sticky="w")
+        ttk.Label(manual, text="类别").grid(row=0, column=4, sticky="w")
         ttk.Combobox(
             manual,
             textvariable=self.manual_category,
@@ -21190,14 +21190,14 @@ class ImouseGui(tk.Tk):
             width=18,
             state="readonly",
         ).grid(row=0, column=5, sticky="ew", padx=(4, 6))
-        ttk.Label(manual, text="Artifact").grid(row=0, column=6, sticky="w")
+        ttk.Label(manual, text="产物").grid(row=0, column=6, sticky="w")
         ttk.Entry(manual, textvariable=self.manual_artifact, width=22).grid(
             row=0, column=7, sticky="ew", padx=(4, 6)
         )
-        ttk.Button(manual, text="Record", command=self.record_manual_observation).grid(
+        ttk.Button(manual, text="记录", command=self.record_manual_observation).grid(
             row=0, column=8, sticky="e"
         )
-        ttk.Label(manual, text="Note").grid(row=1, column=0, sticky="w", pady=(4, 0))
+        ttk.Label(manual, text="备注").grid(row=1, column=0, sticky="w", pady=(4, 0))
         ttk.Entry(manual, textvariable=self.manual_note).grid(
             row=1, column=1, columnspan=8, sticky="ew", padx=(4, 0), pady=(4, 0)
         )
@@ -21206,7 +21206,7 @@ class ImouseGui(tk.Tk):
         metadata.grid(row=3, column=0, columnspan=2, sticky="ew", pady=(0, 6))
         metadata.columnconfigure(3, weight=1)
         metadata.columnconfigure(9, weight=1)
-        ttk.Label(metadata, text="Metadata").grid(row=0, column=0, sticky="w")
+        ttk.Label(metadata, text="元数据").grid(row=0, column=0, sticky="w")
         ttk.Combobox(
             metadata,
             textvariable=self.metadata_receiver_provider,
@@ -21237,18 +21237,18 @@ class ImouseGui(tk.Tk):
         ttk.Entry(metadata, textvariable=self.metadata_ios_version, width=8).grid(
             row=0, column=9, sticky="w", padx=(4, 6)
         )
-        ttk.Button(metadata, text="Record Metadata", command=self.record_component_metadata).grid(
+        ttk.Button(metadata, text="记录元数据", command=self.record_component_metadata).grid(
             row=0, column=10, sticky="e"
         )
-        ttk.Label(metadata, text="Receiver").grid(row=1, column=0, sticky="w", pady=(4, 0))
+        ttk.Label(metadata, text="接收器").grid(row=1, column=0, sticky="w", pady=(4, 0))
         ttk.Entry(metadata, textvariable=self.metadata_receiver_name, width=18).grid(
             row=1, column=1, columnspan=2, sticky="ew", padx=(4, 6), pady=(4, 0)
         )
-        ttk.Label(metadata, text="Version").grid(row=1, column=3, sticky="w", pady=(4, 0))
+        ttk.Label(metadata, text="版本").grid(row=1, column=3, sticky="w", pady=(4, 0))
         ttk.Entry(metadata, textvariable=self.metadata_receiver_version, width=18).grid(
             row=1, column=4, columnspan=3, sticky="ew", padx=(4, 6), pady=(4, 0)
         )
-        ttk.Label(metadata, text="Serial uses Hardware selection when HID is blank").grid(
+        ttk.Label(metadata, text="串口在 HID 为空时使用硬件选择").grid(
             row=1, column=7, columnspan=4, sticky="w", pady=(4, 0)
         )
 
@@ -21261,17 +21261,17 @@ class ImouseGui(tk.Tk):
         self.log_text.configure(yscrollcommand=scrollbar.set)
 
     def _build_live_probe_panel(self, parent: ttk.Frame) -> None:
-        frame = ttk.LabelFrame(parent, text="Live Probe", padding=6)
+        frame = ttk.LabelFrame(parent, text="实时探测", padding=6)
         frame.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(0, 6))
         frame.columnconfigure(40, weight=1)
 
-        ttk.Button(frame, text="Prepare", command=self.prepare_live_probe_from_gui).grid(
+        ttk.Button(frame, text="准备", command=self.prepare_live_probe_from_gui).grid(
             row=0, column=0, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(frame, text="Load Probe Script", command=self.load_probe_script_from_gui).grid(
+        ttk.Button(frame, text="加载探测脚本", command=self.load_probe_script_from_gui).grid(
             row=0, column=1, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(frame, text="Dry Run", command=self.run_live_probe_dry_run).grid(
+        ttk.Button(frame, text="模拟运行", command=self.run_live_probe_dry_run).grid(
             row=0, column=2, sticky="ew", padx=(0, 4)
         )
         ttk.Button(frame, text="Doctor", command=self.run_preflight_doctor).grid(
@@ -21283,16 +21283,16 @@ class ImouseGui(tk.Tk):
         ttk.Button(frame, text="Readiness", command=self.run_readiness_audit).grid(
             row=0, column=5, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(frame, text="Refresh", command=self.refresh_live_probe_status).grid(
+        ttk.Button(frame, text="刷新", command=self.refresh_live_probe_status).grid(
             row=0, column=6, sticky="ew", padx=(0, 4)
         )
-        ttk.Button(frame, text="Report", command=self.write_live_probe_report_from_gui).grid(
+        ttk.Button(frame, text="报告", command=self.write_live_probe_report_from_gui).grid(
             row=0, column=7, sticky="w"
         )
-        ttk.Button(frame, text="Dashboard", command=self.show_stage_dashboard_from_gui).grid(
+        ttk.Button(frame, text="仪表盘", command=self.show_stage_dashboard_from_gui).grid(
             row=0, column=8, sticky="ew", padx=(4, 4)
         )
-        ttk.Button(frame, text="Pack", command=self.write_evidence_pack_from_gui).grid(
+        ttk.Button(frame, text="打包", command=self.write_evidence_pack_from_gui).grid(
             row=0, column=9, sticky="w"
         )
         ttk.Button(frame, text="XP Gap", command=self.write_xp_gap_audit_from_gui).grid(
@@ -21301,16 +21301,16 @@ class ImouseGui(tk.Tk):
         ttk.Button(frame, text="Core", command=self.show_xp_core_function_matrix_from_gui).grid(
             row=0, column=11, sticky="w", padx=(4, 0)
         )
-        ttk.Button(frame, text="Session", command=self.write_gui_session_snapshot_from_gui).grid(
+        ttk.Button(frame, text="会话", command=self.write_gui_session_snapshot_from_gui).grid(
             row=0, column=12, sticky="w", padx=(4, 0)
         )
-        ttk.Button(frame, text="Runbook", command=self.show_field_runbook_from_gui).grid(
+        ttk.Button(frame, text="操作手册", command=self.show_field_runbook_from_gui).grid(
             row=0, column=13, sticky="w", padx=(4, 0)
         )
         ttk.Button(frame, text="SOP", command=self.show_stage_sop_board_from_gui).grid(
             row=0, column=14, sticky="w", padx=(4, 0)
         )
-        ttk.Button(frame, text="SOP MD", command=self.write_stage_sop_board_from_gui).grid(
+        ttk.Button(frame, text="SOP 文档", command=self.write_stage_sop_board_from_gui).grid(
             row=0, column=15, sticky="w", padx=(4, 0)
         )
         ttk.Button(frame, text="P1 Trial", command=self.show_p1_trial_from_gui).grid(
@@ -21343,10 +21343,10 @@ class ImouseGui(tk.Tk):
         ttk.Button(frame, text="Bench", command=self.show_hardware_bench_from_gui).grid(
             row=0, column=25, sticky="w", padx=(4, 0)
         )
-        ttk.Button(frame, text="Wizard", command=self.show_field_evidence_wizard_from_gui).grid(
+        ttk.Button(frame, text="向导", command=self.show_field_evidence_wizard_from_gui).grid(
             row=0, column=26, sticky="w", padx=(4, 0)
         )
-        ttk.Button(frame, text="Runner", command=self.show_field_evidence_runner_from_gui).grid(
+        ttk.Button(frame, text="运行器", command=self.show_field_evidence_runner_from_gui).grid(
             row=0, column=27, sticky="w", padx=(4, 0)
         )
         ttk.Button(frame, text="Start Pack", command=self.show_first_run_packet_from_gui).grid(
@@ -21355,7 +21355,7 @@ class ImouseGui(tk.Tk):
         ttk.Button(frame, text="Shot Bench", command=self.run_capture_quality_bench_from_gui).grid(
             row=0, column=29, sticky="w", padx=(4, 0)
         )
-        ttk.Button(frame, text="Control Bench", command=self.show_control_response_bench_from_gui).grid(
+        ttk.Button(frame, text="控制基准", command=self.show_control_response_bench_from_gui).grid(
             row=0, column=30, sticky="w", padx=(4, 0)
         )
         ttk.Button(frame, text="Iter Radar", command=self.show_xp_iteration_radar_from_gui).grid(
@@ -21641,7 +21641,7 @@ class ImouseGui(tk.Tk):
                 artifacts=artifacts,
             )
         except Exception as exc:
-            self._log(f"Evidence record failed: {exc}")
+            self._log(f"Evidence record 失败: {exc}")
             return
         self._log(f"Evidence {event['status']}: {recorder.path}")
 
@@ -21705,31 +21705,31 @@ class ImouseGui(tk.Tk):
     def write_evidence_summary(self) -> None:
         run_id = self.evidence_run_id.get().strip()
         if not run_id:
-            messagebox.showwarning("iMouse", "Evidence run id is required")
+            messagebox.showwarning("iMouse", "需要证据 run id")
             return
         try:
             path = ValidationRecorder(run_id).write_summary_markdown()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Evidence summary failed: {exc}")
+            messagebox.showerror("iMouse", f"证据摘要失败: {exc}")
             return
         self._log(f"Wrote evidence summary to {path}")
-        messagebox.showinfo("iMouse", f"Wrote evidence summary:\n{path}")
+        messagebox.showinfo("iMouse", f"已写入证据摘要:\n{path}")
 
     def write_evidence_review(self) -> None:
         run_id = self.evidence_run_id.get().strip()
         if not run_id:
-            messagebox.showwarning("iMouse", "Evidence run id is required")
+            messagebox.showwarning("iMouse", "需要证据 run id")
             return
         recorder = ValidationRecorder(run_id)
         if not recorder.path.exists():
-            messagebox.showwarning("iMouse", f"Evidence file does not exist yet:\n{recorder.path}")
+            messagebox.showwarning("iMouse", f"证据文件尚不存在:\n{recorder.path}")
             return
         review_path = recorder.path.with_name(f"{recorder.safe_run_id}_review.md")
         try:
             path = recorder.write_summary_markdown(review_path)
             summary = recorder.summary()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Evidence review failed: {exc}")
+            messagebox.showerror("iMouse", f"证据审查失败: {exc}")
             return
         line = evidence_review_brief(summary)
         self._log(f"{line}; artifact={path}")
@@ -21738,16 +21738,16 @@ class ImouseGui(tk.Tk):
     def show_evidence_timeline_from_gui(self) -> None:
         run_id = self.evidence_run_id.get().strip()
         if not run_id:
-            messagebox.showwarning("iMouse", "Evidence run id is required")
+            messagebox.showwarning("iMouse", "需要证据 run id")
             return
         recorder = ValidationRecorder(run_id)
         if not recorder.path.exists():
-            messagebox.showwarning("iMouse", f"Evidence file does not exist yet:\n{recorder.path}")
+            messagebox.showwarning("iMouse", f"证据文件尚不存在:\n{recorder.path}")
             return
         try:
             rows = evidence_timeline_rows(recorder.load())
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Evidence timeline failed: {exc}")
+            messagebox.showerror("iMouse", f"证据 Timeline 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -21807,16 +21807,16 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed = evidence_timeline_rows(recorder.load())
             except Exception as exc:
-                status_var.set(f"Timeline refresh failed: {exc}")
-                self._log(f"Evidence timeline refresh failed: {exc}")
+                status_var.set(f"Timeline refresh 失败: {exc}")
+                self._log(f"Evidence timeline refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(evidence_timeline_brief(refreshed))
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_evidence_timeline_from_gui).pack(side="left", padx=4)
-        ttk.Button(footer, text="Summary", command=self.write_evidence_summary).pack(side="left", padx=4)
-        ttk.Button(footer, text="Review", command=self.write_evidence_review).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_evidence_timeline_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="摘要", command=self.write_evidence_summary).pack(side="left", padx=4)
+        ttk.Button(footer, text="审查", command=self.write_evidence_review).pack(side="left", padx=4)
         ttk.Label(
             footer,
             text="Timeline is read-only; promotion still requires Acceptance, Readiness, and manual real-iPhone observation.",
@@ -21826,11 +21826,11 @@ class ImouseGui(tk.Tk):
     def write_evidence_timeline_from_gui(self) -> None:
         run_id = self.evidence_run_id.get().strip()
         if not run_id:
-            messagebox.showwarning("iMouse", "Evidence run id is required")
+            messagebox.showwarning("iMouse", "需要证据 run id")
             return
         recorder = ValidationRecorder(run_id)
         if not recorder.path.exists():
-            messagebox.showwarning("iMouse", f"Evidence file does not exist yet:\n{recorder.path}")
+            messagebox.showwarning("iMouse", f"证据文件尚不存在:\n{recorder.path}")
             return
         try:
             rows = evidence_timeline_rows(recorder.load())
@@ -21841,7 +21841,7 @@ class ImouseGui(tk.Tk):
                 evidence_path=recorder.path,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Evidence timeline export failed: {exc}")
+            messagebox.showerror("iMouse", f"证据 Timeline 导出失败: {exc}")
             return
         line = evidence_timeline_brief(rows)
         self._log(f"{line}; artifact={out_path}")
@@ -21863,7 +21863,7 @@ class ImouseGui(tk.Tk):
         try:
             rows = self._callback_event_rows_from_api()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Callback monitor failed: {exc}")
+            messagebox.showerror("iMouse", f"Callback 监控器失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -21921,14 +21921,14 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed = self._callback_event_rows_from_api()
             except Exception as exc:
-                status_var.set(f"Callback refresh failed: {exc}")
-                self._log(f"Callback monitor refresh failed: {exc}")
+                status_var.set(f"Callback refresh 失败: {exc}")
+                self._log(f"Callback monitor refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(callback_event_brief(refreshed))
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_callback_monitor_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_callback_monitor_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Attach Log", command=self.attach_callback_log_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Timeline", command=self.show_evidence_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Matrix", command=self.show_device_evidence_matrix_from_gui).pack(side="left", padx=4)
@@ -21950,7 +21950,7 @@ class ImouseGui(tk.Tk):
                 server_url=self.client.base_url,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Callback monitor export failed: {exc}")
+            messagebox.showerror("iMouse", f"Callback 监控器导出失败: {exc}")
             return
         line = callback_event_brief(rows)
         self._log(f"{line}; artifact={out_path}")
@@ -22084,7 +22084,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, recorder = self._device_evidence_matrix_rows()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Device evidence matrix failed: {exc}")
+            messagebox.showerror("iMouse", f"Device evidence matrix 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -22163,14 +22163,14 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _recorder = self._device_evidence_matrix_rows()
             except Exception as exc:
-                status_var.set(f"Matrix refresh failed: {exc}")
-                self._log(f"Device evidence matrix refresh failed: {exc}")
+                status_var.set(f"Matrix refresh 失败: {exc}")
+                self._log(f"Device evidence matrix refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(device_evidence_matrix_brief(refreshed))
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_device_evidence_matrix_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_device_evidence_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Compat", command=self.show_device_ios_compatibility_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Timeline", command=self.show_evidence_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Acceptance", command=self.run_acceptance_from_gui).pack(side="left", padx=4)
@@ -22190,7 +22190,7 @@ class ImouseGui(tk.Tk):
                 evidence_path=recorder.path,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Device evidence matrix export failed: {exc}")
+            messagebox.showerror("iMouse", f"Device evidence matrix export 失败: {exc}")
             return
         line = device_evidence_matrix_brief(rows)
         self._log(f"{line}; artifact={out_path}")
@@ -22217,7 +22217,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, recorder = self._device_ios_compatibility_rows()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Device/iOS compatibility matrix failed: {exc}")
+            messagebox.showerror("iMouse", f"Device/iOS compatibility matrix 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -22297,14 +22297,14 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _recorder = self._device_ios_compatibility_rows()
             except Exception as exc:
-                status_var.set(f"Device/iOS compatibility refresh failed: {exc}")
-                self._log(f"Device/iOS compatibility refresh failed: {exc}")
+                status_var.set(f"Device/iOS compatibility refresh 失败: {exc}")
+                self._log(f"Device/iOS compatibility refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(device_ios_compatibility_brief(refreshed, stage=stage))
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_device_ios_compatibility_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_device_ios_compatibility_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Matrix", command=self.show_device_evidence_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Wizard", command=self.show_field_evidence_wizard_from_gui).pack(side="left", padx=4)
@@ -22326,7 +22326,7 @@ class ImouseGui(tk.Tk):
                 evidence_path=recorder.path,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Device/iOS compatibility export failed: {exc}")
+            messagebox.showerror("iMouse", f"Device/iOS compatibility export 失败: {exc}")
             return
         line = device_ios_compatibility_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -22346,7 +22346,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, recorder = self._issue_triage_rows()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Issue triage failed: {exc}")
+            messagebox.showerror("iMouse", f"Issue triage 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -22401,14 +22401,14 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _recorder = self._issue_triage_rows()
             except Exception as exc:
-                status_var.set(f"Triage refresh failed: {exc}")
-                self._log(f"Issue triage refresh failed: {exc}")
+                status_var.set(f"Triage refresh 失败: {exc}")
+                self._log(f"Issue triage refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(issue_triage_brief(refreshed))
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_issue_triage_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_issue_triage_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Rerun", command=self.show_rerun_playbook_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Timeline", command=self.show_evidence_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Matrix", command=self.show_device_evidence_matrix_from_gui).pack(side="left", padx=4)
@@ -22429,7 +22429,7 @@ class ImouseGui(tk.Tk):
                 evidence_path=recorder.path,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Issue triage export failed: {exc}")
+            messagebox.showerror("iMouse", f"Issue triage export 失败: {exc}")
             return
         line = issue_triage_brief(rows)
         self._log(f"{line}; artifact={out_path}")
@@ -22467,7 +22467,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, recorder, _readiness_report = self._rerun_playbook_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Rerun playbook failed: {exc}")
+            messagebox.showerror("iMouse", f"Rerun playbook 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -22542,8 +22542,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _recorder, _readiness = self._rerun_playbook_context()
             except Exception as exc:
-                status_var.set(f"Rerun refresh failed: {exc}")
-                self._log(f"Rerun playbook refresh failed: {exc}")
+                status_var.set(f"Rerun refresh 失败: {exc}")
+                self._log(f"Rerun playbook refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(rerun_playbook_brief(refreshed, stage=stage))
@@ -22563,13 +22563,13 @@ class ImouseGui(tk.Tk):
             self._log(f"Rerun action {row.get('category', '')}: {row.get('gui_action', '')}")
             method()
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_rerun_playbook_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_rerun_playbook_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left", padx=4)
         ttk.Button(footer, text="Triage", command=self.show_issue_triage_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Timeline", command=self.show_evidence_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Matrix", command=self.show_device_evidence_matrix_from_gui).pack(side="left", padx=4)
-        ttk.Button(footer, text="Review", command=self.write_evidence_review).pack(side="left", padx=4)
+        ttk.Button(footer, text="审查", command=self.write_evidence_review).pack(side="left", padx=4)
         ttk.Label(
             footer,
             text="Rerun is a decision guide; JSONL evidence, Acceptance, Readiness, and manual observation still decide claims.",
@@ -22589,7 +22589,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Rerun playbook export failed: {exc}")
+            messagebox.showerror("iMouse", f"Rerun playbook export 失败: {exc}")
             return
         line = rerun_playbook_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -22632,7 +22632,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, recorder, _readiness_report = self._recovery_drill_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Recovery drill failed: {exc}")
+            messagebox.showerror("iMouse", f"Recovery drill 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -22707,8 +22707,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _recorder, _readiness = self._recovery_drill_context()
             except Exception as exc:
-                status_var.set(f"Recovery refresh failed: {exc}")
-                self._log(f"Recovery drill refresh failed: {exc}")
+                status_var.set(f"Recovery refresh 失败: {exc}")
+                self._log(f"Recovery drill refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(recovery_drill_brief(refreshed, stage=stage))
@@ -22767,8 +22767,8 @@ class ImouseGui(tk.Tk):
             )
             refresh()
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_recovery_drill_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_recovery_drill_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left", padx=4)
         ttk.Button(footer, text="Record Pass", command=lambda: record_selected("pass")).pack(side="left", padx=4)
         ttk.Button(footer, text="Record Fail", command=lambda: record_selected("fail")).pack(side="left", padx=4)
@@ -22795,7 +22795,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Recovery drill export failed: {exc}")
+            messagebox.showerror("iMouse", f"Recovery drill export 失败: {exc}")
             return
         line = recovery_drill_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -22889,7 +22889,7 @@ class ImouseGui(tk.Tk):
                 write_decision_template(path, run_id=run_id, devices=self._selected_device_ids())
             self.route_decision_path.set(str(path))
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Live probe prepare failed: {exc}")
+            messagebox.showerror("iMouse", f"Live probe prepare 失败: {exc}")
             return
         self._log(
             "Live probe prepared: "
@@ -22987,8 +22987,8 @@ class ImouseGui(tk.Tk):
         try:
             rows = self._live_probe_rows()
         except Exception as exc:
-            self.live_probe_status.set(f"Live probe refresh failed: {exc}")
-            self._log(f"Live probe refresh failed: {exc}")
+            self.live_probe_status.set(f"Live probe refresh 失败: {exc}")
+            self._log(f"Live probe refresh 失败: {exc}")
             return
         self.live_probe_tree.delete(*self.live_probe_tree.get_children())
         for row in rows:
@@ -23022,7 +23022,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Live probe report failed: {exc}")
+            messagebox.showerror("iMouse", f"Live probe report 失败: {exc}")
             return
         line = live_probe_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -23070,7 +23070,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._local_verification_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Local verification failed: {exc}")
+            messagebox.showerror("iMouse", f"Local verification 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -23135,8 +23135,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._local_verification_context()
             except Exception as exc:
-                status_var.set(f"Local verification refresh failed: {exc}")
-                self._log(f"Local verification refresh failed: {exc}")
+                status_var.set(f"Local verification refresh 失败: {exc}")
+                self._log(f"Local verification refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(local_verification_brief(refreshed, stage=stage))
@@ -23156,8 +23156,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_local_verification_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_local_verification_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Verify", command=self.show_verification_walkthrough_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Doctor", command=self.run_preflight_doctor).pack(side="left", padx=4)
         ttk.Button(footer, text="Receiver", command=self.show_receiver_route_gate_from_gui).pack(side="left", padx=4)
@@ -23183,7 +23183,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Local verification export failed: {exc}")
+            messagebox.showerror("iMouse", f"Local verification export 失败: {exc}")
             return
         line = local_verification_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -23253,7 +23253,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._receiver_route_gate_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver route gate failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver route gate 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -23314,8 +23314,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._receiver_route_gate_context()
             except Exception as exc:
-                status_var.set(f"Receiver route gate refresh failed: {exc}")
-                self._log(f"Receiver route gate refresh failed: {exc}")
+                status_var.set(f"Receiver route gate refresh 失败: {exc}")
+                self._log(f"Receiver route gate refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(receiver_route_gate_brief(refreshed, stage=stage))
@@ -23335,8 +23335,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_receiver_route_gate_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_receiver_route_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Edit Route", command=self.edit_route_decision_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Doctor", command=self.run_preflight_doctor).pack(side="left", padx=4)
         ttk.Button(footer, text="Shot Bench", command=self.run_capture_quality_bench_from_gui).pack(side="left", padx=4)
@@ -23365,7 +23365,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver route gate export failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver route gate export 失败: {exc}")
             return
         line = receiver_route_gate_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -23435,7 +23435,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._receiver_setup_wizard_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver setup wizard failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver setup wizard 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -23514,8 +23514,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._receiver_setup_wizard_context()
             except Exception as exc:
-                status_var.set(f"Receiver setup wizard refresh failed: {exc}")
-                self._log(f"Receiver setup wizard refresh failed: {exc}")
+                status_var.set(f"Receiver setup wizard refresh 失败: {exc}")
+                self._log(f"Receiver setup wizard refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(receiver_setup_wizard_brief(refreshed, stage=stage))
@@ -23535,8 +23535,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_receiver_setup_wizard_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_receiver_setup_wizard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Edit Route", command=self.edit_route_decision_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Receiver", command=self.show_receiver_route_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Doctor", command=self.run_preflight_doctor).pack(side="left", padx=4)
@@ -23565,7 +23565,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver setup wizard export failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver setup wizard export 失败: {exc}")
             return
         line = receiver_setup_wizard_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -23636,7 +23636,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._receiver_evidence_checklist_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver evidence checklist failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver evidence checklist 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -23712,8 +23712,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._receiver_evidence_checklist_context()
             except Exception as exc:
-                status_var.set(f"Receiver evidence checklist refresh failed: {exc}")
-                self._log(f"Receiver evidence checklist refresh failed: {exc}")
+                status_var.set(f"Receiver evidence checklist refresh 失败: {exc}")
+                self._log(f"Receiver evidence checklist refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(receiver_evidence_checklist_brief(refreshed, stage=stage))
@@ -23733,8 +23733,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_receiver_evidence_checklist_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_receiver_evidence_checklist_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Rx Setup", command=self.show_receiver_setup_wizard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Receiver", command=self.show_receiver_route_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Doctor", command=self.run_preflight_doctor).pack(side="left", padx=4)
@@ -23765,7 +23765,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver evidence checklist export failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver evidence checklist export 失败: {exc}")
             return
         line = receiver_evidence_checklist_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -23835,7 +23835,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._receiver_candidate_scorecard_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver candidate scorecard failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver candidate scorecard 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -23917,8 +23917,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._receiver_candidate_scorecard_context()
             except Exception as exc:
-                status_var.set(f"Receiver candidate scorecard refresh failed: {exc}")
-                self._log(f"Receiver candidate scorecard refresh failed: {exc}")
+                status_var.set(f"Receiver candidate scorecard refresh 失败: {exc}")
+                self._log(f"Receiver candidate scorecard refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(receiver_candidate_scorecard_brief(refreshed, stage=stage))
@@ -23938,8 +23938,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_receiver_candidate_scorecard_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_receiver_candidate_scorecard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Routes", command=self.show_mainstream_route_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Receiver", command=self.show_receiver_route_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Rx Bootstrap", command=self.show_receiver_bootstrap_from_gui).pack(side="left", padx=4)
@@ -23970,7 +23970,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Receiver candidate scorecard export failed: {exc}")
+            messagebox.showerror("iMouse", f"Receiver candidate scorecard export 失败: {exc}")
             return
         line = receiver_candidate_scorecard_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -24025,7 +24025,7 @@ class ImouseGui(tk.Tk):
                         fields[key].set(selected)
                         if not fields["window_process"].get().strip():
                             fields["window_process"].set(Path(selected).name)
-                ttk.Button(dialog, text="Browse", command=pick).grid(row=row, column=2, sticky="w", padx=4, pady=4)
+                ttk.Button(dialog, text="浏览", command=pick).grid(row=row, column=2, sticky="w", padx=4, pady=4)
 
         add_row(1, "Route", "route", values=("windows_receiver", "wired", "capture_card", "uxplay"))
         add_row(2, "Receiver path", "receiver_path", browse=True)
@@ -24072,7 +24072,7 @@ class ImouseGui(tk.Tk):
                 self.route_decision_path.set(str(decision_path))
                 self._store_probe_report("route", report.get("route_decision", {}))
             except Exception as exc:
-                messagebox.showerror("iMouse", f"Receiver bootstrap failed: {exc}")
+                messagebox.showerror("iMouse", f"Receiver bootstrap 失败: {exc}")
                 return
             line = (
                 f"Receiver bootstrap: preflight={report.get('ok_for_receiver_preflight')}, "
@@ -24148,7 +24148,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._field_runbook_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field runbook failed: {exc}")
+            messagebox.showerror("iMouse", f"Field runbook 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -24202,14 +24202,14 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._field_runbook_context()
             except Exception as exc:
-                status_var.set(f"Field runbook refresh failed: {exc}")
-                self._log(f"Field runbook refresh failed: {exc}")
+                status_var.set(f"Field runbook refresh 失败: {exc}")
+                self._log(f"Field runbook refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(field_runbook_brief(refreshed, stage=stage))
 
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left")
-        ttk.Button(footer, text="Export", command=self.write_field_runbook_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left")
+        ttk.Button(footer, text="导出", command=self.write_field_runbook_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="SOP Board", command=self.show_stage_sop_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Dashboard", command=self.show_stage_dashboard_from_gui).pack(side="left", padx=4)
         ttk.Label(
@@ -24233,7 +24233,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field runbook export failed: {exc}")
+            messagebox.showerror("iMouse", f"Field runbook export 失败: {exc}")
             return
         line = field_runbook_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -24294,7 +24294,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._p1_trial_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"P1 trial failed: {exc}")
+            messagebox.showerror("iMouse", f"P1 trial 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -24360,8 +24360,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._p1_trial_context()
             except Exception as exc:
-                status_var.set(f"P1 trial refresh failed: {exc}")
-                self._log(f"P1 trial refresh failed: {exc}")
+                status_var.set(f"P1 trial refresh 失败: {exc}")
+                self._log(f"P1 trial refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(p1_trial_brief(refreshed))
@@ -24397,8 +24397,8 @@ class ImouseGui(tk.Tk):
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
         ttk.Button(footer, text="Record Pass", command=lambda: record_selected("pass")).pack(side="left", padx=4)
         ttk.Button(footer, text="Record Fail", command=lambda: record_selected("fail")).pack(side="left", padx=4)
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_p1_trial_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_p1_trial_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Ctrl Ledger", command=self.show_control_evidence_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Callback", command=self.show_callback_monitor_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Gap", command=self.write_acceptance_gap_from_gui).pack(side="left", padx=4)
@@ -24421,7 +24421,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"P1 trial export failed: {exc}")
+            messagebox.showerror("iMouse", f"P1 trial export 失败: {exc}")
             return
         line = p1_trial_brief(rows)
         self._log(f"{line}; artifact={out_path}")
@@ -24511,7 +24511,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report, recorder = self._p1_test_coach_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"P1 test coach failed: {exc}")
+            messagebox.showerror("iMouse", f"P1 test coach 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -24578,8 +24578,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness, _recorder = self._p1_test_coach_context()
             except Exception as exc:
-                status_var.set(f"P1 coach refresh failed: {exc}")
-                self._log(f"P1 test coach refresh failed: {exc}")
+                status_var.set(f"P1 coach refresh 失败: {exc}")
+                self._log(f"P1 test coach refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(p1_test_coach_brief(refreshed, stage=stage))
@@ -24599,8 +24599,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_p1_test_coach_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_p1_test_coach_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Home", command=self.show_operator_home_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Action Map", command=self.show_xp_public_source_action_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Transcript", command=self.show_p1_field_transcript_from_gui).pack(side="left", padx=4)
@@ -24627,7 +24627,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"P1 test coach export failed: {exc}")
+            messagebox.showerror("iMouse", f"P1 test coach export 失败: {exc}")
             return
         line = p1_test_coach_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -24662,7 +24662,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report, recorder = self._p1_field_transcript_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"P1 field transcript failed: {exc}")
+            messagebox.showerror("iMouse", f"P1 field transcript 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -24744,8 +24744,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness, _recorder = self._p1_field_transcript_context()
             except Exception as exc:
-                status_var.set(f"P1 field transcript refresh failed: {exc}")
-                self._log(f"P1 field transcript refresh failed: {exc}")
+                status_var.set(f"P1 field transcript refresh 失败: {exc}")
+                self._log(f"P1 field transcript refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(p1_field_transcript_brief(refreshed, stage=stage))
@@ -24809,8 +24809,8 @@ class ImouseGui(tk.Tk):
         ttk.Button(footer, text="Prefill Manual", command=lambda: prefill_manual("pass")).pack(side="left", padx=4)
         ttk.Button(footer, text="Record Pass", command=lambda: record_manual_from_transcript("pass")).pack(side="left", padx=4)
         ttk.Button(footer, text="Record Fail", command=lambda: record_manual_from_transcript("fail")).pack(side="left", padx=4)
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_p1_field_transcript_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_p1_field_transcript_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Coach", command=self.show_p1_test_coach_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Rx Setup", command=self.show_receiver_setup_wizard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="P1 Trial", command=self.show_p1_trial_from_gui).pack(side="left", padx=4)
@@ -24834,7 +24834,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"P1 field transcript export failed: {exc}")
+            messagebox.showerror("iMouse", f"P1 field transcript export 失败: {exc}")
             return
         line = p1_field_transcript_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -24874,7 +24874,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report, recorder = self._control_response_bench_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Control response bench failed: {exc}")
+            messagebox.showerror("iMouse", f"Control response bench 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -24937,8 +24937,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness, _recorder = self._control_response_bench_context()
             except Exception as exc:
-                status_var.set(f"Control bench refresh failed: {exc}")
-                self._log(f"Control response bench refresh failed: {exc}")
+                status_var.set(f"Control bench refresh 失败: {exc}")
+                self._log(f"Control response bench refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(control_response_bench_brief(refreshed, stage=stage))
@@ -24958,8 +24958,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_control_response_bench_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_control_response_bench_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Ledger", command=self.show_control_evidence_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="P1 Trial", command=self.show_p1_trial_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Timeline", command=self.show_evidence_timeline_from_gui).pack(side="left", padx=4)
@@ -24984,7 +24984,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Control bench export failed: {exc}")
+            messagebox.showerror("iMouse", f"Control bench export 失败: {exc}")
             return
         line = control_response_bench_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25051,7 +25051,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report, recorder = self._control_evidence_ledger_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Control evidence ledger failed: {exc}")
+            messagebox.showerror("iMouse", f"Control evidence ledger 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -25121,8 +25121,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness, _recorder = self._control_evidence_ledger_context()
             except Exception as exc:
-                status_var.set(f"Control ledger refresh failed: {exc}")
-                self._log(f"Control evidence ledger refresh failed: {exc}")
+                status_var.set(f"Control ledger refresh 失败: {exc}")
+                self._log(f"Control evidence ledger refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(control_evidence_ledger_brief(refreshed, stage=stage))
@@ -25160,8 +25160,8 @@ class ImouseGui(tk.Tk):
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
         ttk.Button(footer, text="Record Pass", command=lambda: record_selected("pass")).pack(side="left", padx=4)
         ttk.Button(footer, text="Record Fail", command=lambda: record_selected("fail")).pack(side="left", padx=4)
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_control_evidence_ledger_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_control_evidence_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="P1 Trial", command=self.show_p1_trial_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Control Bench", command=self.show_control_response_bench_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Acceptance", command=self.run_acceptance_from_gui).pack(side="left", padx=4)
@@ -25187,7 +25187,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Control evidence ledger export failed: {exc}")
+            messagebox.showerror("iMouse", f"Control evidence ledger export 失败: {exc}")
             return
         line = control_evidence_ledger_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25223,7 +25223,7 @@ class ImouseGui(tk.Tk):
         try:
             rows = self._stage_sop_rows()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"SOP board failed: {exc}")
+            messagebox.showerror("iMouse", f"SOP board 失败: {exc}")
             return
         stage = self.field_stage.get().strip().lower() or "p1"
 
@@ -25283,8 +25283,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed = self._stage_sop_rows()
             except Exception as exc:
-                status_var.set(f"SOP board refresh failed: {exc}")
-                self._log(f"SOP board refresh failed: {exc}")
+                status_var.set(f"SOP board refresh 失败: {exc}")
+                self._log(f"SOP board refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(stage_sop_brief(refreshed, stage=stage))
@@ -25304,8 +25304,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_stage_sop_board_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_stage_sop_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Session", command=self.write_gui_session_snapshot_from_gui).pack(side="left", padx=4)
         ttk.Label(
             footer,
@@ -25327,7 +25327,7 @@ class ImouseGui(tk.Tk):
                 evidence_path=recorder.path,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"SOP board export failed: {exc}")
+            messagebox.showerror("iMouse", f"SOP board export 失败: {exc}")
             return
         line = stage_sop_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25428,8 +25428,8 @@ class ImouseGui(tk.Tk):
             try:
                 rows, _readiness = self._stage_dashboard_context()
             except Exception as exc:
-                status_var.set(f"Refresh failed: {exc}")
-                self._log(f"Stage dashboard refresh failed: {exc}")
+                status_var.set(f"Refresh 失败: {exc}")
+                self._log(f"Stage dashboard refresh 失败: {exc}")
                 return
             tree.delete(*tree.get_children())
             for row in rows:
@@ -25453,14 +25453,14 @@ class ImouseGui(tk.Tk):
             status_var.set(line)
             self._log(line)
 
-        ttk.Button(footer, text="Refresh", command=refresh).grid(row=0, column=1, padx=(8, 0), sticky="e")
-        ttk.Button(footer, text="Export", command=self.write_stage_dashboard_from_gui).grid(
+        ttk.Button(footer, text="刷新", command=refresh).grid(row=0, column=1, padx=(8, 0), sticky="e")
+        ttk.Button(footer, text="导出", command=self.write_stage_dashboard_from_gui).grid(
             row=0, column=2, padx=(8, 0), sticky="e"
         )
         ttk.Button(footer, text="Pack", command=self.write_evidence_pack_from_gui).grid(
             row=0, column=3, padx=(8, 0), sticky="e"
         )
-        ttk.Button(footer, text="Close", command=dialog.destroy).grid(row=0, column=4, padx=(8, 0), sticky="e")
+        ttk.Button(footer, text="关闭", command=dialog.destroy).grid(row=0, column=4, padx=(8, 0), sticky="e")
         refresh()
 
     def write_stage_dashboard_from_gui(self) -> None:
@@ -25478,7 +25478,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Stage dashboard export failed: {exc}")
+            messagebox.showerror("iMouse", f"Stage dashboard export 失败: {exc}")
             return
         line = stage_dashboard_brief(rows, target_stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25508,7 +25508,7 @@ class ImouseGui(tk.Tk):
                 stage=stage,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Evidence pack failed: {exc}")
+            messagebox.showerror("iMouse", f"Evidence pack 失败: {exc}")
             return
         line = gui_evidence_pack_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25612,7 +25612,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._operator_home_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Operator home failed: {exc}")
+            messagebox.showerror("iMouse", f"Operator home 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -25675,8 +25675,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._operator_home_context()
             except Exception as exc:
-                status_var.set(f"Operator home refresh failed: {exc}")
-                self._log(f"Operator home refresh failed: {exc}")
+                status_var.set(f"Operator home refresh 失败: {exc}")
+                self._log(f"Operator home refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(operator_home_brief(refreshed, stage=stage))
@@ -25696,8 +25696,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_operator_home_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_operator_home_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Start Pack", command=self.show_first_run_packet_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Proof Map", command=self.show_acceptance_proof_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Claim Scope", command=self.show_claim_scope_from_gui).pack(side="left", padx=4)
@@ -25728,7 +25728,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Operator home export failed: {exc}")
+            messagebox.showerror("iMouse", f"Operator home export 失败: {exc}")
             return
         line = operator_home_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25811,7 +25811,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._gui_control_center_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Control center failed: {exc}")
+            messagebox.showerror("iMouse", f"Control center 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -25868,8 +25868,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._gui_control_center_context()
             except Exception as exc:
-                status_var.set(f"Control center refresh failed: {exc}")
-                self._log(f"Control center refresh failed: {exc}")
+                status_var.set(f"Control center refresh 失败: {exc}")
+                self._log(f"Control center refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(gui_control_center_brief(refreshed, stage=stage))
@@ -25889,8 +25889,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_gui_control_center_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_gui_control_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="SOP Board", command=self.show_stage_sop_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Pack", command=self.write_evidence_pack_from_gui).pack(side="left", padx=4)
         ttk.Label(
@@ -25914,7 +25914,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Control center export failed: {exc}")
+            messagebox.showerror("iMouse", f"Control center export 失败: {exc}")
             return
         line = gui_control_center_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -25985,7 +25985,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._gui_knowledge_center_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Knowledge center failed: {exc}")
+            messagebox.showerror("iMouse", f"Knowledge center 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -26042,8 +26042,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._gui_knowledge_center_context()
             except Exception as exc:
-                status_var.set(f"Knowledge refresh failed: {exc}")
-                self._log(f"Knowledge center refresh failed: {exc}")
+                status_var.set(f"Knowledge refresh 失败: {exc}")
+                self._log(f"Knowledge center refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(gui_knowledge_center_brief(refreshed, stage=stage))
@@ -26063,8 +26063,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_gui_knowledge_center_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_gui_knowledge_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Center", command=self.show_gui_control_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="XP Gap", command=self.write_xp_gap_audit_from_gui).pack(side="left", padx=4)
@@ -26089,7 +26089,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Knowledge center export failed: {exc}")
+            messagebox.showerror("iMouse", f"Knowledge center export 失败: {exc}")
             return
         line = gui_knowledge_center_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -26150,7 +26150,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._industry_current_snapshot_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Industry snapshot failed: {exc}")
+            messagebox.showerror("iMouse", f"Industry snapshot 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -26213,8 +26213,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._industry_current_snapshot_context()
             except Exception as exc:
-                status_var.set(f"Industry snapshot refresh failed: {exc}")
-                self._log(f"Industry snapshot refresh failed: {exc}")
+                status_var.set(f"Industry snapshot refresh 失败: {exc}")
+                self._log(f"Industry snapshot refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(industry_current_snapshot_brief(refreshed, stage=stage))
@@ -26234,8 +26234,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_industry_current_snapshot_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_industry_current_snapshot_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Procure", command=self.show_industry_route_procurement_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Routes", command=self.show_mainstream_route_matrix_from_gui).pack(side="left", padx=4)
@@ -26262,7 +26262,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Industry snapshot export failed: {exc}")
+            messagebox.showerror("iMouse", f"Industry snapshot export 失败: {exc}")
             return
         line = industry_current_snapshot_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -26342,7 +26342,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._industry_sop_radar_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Industry SOP radar failed: {exc}")
+            messagebox.showerror("iMouse", f"Industry SOP radar 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -26405,8 +26405,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._industry_sop_radar_context()
             except Exception as exc:
-                status_var.set(f"Industry refresh failed: {exc}")
-                self._log(f"Industry SOP radar refresh failed: {exc}")
+                status_var.set(f"Industry refresh 失败: {exc}")
+                self._log(f"Industry SOP radar refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(industry_sop_radar_brief(refreshed, stage=stage))
@@ -26426,8 +26426,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_industry_sop_radar_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_industry_sop_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Snapshot", command=self.show_industry_current_snapshot_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Knowledge", command=self.show_gui_knowledge_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Procure", command=self.show_industry_route_procurement_from_gui).pack(side="left", padx=4)
@@ -26457,7 +26457,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Industry SOP radar export failed: {exc}")
+            messagebox.showerror("iMouse", f"Industry SOP radar export 失败: {exc}")
             return
         line = industry_sop_radar_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -26537,7 +26537,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._industry_route_procurement_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route procurement SOP failed: {exc}")
+            messagebox.showerror("iMouse", f"Route procurement SOP 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -26602,8 +26602,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._industry_route_procurement_context()
             except Exception as exc:
-                status_var.set(f"Route procurement refresh failed: {exc}")
-                self._log(f"Route procurement refresh failed: {exc}")
+                status_var.set(f"Route procurement refresh 失败: {exc}")
+                self._log(f"Route procurement refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(industry_route_procurement_brief(refreshed, stage=stage))
@@ -26623,8 +26623,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_industry_route_procurement_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_industry_route_procurement_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Snapshot", command=self.show_industry_current_snapshot_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Routes", command=self.show_mainstream_route_matrix_from_gui).pack(side="left", padx=4)
@@ -26653,7 +26653,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route procurement export failed: {exc}")
+            messagebox.showerror("iMouse", f"Route procurement export 失败: {exc}")
             return
         line = industry_route_procurement_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -26722,7 +26722,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._mainstream_route_matrix_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route matrix failed: {exc}")
+            messagebox.showerror("iMouse", f"Route matrix 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -26785,8 +26785,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._mainstream_route_matrix_context()
             except Exception as exc:
-                status_var.set(f"Route matrix refresh failed: {exc}")
-                self._log(f"Route matrix refresh failed: {exc}")
+                status_var.set(f"Route matrix refresh 失败: {exc}")
+                self._log(f"Route matrix refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(mainstream_route_matrix_brief(refreshed, stage=stage))
@@ -26806,8 +26806,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_mainstream_route_matrix_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_mainstream_route_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Knowledge", command=self.show_gui_knowledge_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Procure", command=self.show_industry_route_procurement_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Edit Route", command=self.edit_route_decision_from_gui).pack(side="left", padx=4)
@@ -26833,7 +26833,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route matrix export failed: {exc}")
+            messagebox.showerror("iMouse", f"Route matrix export 失败: {exc}")
             return
         line = mainstream_route_matrix_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -26903,7 +26903,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_architecture_map_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP architecture map failed: {exc}")
+            messagebox.showerror("iMouse", f"XP architecture map 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -26968,8 +26968,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_architecture_map_context()
             except Exception as exc:
-                status_var.set(f"XP architecture refresh failed: {exc}")
-                self._log(f"XP architecture refresh failed: {exc}")
+                status_var.set(f"XP architecture refresh 失败: {exc}")
+                self._log(f"XP architecture refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_architecture_map_brief(refreshed, stage=stage))
@@ -26989,8 +26989,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_architecture_map_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_architecture_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="XP Lab", command=self.show_xp_hardware_lab_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Core", command=self.show_xp_core_function_matrix_from_gui).pack(side="left", padx=4)
@@ -27019,7 +27019,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP architecture export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP architecture export 失败: {exc}")
             return
         line = xp_architecture_map_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -27098,7 +27098,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_hardware_lab_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP hardware lab failed: {exc}")
+            messagebox.showerror("iMouse", f"XP hardware lab 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -27161,8 +27161,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_hardware_lab_context()
             except Exception as exc:
-                status_var.set(f"XP hardware lab refresh failed: {exc}")
-                self._log(f"XP hardware lab refresh failed: {exc}")
+                status_var.set(f"XP hardware lab refresh 失败: {exc}")
+                self._log(f"XP hardware lab refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_hardware_lab_brief(refreshed, stage=stage))
@@ -27182,8 +27182,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_hardware_lab_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_hardware_lab_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="XP Arch", command=self.show_xp_architecture_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Rx Score", command=self.show_receiver_candidate_scorecard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Bench", command=self.show_hardware_bench_from_gui).pack(side="left", padx=4)
@@ -27211,7 +27211,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP hardware lab export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP hardware lab export 失败: {exc}")
             return
         line = xp_hardware_lab_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -27289,7 +27289,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_core_function_matrix_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP core function matrix failed: {exc}")
+            messagebox.showerror("iMouse", f"XP core function matrix 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -27352,8 +27352,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_core_function_matrix_context()
             except Exception as exc:
-                status_var.set(f"XP core matrix refresh failed: {exc}")
-                self._log(f"XP core matrix refresh failed: {exc}")
+                status_var.set(f"XP core matrix refresh 失败: {exc}")
+                self._log(f"XP core matrix refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_core_function_matrix_brief(refreshed, stage=stage))
@@ -27373,8 +27373,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_core_function_matrix_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_core_function_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="API Cov", command=self.show_xp_api_coverage_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Script Cov", command=self.show_script_coverage_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Proof Map", command=self.show_acceptance_proof_map_from_gui).pack(side="left", padx=4)
@@ -27407,7 +27407,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP core function matrix export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP core function matrix export 失败: {exc}")
             return
         line = xp_core_function_matrix_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -27490,7 +27490,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_api_coverage_board_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP API coverage board failed: {exc}")
+            messagebox.showerror("iMouse", f"XP API coverage board 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -27557,8 +27557,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_api_coverage_board_context()
             except Exception as exc:
-                status_var.set(f"XP API coverage refresh failed: {exc}")
-                self._log(f"XP API coverage refresh failed: {exc}")
+                status_var.set(f"XP API coverage refresh 失败: {exc}")
+                self._log(f"XP API coverage refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_api_coverage_board_brief(refreshed, stage=stage))
@@ -27578,8 +27578,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_api_coverage_board_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_api_coverage_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Core", command=self.show_xp_core_function_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Script Cov", command=self.show_script_coverage_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Proof Map", command=self.show_acceptance_proof_map_from_gui).pack(side="left", padx=4)
@@ -27609,7 +27609,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP API coverage export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP API coverage export 失败: {exc}")
             return
         line = xp_api_coverage_board_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -27680,7 +27680,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._script_coverage_board_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Script coverage board failed: {exc}")
+            messagebox.showerror("iMouse", f"Script coverage board 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -27745,8 +27745,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._script_coverage_board_context()
             except Exception as exc:
-                status_var.set(f"Script coverage refresh failed: {exc}")
-                self._log(f"Script coverage refresh failed: {exc}")
+                status_var.set(f"Script coverage refresh 失败: {exc}")
+                self._log(f"Script coverage refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(script_coverage_board_brief(refreshed, stage=stage))
@@ -27766,8 +27766,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_script_coverage_board_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_script_coverage_board_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Scenario Library", command=self.show_scenario_library_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Dry Run", command=self.run_live_probe_dry_run).pack(side="left", padx=4)
         ttk.Button(footer, text="Proof Map", command=self.show_acceptance_proof_map_from_gui).pack(side="left", padx=4)
@@ -27796,7 +27796,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Script coverage export failed: {exc}")
+            messagebox.showerror("iMouse", f"Script coverage export 失败: {exc}")
             return
         line = script_coverage_board_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -27882,7 +27882,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._acceptance_proof_map_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Proof map failed: {exc}")
+            messagebox.showerror("iMouse", f"Proof map 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -27945,8 +27945,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._acceptance_proof_map_context()
             except Exception as exc:
-                status_var.set(f"Proof map refresh failed: {exc}")
-                self._log(f"Proof map refresh failed: {exc}")
+                status_var.set(f"Proof map refresh 失败: {exc}")
+                self._log(f"Proof map refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(acceptance_proof_map_brief(refreshed, stage=stage))
@@ -27969,8 +27969,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_acceptance_proof_map_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_acceptance_proof_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Acceptance", command=self.run_acceptance_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Readiness", command=self.run_readiness_audit).pack(side="left", padx=4)
         ttk.Button(footer, text="Ctrl Ledger", command=self.show_control_evidence_ledger_from_gui).pack(side="left", padx=4)
@@ -27998,7 +27998,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Proof map export failed: {exc}")
+            messagebox.showerror("iMouse", f"Proof map export 失败: {exc}")
             return
         line = acceptance_proof_map_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -28099,7 +28099,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._claim_scope_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Claim scope failed: {exc}")
+            messagebox.showerror("iMouse", f"Claim scope 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -28160,8 +28160,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._claim_scope_context()
             except Exception as exc:
-                status_var.set(f"Claim scope refresh failed: {exc}")
-                self._log(f"Claim scope refresh failed: {exc}")
+                status_var.set(f"Claim scope refresh 失败: {exc}")
+                self._log(f"Claim scope refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(claim_scope_brief(refreshed, stage=stage))
@@ -28181,8 +28181,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_claim_scope_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_claim_scope_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Readiness", command=self.run_readiness_audit).pack(side="left", padx=4)
         ttk.Button(footer, text="Proof Map", command=self.show_acceptance_proof_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Goals", command=self.show_gui_goal_gate_from_gui).pack(side="left", padx=4)
@@ -28209,7 +28209,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Claim scope export failed: {exc}")
+            messagebox.showerror("iMouse", f"Claim scope export 失败: {exc}")
             return
         line = claim_scope_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -28292,7 +28292,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_event_error_contract_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP event/error contract failed: {exc}")
+            messagebox.showerror("iMouse", f"XP event/error contract 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -28355,8 +28355,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_event_error_contract_context()
             except Exception as exc:
-                status_var.set(f"XP event/error contract refresh failed: {exc}")
-                self._log(f"XP event/error contract refresh failed: {exc}")
+                status_var.set(f"XP event/error contract refresh 失败: {exc}")
+                self._log(f"XP event/error contract refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_event_error_contract_brief(refreshed, stage=stage))
@@ -28376,8 +28376,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_event_error_contract_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_event_error_contract_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Callback", command=self.show_callback_monitor_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Attach Log", command=self.attach_callback_log_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="API Cov", command=self.show_xp_api_coverage_board_from_gui).pack(side="left", padx=4)
@@ -28405,7 +28405,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP event/error contract export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP event/error contract export 失败: {exc}")
             return
         line = xp_event_error_contract_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -28486,7 +28486,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._verification_walkthrough_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Verification walkthrough failed: {exc}")
+            messagebox.showerror("iMouse", f"Verification walkthrough 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -28551,8 +28551,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._verification_walkthrough_context()
             except Exception as exc:
-                status_var.set(f"Verification walkthrough refresh failed: {exc}")
-                self._log(f"Verification walkthrough refresh failed: {exc}")
+                status_var.set(f"Verification walkthrough refresh 失败: {exc}")
+                self._log(f"Verification walkthrough refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(verification_walkthrough_brief(refreshed, stage=stage))
@@ -28572,8 +28572,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_verification_walkthrough_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_verification_walkthrough_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Start Pack", command=self.show_first_run_packet_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Core", command=self.show_xp_core_function_matrix_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Roadmap", command=self.show_xp_roadmap_from_gui).pack(side="left", padx=4)
@@ -28600,7 +28600,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Verification walkthrough export failed: {exc}")
+            messagebox.showerror("iMouse", f"Verification walkthrough export 失败: {exc}")
             return
         line = verification_walkthrough_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -28672,7 +28672,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._pitfall_library_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Pitfall library failed: {exc}")
+            messagebox.showerror("iMouse", f"Pitfall library 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -28733,8 +28733,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._pitfall_library_context()
             except Exception as exc:
-                status_var.set(f"Pitfall refresh failed: {exc}")
-                self._log(f"Pitfall library refresh failed: {exc}")
+                status_var.set(f"Pitfall refresh 失败: {exc}")
+                self._log(f"Pitfall library refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(pitfall_library_brief(refreshed, stage=stage))
@@ -28754,8 +28754,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_pitfall_library_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_pitfall_library_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Knowledge", command=self.show_gui_knowledge_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Triage", command=self.show_issue_triage_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Runbook", command=self.show_field_runbook_from_gui).pack(side="left", padx=4)
@@ -28780,7 +28780,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Pitfall library export failed: {exc}")
+            messagebox.showerror("iMouse", f"Pitfall library export 失败: {exc}")
             return
         line = pitfall_library_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -28853,7 +28853,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._sop_problem_ledger_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"SOP problem ledger failed: {exc}")
+            messagebox.showerror("iMouse", f"SOP problem ledger 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -28924,8 +28924,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._sop_problem_ledger_context()
             except Exception as exc:
-                status_var.set(f"SOP problem ledger refresh failed: {exc}")
-                self._log(f"SOP problem ledger refresh failed: {exc}")
+                status_var.set(f"SOP problem ledger refresh 失败: {exc}")
+                self._log(f"SOP problem ledger refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(sop_problem_ledger_brief(refreshed, stage=stage))
@@ -28945,8 +28945,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_sop_problem_ledger_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_sop_problem_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Pitfalls", command=self.show_pitfall_library_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Triage", command=self.show_issue_triage_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Rerun", command=self.show_rerun_playbook_from_gui).pack(side="left", padx=4)
@@ -28972,7 +28972,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"SOP problem ledger export failed: {exc}")
+            messagebox.showerror("iMouse", f"SOP problem ledger export 失败: {exc}")
             return
         line = sop_problem_ledger_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -29042,7 +29042,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_source_refresh_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP source refresh failed: {exc}")
+            messagebox.showerror("iMouse", f"XP source refresh 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -29109,8 +29109,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_source_refresh_context()
             except Exception as exc:
-                status_var.set(f"XP source refresh failed: {exc}")
-                self._log(f"XP source refresh failed: {exc}")
+                status_var.set(f"XP source refresh 失败: {exc}")
+                self._log(f"XP source refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_source_refresh_brief(refreshed, stage=stage))
@@ -29130,8 +29130,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_source_refresh_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_source_refresh_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Src Audit", command=self.show_xp_public_source_audit_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Pkg Guard", command=self.show_xp_package_namespace_guard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
@@ -29161,7 +29161,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP source refresh export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP source refresh export 失败: {exc}")
             return
         line = xp_source_refresh_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -29178,7 +29178,7 @@ class ImouseGui(tk.Tk):
         try:
             report = self._xp_public_source_audit_report(offline=True)
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP public source audit failed: {exc}")
+            messagebox.showerror("iMouse", f"XP public source audit 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -29248,8 +29248,8 @@ class ImouseGui(tk.Tk):
             try:
                 next_report = self._xp_public_source_audit_report(offline=offline)
             except Exception as exc:
-                status_var.set(f"XP public source audit failed: {exc}")
-                self._log(f"XP public source audit failed: {exc}")
+                status_var.set(f"XP public source audit 失败: {exc}")
+                self._log(f"XP public source audit 失败: {exc}")
                 return
             report_box["report"] = next_report
             render(next_report)
@@ -29260,7 +29260,7 @@ class ImouseGui(tk.Tk):
 
         ttk.Button(footer, text="Run Offline", command=lambda: run_audit(offline=True)).pack(side="left")
         ttk.Button(footer, text="Run Live", command=lambda: run_audit(offline=False)).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=export_current).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=export_current).pack(side="left", padx=4)
         ttk.Button(footer, text="Pkg Guard", command=self.show_xp_package_namespace_guard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Src Refresh", command=self.show_xp_source_refresh_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
@@ -29283,7 +29283,7 @@ class ImouseGui(tk.Tk):
                 Path("evidence") / f"{recorder.safe_run_id}_{stage}_xp_public_source_audit.md",
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP public source audit export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP public source audit export 失败: {exc}")
             return
         line = source_audit_brief(next_report)
         self._log(f"{line}; artifact={out_path}")
@@ -29306,7 +29306,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, report = self._xp_package_namespace_guard_context(offline=True)
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP package namespace guard failed: {exc}")
+            messagebox.showerror("iMouse", f"XP package namespace guard 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -29378,8 +29378,8 @@ class ImouseGui(tk.Tk):
             try:
                 next_rows, next_report = self._xp_package_namespace_guard_context(offline=offline)
             except Exception as exc:
-                status_var.set(f"XP package namespace guard failed: {exc}")
-                self._log(f"XP package namespace guard failed: {exc}")
+                status_var.set(f"XP package namespace guard 失败: {exc}")
+                self._log(f"XP package namespace guard 失败: {exc}")
                 return
             rows_box["rows"] = next_rows
             report_box["report"] = next_report
@@ -29409,7 +29409,7 @@ class ImouseGui(tk.Tk):
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
         ttk.Button(footer, text="Run Offline", command=lambda: run_guard(offline=True)).pack(side="left", padx=4)
         ttk.Button(footer, text="Run Live", command=lambda: run_guard(offline=False)).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=export_current).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=export_current).pack(side="left", padx=4)
         ttk.Button(footer, text="Src Audit", command=self.show_xp_public_source_audit_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Src Refresh", command=self.show_xp_source_refresh_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Action Map", command=self.show_xp_public_source_action_map_from_gui).pack(side="left", padx=4)
@@ -29441,7 +29441,7 @@ class ImouseGui(tk.Tk):
                 source_audit_overall=str(next_report.get("overall", "") or ""),
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP package namespace guard export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP package namespace guard export 失败: {exc}")
             return
         line = xp_package_namespace_guard_brief(next_rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -29511,7 +29511,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_public_source_ledger_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP public source ledger failed: {exc}")
+            messagebox.showerror("iMouse", f"XP public source ledger 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -29574,8 +29574,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_public_source_ledger_context()
             except Exception as exc:
-                status_var.set(f"XP public source ledger refresh failed: {exc}")
-                self._log(f"XP public source ledger refresh failed: {exc}")
+                status_var.set(f"XP public source ledger refresh 失败: {exc}")
+                self._log(f"XP public source ledger refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_public_source_ledger_brief(refreshed, stage=stage))
@@ -29595,8 +29595,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Action Map", command=self.show_xp_public_source_action_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Knowledge", command=self.show_gui_knowledge_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
@@ -29625,7 +29625,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP public source ledger export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP public source ledger export 失败: {exc}")
             return
         line = xp_public_source_ledger_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -29695,7 +29695,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_public_source_action_map_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP source action map failed: {exc}")
+            messagebox.showerror("iMouse", f"XP source action map 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -29758,8 +29758,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_public_source_action_map_context()
             except Exception as exc:
-                status_var.set(f"XP source action map refresh failed: {exc}")
-                self._log(f"XP source action map refresh failed: {exc}")
+                status_var.set(f"XP source action map refresh 失败: {exc}")
+                self._log(f"XP source action map refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_public_source_action_map_brief(refreshed, stage=stage))
@@ -29779,8 +29779,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_public_source_action_map_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_public_source_action_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="XP Timeline", command=self.show_xp_iteration_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Home", command=self.show_operator_home_from_gui).pack(side="left", padx=4)
@@ -29807,7 +29807,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP source action map export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP source action map export 失败: {exc}")
             return
         line = xp_public_source_action_map_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -29877,7 +29877,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_iteration_timeline_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP iteration timeline failed: {exc}")
+            messagebox.showerror("iMouse", f"XP iteration timeline 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -29942,8 +29942,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_iteration_timeline_context()
             except Exception as exc:
-                status_var.set(f"XP iteration timeline refresh failed: {exc}")
-                self._log(f"XP iteration timeline refresh failed: {exc}")
+                status_var.set(f"XP iteration timeline refresh 失败: {exc}")
+                self._log(f"XP iteration timeline refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_iteration_timeline_brief(refreshed, stage=stage))
@@ -29963,8 +29963,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_iteration_timeline_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_iteration_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Action Map", command=self.show_xp_public_source_action_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Iter Radar", command=self.show_xp_iteration_radar_from_gui).pack(side="left", padx=4)
@@ -29993,7 +29993,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP iteration timeline export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP iteration timeline export 失败: {exc}")
             return
         line = xp_iteration_timeline_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -30063,7 +30063,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_iteration_radar_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP iteration radar failed: {exc}")
+            messagebox.showerror("iMouse", f"XP iteration radar 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -30124,8 +30124,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_iteration_radar_context()
             except Exception as exc:
-                status_var.set(f"XP iteration radar refresh failed: {exc}")
-                self._log(f"XP iteration radar refresh failed: {exc}")
+                status_var.set(f"XP iteration radar refresh 失败: {exc}")
+                self._log(f"XP iteration radar refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_iteration_radar_brief(refreshed, stage=stage))
@@ -30145,8 +30145,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_iteration_radar_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_iteration_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Knowledge", command=self.show_gui_knowledge_center_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
@@ -30176,7 +30176,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP iteration radar export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP iteration radar export 失败: {exc}")
             return
         line = xp_iteration_radar_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -30246,7 +30246,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_iteration_drill_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP iteration drill failed: {exc}")
+            messagebox.showerror("iMouse", f"XP iteration drill 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -30311,8 +30311,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_iteration_drill_context()
             except Exception as exc:
-                status_var.set(f"XP iteration drill refresh failed: {exc}")
-                self._log(f"XP iteration drill refresh failed: {exc}")
+                status_var.set(f"XP iteration drill refresh 失败: {exc}")
+                self._log(f"XP iteration drill refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_iteration_drill_brief(refreshed, stage=stage))
@@ -30332,8 +30332,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_iteration_drill_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_iteration_drill_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Src Refresh", command=self.show_xp_source_refresh_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Iter Radar", command=self.show_xp_iteration_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="XP Timeline", command=self.show_xp_iteration_timeline_from_gui).pack(side="left", padx=4)
@@ -30368,7 +30368,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP iteration drill export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP iteration drill export 失败: {exc}")
             return
         line = xp_iteration_drill_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -30458,7 +30458,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._xp_roadmap_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP roadmap failed: {exc}")
+            messagebox.showerror("iMouse", f"XP roadmap 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -30523,8 +30523,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._xp_roadmap_context()
             except Exception as exc:
-                status_var.set(f"XP roadmap refresh failed: {exc}")
-                self._log(f"XP roadmap refresh failed: {exc}")
+                status_var.set(f"XP roadmap refresh 失败: {exc}")
+                self._log(f"XP roadmap refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(xp_roadmap_brief(refreshed, stage=stage))
@@ -30544,8 +30544,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_xp_roadmap_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_xp_roadmap_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="XP Timeline", command=self.show_xp_iteration_timeline_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
@@ -30575,7 +30575,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP roadmap export failed: {exc}")
+            messagebox.showerror("iMouse", f"XP roadmap export 失败: {exc}")
             return
         line = xp_roadmap_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -30665,7 +30665,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._gui_goal_gate_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Goal gate failed: {exc}")
+            messagebox.showerror("iMouse", f"Goal gate 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -30724,8 +30724,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._gui_goal_gate_context()
             except Exception as exc:
-                status_var.set(f"Goal gate refresh failed: {exc}")
-                self._log(f"Goal gate refresh failed: {exc}")
+                status_var.set(f"Goal gate refresh 失败: {exc}")
+                self._log(f"Goal gate refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(gui_goal_gate_brief(refreshed, stage=stage))
@@ -30745,8 +30745,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_gui_goal_gate_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_gui_goal_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Proof Map", command=self.show_acceptance_proof_map_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Claim Scope", command=self.show_claim_scope_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Knowledge", command=self.show_gui_knowledge_center_from_gui).pack(side="left", padx=4)
@@ -30772,7 +30772,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Goal gate export failed: {exc}")
+            messagebox.showerror("iMouse", f"Goal gate export 失败: {exc}")
             return
         line = gui_goal_gate_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -30842,7 +30842,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._ios_field_sop_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"iOS field SOP failed: {exc}")
+            messagebox.showerror("iMouse", f"iOS field SOP 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -30903,8 +30903,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._ios_field_sop_context()
             except Exception as exc:
-                status_var.set(f"iOS field SOP refresh failed: {exc}")
-                self._log(f"iOS field SOP refresh failed: {exc}")
+                status_var.set(f"iOS field SOP refresh 失败: {exc}")
+                self._log(f"iOS field SOP refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(ios_field_sop_brief(refreshed, stage=stage))
@@ -30924,8 +30924,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_ios_field_sop_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_ios_field_sop_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Edit Route", command=self.edit_route_decision_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Kit Gate", command=self.show_field_kit_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Bench", command=self.show_hardware_bench_from_gui).pack(side="left", padx=4)
@@ -30952,7 +30952,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"iOS field SOP export failed: {exc}")
+            messagebox.showerror("iMouse", f"iOS field SOP export 失败: {exc}")
             return
         line = ios_field_sop_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -31008,7 +31008,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._field_kit_gate_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field kit gate failed: {exc}")
+            messagebox.showerror("iMouse", f"Field kit gate 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -31067,8 +31067,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._field_kit_gate_context()
             except Exception as exc:
-                status_var.set(f"Field kit gate refresh failed: {exc}")
-                self._log(f"Field kit gate refresh failed: {exc}")
+                status_var.set(f"Field kit gate refresh 失败: {exc}")
+                self._log(f"Field kit gate refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(field_kit_gate_brief(refreshed, stage=stage))
@@ -31088,8 +31088,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_field_kit_gate_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_field_kit_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Edit Route", command=self.edit_route_decision_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="iOS SOP", command=self.show_ios_field_sop_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Bench", command=self.show_hardware_bench_from_gui).pack(side="left", padx=4)
@@ -31115,7 +31115,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field kit gate export failed: {exc}")
+            messagebox.showerror("iMouse", f"Field kit gate export 失败: {exc}")
             return
         line = field_kit_gate_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -31198,7 +31198,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._hardware_bench_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Hardware bench failed: {exc}")
+            messagebox.showerror("iMouse", f"Hardware bench 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -31257,8 +31257,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._hardware_bench_context()
             except Exception as exc:
-                status_var.set(f"Hardware bench refresh failed: {exc}")
-                self._log(f"Hardware bench refresh failed: {exc}")
+                status_var.set(f"Hardware bench refresh 失败: {exc}")
+                self._log(f"Hardware bench refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(hardware_bench_brief(refreshed, stage=stage))
@@ -31278,8 +31278,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_hardware_bench_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_hardware_bench_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Goals", command=self.show_gui_goal_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Runbook", command=self.show_field_runbook_from_gui).pack(side="left", padx=4)
         ttk.Label(
@@ -31303,7 +31303,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Hardware bench export failed: {exc}")
+            messagebox.showerror("iMouse", f"Hardware bench export 失败: {exc}")
             return
         line = hardware_bench_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -31398,7 +31398,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._field_evidence_wizard_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field evidence wizard failed: {exc}")
+            messagebox.showerror("iMouse", f"Field evidence wizard 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -31459,8 +31459,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._field_evidence_wizard_context()
             except Exception as exc:
-                status_var.set(f"Field evidence wizard refresh failed: {exc}")
-                self._log(f"Field evidence wizard refresh failed: {exc}")
+                status_var.set(f"Field evidence wizard refresh 失败: {exc}")
+                self._log(f"Field evidence wizard refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(field_evidence_wizard_brief(refreshed, stage=stage))
@@ -31480,8 +31480,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_field_evidence_wizard_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_field_evidence_wizard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Goals", command=self.show_gui_goal_gate_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Bench", command=self.show_hardware_bench_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Runner", command=self.show_field_evidence_runner_from_gui).pack(side="left", padx=4)
@@ -31507,7 +31507,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field evidence wizard export failed: {exc}")
+            messagebox.showerror("iMouse", f"Field evidence wizard export 失败: {exc}")
             return
         line = field_evidence_wizard_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -31583,7 +31583,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._field_evidence_runner_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field evidence runner failed: {exc}")
+            messagebox.showerror("iMouse", f"Field evidence runner 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -31646,8 +31646,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._field_evidence_runner_context()
             except Exception as exc:
-                status_var.set(f"Field evidence runner refresh failed: {exc}")
-                self._log(f"Field evidence runner refresh failed: {exc}")
+                status_var.set(f"Field evidence runner refresh 失败: {exc}")
+                self._log(f"Field evidence runner refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(field_evidence_runner_brief(refreshed, stage=stage))
@@ -31682,8 +31682,8 @@ class ImouseGui(tk.Tk):
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
         ttk.Button(footer, text="Copy Command", command=copy_command).pack(side="left", padx=4)
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_field_evidence_runner_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_field_evidence_runner_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Wizard", command=self.show_field_evidence_wizard_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Ctrl Ledger", command=self.show_control_evidence_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="P1 Trial", command=self.show_p1_trial_from_gui).pack(side="left", padx=4)
@@ -31711,7 +31711,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Field evidence runner export failed: {exc}")
+            messagebox.showerror("iMouse", f"Field evidence runner export 失败: {exc}")
             return
         line = field_evidence_runner_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -31884,7 +31884,7 @@ class ImouseGui(tk.Tk):
         try:
             rows, _readiness_report = self._first_run_packet_context()
         except Exception as exc:
-            messagebox.showerror("iMouse", f"First run packet failed: {exc}")
+            messagebox.showerror("iMouse", f"First run packet 失败: {exc}")
             return
 
         dialog = tk.Toplevel(self)
@@ -31945,8 +31945,8 @@ class ImouseGui(tk.Tk):
             try:
                 refreshed, _readiness = self._first_run_packet_context()
             except Exception as exc:
-                status_var.set(f"First run packet refresh failed: {exc}")
-                self._log(f"First run packet refresh failed: {exc}")
+                status_var.set(f"First run packet refresh 失败: {exc}")
+                self._log(f"First run packet refresh 失败: {exc}")
                 return
             render(refreshed)
             self._log(first_run_packet_brief(refreshed, stage=stage))
@@ -31966,8 +31966,8 @@ class ImouseGui(tk.Tk):
             method()
 
         ttk.Button(footer, text="Run Selected", command=run_selected).pack(side="left")
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_first_run_packet_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_first_run_packet_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Sources", command=self.show_xp_public_source_ledger_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Industry", command=self.show_industry_sop_radar_from_gui).pack(side="left", padx=4)
         ttk.Button(footer, text="Procure", command=self.show_industry_route_procurement_from_gui).pack(side="left", padx=4)
@@ -32008,7 +32008,7 @@ class ImouseGui(tk.Tk):
                 readiness_report=readiness_report,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"First run packet export failed: {exc}")
+            messagebox.showerror("iMouse", f"First run packet export 失败: {exc}")
             return
         line = first_run_packet_brief(rows, stage=stage)
         self._log(f"{line}; artifact={out_path}")
@@ -32180,7 +32180,7 @@ class ImouseGui(tk.Tk):
                 Path("evidence") / f"{recorder.safe_run_id}_{stage}_gui_session.md",
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"GUI session snapshot failed: {exc}")
+            messagebox.showerror("iMouse", f"GUI session snapshot 失败: {exc}")
             return
         line = gui_session_snapshot_brief(snapshot)
         self._log(f"{line}; artifact={out_path}")
@@ -32208,7 +32208,7 @@ class ImouseGui(tk.Tk):
                 Path("evidence") / f"{recorder.safe_run_id}_{stage}_xp_gap_audit.md",
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"XP gap audit failed: {exc}")
+            messagebox.showerror("iMouse", f"XP gap audit 失败: {exc}")
             return
         line = xp_gap_audit_brief(audit)
         self._log(f"{line}; artifact={out_path}")
@@ -32238,7 +32238,7 @@ class ImouseGui(tk.Tk):
         try:
             out_path = write_decision_template(path, run_id=run_id, devices=devices)
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route decision init failed: {exc}")
+            messagebox.showerror("iMouse", f"Route decision init 失败: {exc}")
             return
         self.route_decision_path.set(str(out_path))
         self._log(f"Wrote route decision template: {out_path}; devices={devices}")
@@ -32276,7 +32276,7 @@ class ImouseGui(tk.Tk):
                 write_decision_template(path, run_id=run_id, devices=self._selected_device_ids())
             data = load_decision(path)
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route decision editor failed: {exc}")
+            messagebox.showerror("iMouse", f"Route decision editor 失败: {exc}")
             return
 
         self.route_decision_path.set(str(path))
@@ -32406,7 +32406,7 @@ class ImouseGui(tk.Tk):
                     encoding="utf-8",
                 )
             except Exception as exc:
-                messagebox.showerror("iMouse", f"Route decision save failed: {exc}")
+                messagebox.showerror("iMouse", f"Route decision save 失败: {exc}")
                 return False
             self.route_decision_path.set(str(path))
             saved_run_id = str(updated.get("run_id", "") or "").strip()
@@ -32430,11 +32430,11 @@ class ImouseGui(tk.Tk):
         ).grid(row=0, column=0, sticky="w")
         ttk.Button(footer, text="Use Metadata", command=use_metadata).grid(row=0, column=1, padx=(8, 0), sticky="e")
         ttk.Button(footer, text="Scan Issues", command=refresh_issues).grid(row=0, column=2, padx=(8, 0), sticky="e")
-        ttk.Button(footer, text="Save", command=save).grid(row=0, column=3, padx=(8, 0), sticky="e")
+        ttk.Button(footer, text="保存", command=save).grid(row=0, column=3, padx=(8, 0), sticky="e")
         ttk.Button(footer, text="Save + Validate", command=save_and_validate).grid(
             row=0, column=4, padx=(8, 0), sticky="e"
         )
-        ttk.Button(footer, text="Close", command=save_and_close).grid(row=0, column=5, padx=(8, 0), sticky="e")
+        ttk.Button(footer, text="关闭", command=save_and_close).grid(row=0, column=5, padx=(8, 0), sticky="e")
         refresh_issues()
 
     def write_route_issue_checklist_from_gui(self) -> None:
@@ -32451,7 +32451,7 @@ class ImouseGui(tk.Tk):
                 run_id = decision_run_id
             out_path = write_route_decision_issue_markdown(data, self.route_issue_checklist_file(run_id))
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route checklist failed: {exc}")
+            messagebox.showerror("iMouse", f"Route checklist 失败: {exc}")
             return
         line = route_decision_issue_brief(data)
         self._log(f"{line}; artifact={out_path}")
@@ -32478,7 +32478,7 @@ class ImouseGui(tk.Tk):
             evidence_path = ValidationRecorder(run_id).path
             append_decision_evidence(data, report, evidence_path)
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Route decision validation failed: {exc}")
+            messagebox.showerror("iMouse", f"Route decision validation 失败: {exc}")
             return
 
         line = route_decision_brief(report)
@@ -32540,7 +32540,7 @@ class ImouseGui(tk.Tk):
                 Path("evidence") / f"{recorder.safe_run_id}_{stage}_operator_worksheet.md",
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Operator worksheet failed: {exc}")
+            messagebox.showerror("iMouse", f"Operator worksheet 失败: {exc}")
             return
         line = operator_worksheet_brief(worksheet)
         self._log(f"{line}; artifact={path}")
@@ -32712,8 +32712,8 @@ class ImouseGui(tk.Tk):
 
         ttk.Button(footer, text="Use Selected", command=use_selected).pack(side="left")
         ttk.Button(footer, text="Dry Run Selected", command=dry_run_selected).pack(side="left", padx=4)
-        ttk.Button(footer, text="Refresh", command=refresh).pack(side="left", padx=4)
-        ttk.Button(footer, text="Export", command=self.write_scenario_library_from_gui).pack(side="left", padx=4)
+        ttk.Button(footer, text="刷新", command=refresh).pack(side="left", padx=4)
+        ttk.Button(footer, text="导出", command=self.write_scenario_library_from_gui).pack(side="left", padx=4)
         ttk.Label(
             footer,
             text="Library always loads with Dry Run enabled; Real-run Guard controls real execution.",
@@ -32732,7 +32732,7 @@ class ImouseGui(tk.Tk):
                 run_id=run_id,
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Scenario library export failed: {exc}")
+            messagebox.showerror("iMouse", f"Scenario library export 失败: {exc}")
             return
         line = scenario_library_brief(rows)
         self._log(f"{line}; artifact={out_path}")
@@ -32888,7 +32888,7 @@ class ImouseGui(tk.Tk):
                 stop_on_error=bool(self.queue_stop_on_error.get()),
             )
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Command queue export failed: {exc}")
+            messagebox.showerror("iMouse", f"Command queue export 失败: {exc}")
             return
         self.scenario_path.set(str(out_path))
         line = command_queue_brief(self.command_queue_items)
@@ -32918,7 +32918,7 @@ class ImouseGui(tk.Tk):
         try:
             out_path = self._write_real_run_guard_report(report, run_id)
         except Exception as exc:
-            messagebox.showerror("iMouse", f"Real-run guard failed: {exc}")
+            messagebox.showerror("iMouse", f"Real-run guard 失败: {exc}")
             return False
         line = real_run_guard_brief(report)
         self._log(f"{label} {line}; artifact={out_path}")
@@ -33620,16 +33620,16 @@ class ImouseGui(tk.Tk):
             try:
                 out_path = write_template_asset_index_markdown(rows, path)
             except Exception as exc:
-                messagebox.showerror("iMouse", f"Template asset index failed: {exc}")
+                messagebox.showerror("iMouse", f"Template asset index 失败: {exc}")
                 return
             line = template_asset_brief(rows)
             self._log(f"{line}; artifact={out_path}")
             messagebox.showinfo("iMouse", f"{line}\n{out_path}")
 
-        ttk.Button(footer, text="Refresh", command=refresh).grid(row=0, column=1, padx=(8, 0), sticky="e")
+        ttk.Button(footer, text="刷新", command=refresh).grid(row=0, column=1, padx=(8, 0), sticky="e")
         ttk.Button(footer, text="Use Selected", command=use_selected).grid(row=0, column=2, padx=(8, 0), sticky="e")
         ttk.Button(footer, text="Write Index", command=write_index).grid(row=0, column=3, padx=(8, 0), sticky="e")
-        ttk.Button(footer, text="Close", command=dialog.destroy).grid(row=0, column=4, padx=(8, 0), sticky="e")
+        ttk.Button(footer, text="关闭", command=dialog.destroy).grid(row=0, column=4, padx=(8, 0), sticky="e")
         refresh()
 
     def save_template_crop(self) -> None:

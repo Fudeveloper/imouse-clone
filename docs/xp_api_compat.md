@@ -73,15 +73,15 @@ curl.exe -X POST http://127.0.0.1:9911/api `
 ws://127.0.0.1:9911/ws
 ```
 
-XP-compatible WebSocket path:
+XP 兼容 WebSocket 路径：
 
 ```text
 ws://127.0.0.1:9911/api
 ```
 
-`/ws` is kept as a legacy/debug alias. New XP-facing clients should prefer WebSocket `/api` so HTTP and WebSocket share the same visible endpoint.
+`/ws` 保留为 legacy/debug alias。新的 XP 面向客户端应优先使用 WebSocket `/api`，以便 HTTP 和 WebSocket 共享同一个可见端点。
 
-Callback push messages use this shape:
+Callback 推送消息使用此格式：
 
 ```json
 {
@@ -98,7 +98,7 @@ Callback push messages use this shape:
 }
 ```
 
-Callback fun supported in this prototype:
+本原型支持的 Callback fun：
 
 | fun | Purpose |
 |---|---|
@@ -110,11 +110,11 @@ Callback fun supported in this prototype:
 | `/event/poll` | Alias for `/callback/poll`. |
 | `/event/push` | Alias for `/callback/push`. |
 
-Callback boundary: events are in-memory only, real receiver/HID/device events still need field integration, and callback events do not prove real iOS control.
+Callback 边界：事件仅在内存中，真实 receiver/HID/设备事件仍需现场集成，callback 事件不证明真实 iOS 控制。
 
-GUI note: the top `Callback` button reads `/callback/list` and exports `evidence/<run_id>_callback_monitor.md` for field debugging. The top `Attach Log` button parses receiver/HID text logs, pushes classified rows through `/callback/push`, exports `evidence/<run_id>_callback_log.md`, and writes `Attach Log triage` JSONL when `Record` is enabled. Log triage supports failure classification; it does not prove real iOS control.
+GUI 说明：顶部 `Callback` 按钮读取 `/callback/list` 并导出 `evidence/<run_id>_callback_monitor.md` 用于现场调试。顶部 `Attach Log` 按钮解析 receiver/HID 文本日志，通过 `/callback/push` 推送已分类的行，导出 `evidence/<run_id>_callback_log.md`，并在启用 `Record` 时写入 `Attach Log triage` JSONL。日志 triage 支持失败分类；它不证明真实 iOS 控制。
 
-GUI event/error contract: the Live Probe `Events` button exports `evidence/<run_id>_<stage>_xp_event_error_contract.md`. It audits the XP response envelope, `/api` transport shape, `msgid`, callback lifecycle, `/event/*` aliases, Attach Log ingestion, receiver/capture/HID error taxonomy, and claim boundaries. It is a compatibility/SOP audit only; real iOS control still requires JSONL evidence, screenshot quality, Manual observation, Acceptance, and Readiness.
+GUI 事件/错误协议：Live Probe 的 `Events` 按钮导出 `evidence/<run_id>_<stage>_xp_event_error_contract.md`。它审计 XP 响应信封、`/api` 传输形态、`msgid`、callback 生命周期、`/event/*` 别名、Attach Log 接入、receiver/采集/HID 错误分类和声明边界。它仅做兼容性/SOP 审计；真实 iOS 控制仍需要 JSONL evidence、截图质量、Manual 观察、Acceptance 和 Readiness。
 
 发送：
 
@@ -234,8 +234,8 @@ GUI event/error contract: the Live Probe `Events` button exports `evidence/<run_
 
 ### ImConfig / User / Shortcut runtime compatibility
 
-These fun names are local compatibility scaffolding for the public XP Python helper domains `ImConfig`, `User`, and `Shortcut`.
-They persist local runtime state to `state/xp_runtime.json` and push callback ledger events, but they do not prove XP cloud account behavior, permissions, licensing, or real shortcut execution.
+这些 fun 名称是公开 XP Python helper 域 `ImConfig`、`User` 和 `Shortcut` 的本地兼容脚手架。
+它们将本地运行时状态持久化到 `state/xp_runtime.json` 并推送 callback ledger 事件，但不证明 XP 云账号行为、权限、授权或真实快捷指令执行。
 
 | fun | Description |
 |---|---|
@@ -269,14 +269,14 @@ They persist local runtime state to `state/xp_runtime.json` and push callback le
 | `/shortcut/brightness` | Store local brightness value and record a dry-run callback. |
 | `/shortcut/switch/bril` | `/shortcut/brightness` alias seen in XP-style shortcut naming. |
 
-Write operations emit callback events such as `config_saved`, `user_saved`, `user_switched`, `shortcut_saved`, `shortcut_run`, and `shortcut_brightness`.
+写操作会触发 callback 事件，如 `config_saved`、`user_saved`、`user_switched`、`shortcut_saved`、`shortcut_run` 和 `shortcut_brightness`。
 
 ### GUI API Coverage Board
 
-The Live Probe `API Cov` button exports `evidence/<run_id>_<stage>_xp_api_coverage.md`.
-It maps XP-style fun/helper domains to local API coverage, local tests, runtime gates, required field evidence and claim boundaries.
+Live Probe 的 `API Cov` 按钮导出 `evidence/<run_id>_<stage>_xp_api_coverage.md`。
+它将 XP 风格 fun/helper 域映射到本地 API 覆盖、本地测试、runtime 门、必需字段 evidence 和声明边界。
 
-This board is P0 compatibility/SOP material only. Local API tests do not prove receiver capture, HID response, real iPhone click/swipe/text behavior, XP dedicated hardware parity, XP cloud accounts, licensing or subaccount behavior.
+该面板仅是 P0 兼容性/SOP 资料。本地 API 测试不证明 receiver 采集、HID 响应、真实 iPhone 点击/滑动/文本行为、XP 专用硬件对标、XP 云账号、授权或子账号行为。
 
 ### 图色 OCR
 

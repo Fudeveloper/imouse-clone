@@ -1,29 +1,29 @@
-﻿# GUI Industry Current Snapshot
+# GUI Industry Current Snapshot
 
-`Snapshot` is the Live Probe board for current industry/source/SOP state. It turns `docs/industry_current_state_snapshot_2026.md` into operator rows for procurement, route choice, receiver setup, HID proof, iPhone settings, API/Console boundaries, vision replay, group isolation, and claim wording.
+`Snapshot` 是当前行业/来源/SOP 状态的 Live Probe 看板。它将 `docs/industry_current_state_snapshot_2026.md` 转换为操作者行，用于采购、路由选择、接收器设置、HID 证明、iPhone 设置、API/Console 边界、视觉回放、群控隔离和声明措辞。
 
-Use it before `Routes`, `Kit Gate`, `iOS SOP`, `Start Pack`, procurement review, or demo wording.
+在 `Routes`、`Kit Gate`、`iOS SOP`、`Start Pack`、采购审查或演示措辞之前使用。
 
-## Operator Path
+## 操作者路径
 
 ```text
 Home -> Snapshot -> Procure -> Action Map -> Src Refresh -> Src Audit -> XP Drill -> XP Timeline -> XP Arch -> XP Lab -> Coach -> Rx Score -> Rx Bootstrap -> Rx Setup -> Transcript -> Route/Kit -> Local -> Screenshot -> Wizard -> Runner -> Ctrl Ledger -> P1 Trial -> Events/Problems -> Acceptance/Readiness
 ```
 
-## Follow-Along Test
+## 跟随测试
 
-1. Start the GUI with `python -m imouse.gui`.
-2. Set `Evidence` and `Stage`.
-3. Click `Snapshot`.
-4. Confirm offline rows do not claim receiver, HID, iOS settings, group scale, or XP parity as proven.
-5. Select the first `fail`, `pending`, or `warn` row and click `Run Selected`.
-6. Export the board to `evidence/<run_id>_<stage>_industry_current_snapshot.md`.
-7. Continue through `Procure`, `Routes`, `Kit Gate`, `iOS SOP`, `Rx Bootstrap`, `Rx Setup`, `Shot Bench`, `P1 Trial`, `Acceptance`, and `Readiness`.
+1. 使用 `python -m imouse.gui` 启动 GUI。
+2. 设置 `Evidence` 和 `Stage`。
+3. 点击 `Snapshot`。
+4. 确认离线行不声称接收器、HID、iOS 设置、群控规模或 XP 对标已被证明。
+5. 选择第一个 `fail`、`pending` 或 `warn` 行并点击 `Run Selected`。
+6. 将看板导出到 `evidence/<run_id>_<stage>_industry_current_snapshot.md`。
+7. 继续通过 `Procure`、`Routes`、`Kit Gate`、`iOS SOP`、`Rx Bootstrap`、`Rx Setup`、`Shot Bench`、`P1 Trial`、`Acceptance` 和 `Readiness`。
 
-## Boundaries
+## 边界
 
-- `Snapshot` is a current-state/SOP map, not JSONL evidence.
-- It does not browse automatically, install receiver software, connect HID hardware, or prove real iPhone response.
-- It can identify the next action, but only same-run field evidence, saved screenshots, Manual/P1 Trial observations, Acceptance, Readiness, logs, and exact device/iOS scope can support a claim.
-- Public iMouse/XP/Apple/Some3C signals are inputs to testing, not local compatibility or parity proof.
-- When website compatibility wording changes, update `docs/industry_current_state_snapshot_2026.md` first, then use `Snapshot` to convert it into test rows.
+- `Snapshot` 是一个当前状态/SOP 映射，不是 JSONL 证据。
+- 它不会自动浏览、安装接收器软件、连接 HID 硬件或证明真实 iPhone 响应。
+- 它可以识别下一步操作，但只有相同运行的现场证据、保存的截图、Manual/P1 Trial 观察、Acceptance、Readiness、日志和精确设备/iOS 范围才能支持声明。
+- 公开的 iMouse/XP/Apple/Some3C 信号是测试的输入，不是本地兼容性或对标证明。
+- 当网站兼容性措辞变化时，先更新 `docs/industry_current_state_snapshot_2026.md`，然后使用 `Snapshot` 将其转换为测试行。

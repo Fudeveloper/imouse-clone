@@ -1,79 +1,79 @@
-# XP Public Source Action Map
+# XP 公开来源行动映射
 
-Last checked: 2026-06-09 Asia/Shanghai.
+最后检查：2026-06-09 亚洲/上海。
 
-This document turns public iMouse XP and industry signals into R&D actions, SOP gates, and GUI ownership. It is source intelligence only. It does not write JSONL evidence, does not prove real iPhone control, and does not prove XP parity.
+本文把公开的 iMouse XP 和行业信号转化为研发动作、SOP 闸门和 GUI 归属。它仅作为来源情报。它不写 JSONL evidence，不证明真实 iPhone 控制，也不证明 XP 对标。
 
-## Current Position
+## 当前定位
 
-The iMouse XP benchmark is still a black-box iOS control product shape:
+iMouse XP 对标仍然是一个黑盒 iOS 控制产品形态：
 
 ```text
-iPhone zero-install and non-jailbreak
--> AirPlay or wired projection receiver
--> screenshot/capture pipeline
--> image/OCR recognition
--> USB HID mouse/keyboard injection
--> local Kernel/Core API
--> Console, SDK, scripts, GUI
--> evidence, Acceptance, Readiness, SOP review
+iPhone 免越狱零安装
+-> AirPlay 或有线投屏 receiver
+-> 截图/采集管线
+-> 图像/OCR 识别
+-> USB HID 鼠标/键盘注入
+-> 本地 Kernel/Core API
+-> 控制台、SDK、脚本、GUI
+-> evidence、Acceptance、Readiness、SOP 复盘
 ```
 
-WDA, Appium, XCUITest, MDM, Apple Configurator, and Shortcuts remain useful auxiliary lanes, but they do not replace the XP-style receiver plus HID mainline when the product goal is cross-app, system-level, pixel-driven group control without an iPhone-side app.
+WDA、Appium、XCUITest、MDM、Apple Configurator 和 Shortcuts 仍然是有用的辅助 lane，但当产品目标是跨 App、系统级、像素驱动的无 iPhone 端 App 群控时，它们不替代 XP 风格的 receiver 加 HID 主线。
 
-## Action Map
+## 行动映射
 
-| Public Signal | Source | R&D Decision | SOP Gate | Stop Rule | GUI Owner |
+| 公开信号 | 来源 | 研发决策 | SOP 闸门 | 停止线 | GUI 归属 |
 |---|---|---|---|---|---|
-| iMouse publicly describes dedicated virtual mouse/keyboard hardware, AirPlay mirroring, no iPhone app, Kernel/Core service, Console, HTTP/WebSocket API, OpenCV image matching, and OCR. | `https://www.imouse.cc/` | Keep receiver/capture, HID, vision, API, and evidence as separate lanes. Do not pivot the mainline to WDA/Appium. | P1 must prove one real iPhone can be seen, clicked, swiped, typed into, and manually observed. | Stop all "perfect iOS control" language until screenshot, HID response, manual observation, Acceptance, and Readiness pass in the same run. | `Home -> Route/Kit -> Local -> Screenshot -> P1 Trial -> Acceptance/Readiness` |
-| The homepage advertises broad iPhone/iOS compatibility, including current high-end model and iOS generation claims. | `https://www.imouse.cc/` | Treat compatibility claims as a test-matrix input only. Build our own model/iOS coverage table. | Every claimed model plus iOS pair needs local evidence. | Stop broad compatibility claims when the exact model/iOS/orientation tuple is missing from evidence. | `Compat`, `Bench`, `Goals` |
-| Python XP material says the client is XP-only and needs dedicated iMouse hardware. | `https://www.imouse.cc/python-xp/` and `https://pypi.org/project/imouse-py/` | Use the SDK shape to design client helpers, but do not treat install/import success as hardware proof. | Before SDK parity claims, pin package version/hash and pass API tests plus real receiver/HID/iPhone evidence for used domains. | Stop SDK parity claims if helper calls pass locally but no hardware-backed action is observed on iPhone. | `Sources`, `Events`, `XP Gap`, `Core` |
-| Public Python helper domains include console-level device, AirPlay, USB, group, config, user and device-level image, keyboard, mouse, shortcut, events, and logging. | `https://www.imouse.cc/python-xp/` | Backlog must be domain-based, not button-based. Implement helpers only when their evidence gate is known. | XP Gap rows must show implemented, tested, and evidence-backed status for the current stage. | Stop "core function complete" if config/user/group/callback/log gaps are hidden behind click/screenshot demos. | `Core`, `XP Gap`, `Events`, `Roadmap` |
-| XP API uses local port `9911`, `/api`, HTTP/WebSocket, `msgid`, `status/message/data`, and device execution codes. | `https://www.imouse.cc/XP%E7%89%88API%E6%96%87%E6%A1%A3/` | Keep `/api + fun` compatibility, WebSocket echo behavior, and structured error taxonomy. | API tests must cover success, device not found, hardware not bound, capture fail, timeout, and callback/log paths. | Stop integration if HTTP 200 hides device, capture, HID, or callback failure. | `Events`, `Attach Log`, `XP Gap`, `Verify` |
-| XP new-version material emphasizes Windows service split, Console/Core restart, wired projection, 4.4 firmware, auto binding, fast projection, hardware decode, logs, cloud groups, subaccounts, LAN visibility, and custom shortcuts. | XP help mirrors and official help pages | Plan service/process/log/recovery work after P1, instead of adding more decorative GUI. | P2/P3 must collect metrics, logs, restart notes, receiver/HID recovery records, and per-device failure isolation. | Stop P3/P4 promotion if one device failure cannot be isolated to receiver, capture, HID, calibration, vision, script, or ops. | `Recovery`, `Rerun`, `Dashboard`, `Matrix`, `Roadmap` |
-| Apple supports pointer devices through AssistiveTouch and exposes pointer style, tracking speed, button assignment, Mouse Keys, and onscreen keyboard settings. | `https://support.apple.com/en-us/111775` | iOS setup is a product lane, not a note. Record AssistiveTouch, pointer speed, mouse profile, keyboard behavior, lock/rotation state, and baseline screenshots. | P1 cannot start until iOS SOP fields are filled and a baseline screenshot proves the intended phone state. | Stop HID testing when the iPhone settings profile is unknown or not tied to evidence. | `iOS SOP`, `Kit Gate`, `P1 Trial`, `Control Bench` |
-| Apple AirPlay screen mirroring is a user-level screen output path, not a receiver implementation guarantee. | Apple AirPlay support docs plus local receiver tests | Receiver selection must be tested locally: UxPlay, Windows receiver, wired projection, or capture-card fallback. | Doctor must pass receiver checks and screenshot quality must be nonblank and repeatable before HID control tests. | Stop real-run control when capture is black, stale, wrong-window, cropped, or not tied to one device id. | `Receiver`, `Shot Bench`, `Local`, `Doctor` |
-| PyPI also contains `imouse-xp 0.0.7` and `py-imouse-xp 1.0.1`, separate from `imouse-py 0.0.4`. | `https://pypi.org/project/imouse-xp/`, `https://pypi.org/project/py-imouse-xp/`, `https://pypi.org/project/imouse-py/` | Treat package names as drift and supply-chain signals. Review namespace, maintainer, source, hashes, API shape, and license before using any package. | Package adoption needs a frozen version, hash, source review, local API regression tests, and hardware-backed smoke evidence. | Stop dependency adoption if package identity, source, or API shape is unclear. Do not install packages on field machines without a pinned artifact. | `Sources`, `XP Gap`, `Local`, `Verify` |
-| XP value moves from single command success to group operation, logging, recovery, account/permission, and repeatable SOP. | iMouse public docs, XP help mirrors, and local SOP docs | Make P1/P2/P3/P4 stage gates explicit. Productization comes after evidence, not before it. | P3 requires 4-device per-device evidence and failure isolation. P4 requires longer stability metrics and recovery logs. | Stop group-control claims when one-device evidence is being extrapolated to multiple devices. | `Dashboard`, `Matrix`, `SOP`, `Pack`, `Goals` |
-| Public API/source docs can be stale or promotional. | All public sources | Keep source claims in ledgers, and keep acceptance claims in JSONL evidence. | Every public claim must map to route fields, tests, artifacts, and stop rules before it can affect scope. | Stop R&D decisions when source-only claims have no local validation path. | `Sources`, `Operator Home`, `Goal Gate` |
+| iMouse 公开描述专用虚拟鼠标/键盘硬件、AirPlay 镜像、无 iPhone App、Kernel/Core 服务、控制台、HTTP/WebSocket API、OpenCV 找图和 OCR。 | `https://www.imouse.cc/` | 保持 receiver/采集、HID、视觉、API 和 evidence 为独立 lane。不要把主线转向 WDA/Appium。 | P1 必须证明一台真实 iPhone 能被看到、点击、滑动、输入并人工观察。 | 在同一 run 内截图、HID 响应、人工观察、Acceptance 和 Readiness 通过之前，停止所有"iOS 完美控制"声明。 | `Home -> Route/Kit -> Local -> Screenshot -> P1 Trial -> Acceptance/Readiness` |
+| 首页宣传广泛的 iPhone/iOS 兼容性，包括当前高端机型和 iOS 世代声明。 | `https://www.imouse.cc/` | 将兼容性声明仅作为测试矩阵输入。建立我们自己的 model/iOS 覆盖表。 | 每个声称的型号加 iOS 组合需要本地 evidence。 | 当精确的 model/iOS/方向组合在 evidence 中缺失时，停止广泛兼容声明。 | `Compat`、`Bench`、`Goals` |
+| Python XP 文档说明客户端仅适用于 XP 版且需要专用 iMouse 硬件。 | `https://www.imouse.cc/python-xp/` 和 `https://pypi.org/project/imouse-py/` | 用 SDK 形态设计 client helper，但不要把安装/导入成功当作硬件证明。 | SDK 对标声明之前，固定包版本/hash 并通过 API 测试加真实 receiver/HID/iPhone evidence。 | 如果 helper 调用本地通过但在 iPhone 上没有硬件支持的动作被观察到，停止 SDK 对标声明。 | `Sources`、`Events`、`XP Gap`、`Core` |
+| 公开 Python helper 域包括 console 级 device、AirPlay、USB、分组、config、user 和 device 级 image、keyboard、mouse、shortcut、events 和 logging。 | `https://www.imouse.cc/python-xp/` | Backlog 必须基于域，而不是基于按钮。只在 helper 的 evidence 门已知时才实现。 | XP Gap 行必须显示当前阶段的已实现、已测试和有 evidence 支持的状态。 | 如果 config/user/group/callback/log gap 被隐藏在 click/screenshot 演示后面，停止"核心功能完成"声明。 | `Core`、`XP Gap`、`Events`、`Roadmap` |
+| XP API 使用本地端口 `9911`、`/api`、HTTP/WebSocket、`msgid`、`status/message/data` 和设备执行码。 | `https://www.imouse.cc/XP%E7%89%88API%E6%96%87%E6%A1%A3/` | 保持 `/api + fun` 兼容、WebSocket 回显行为和结构化错误分类。 | API 测试必须覆盖成功、设备未找到、硬件未绑定、采集失败、超时和 callback/日志路径。 | 如果 HTTP 200 隐藏了设备、采集、HID 或 callback 失败，停止集成。 | `Events`、`Attach Log`、`XP Gap`、`Verify` |
+| XP 新版资料强调 Windows service 分离、控制台/内核重启、有线投屏、4.4 固件、自动绑定、快速投屏、硬解、日志、云分组、子账号、LAN 可见范围和自定义快捷指令。 | XP 帮助镜像和官方帮助页 | 在 P1 之后规划 service/进程/日志/恢复工作，而不是添加更多装饰性 GUI。 | P2/P3 必须收集 metrics、日志、重启记录、receiver/HID 恢复记录和逐设备失败隔离。 | 如果一个设备失败无法隔离到 receiver、采集、HID、校准、视觉、脚本或运维，停止 P3/P4 晋级。 | `Recovery`、`Rerun`、`Dashboard`、`Matrix`、`Roadmap` |
+| Apple 通过 AssistiveTouch 支持指针设备，并公开指针样式、跟踪速度、按钮分配、Mouse Keys 和屏幕键盘设置。 | `https://support.apple.com/en-us/111775` | iOS 设置是产品 lane，不是备注。记录 AssistiveTouch、指针速度、鼠标 profile、键盘行为、锁屏/旋转状态和 baseline 截图。 | P1 在 iOS SOP 字段填写且 baseline 截图证明预期手机状态之前不能开始。 | 当 iPhone 设置 profile 未知或未关联到 evidence 时，停止 HID 测试。 | `iOS SOP`、`Kit Gate`、`P1 Trial`、`Control Bench` |
+| Apple AirPlay 屏幕镜像是用户级屏幕输出路径，不是 receiver 实现保证。 | Apple AirPlay 支持文档加本地 receiver 测试 | Receiver 选择必须本地测试：UxPlay、Windows receiver、有线投屏或采集卡备选。 | Doctor 必须通过 receiver 检查且截图质量必须非空且可重复，然后才能进行 HID 控制测试。 | 当采集为黑屏、过时、错窗口、裁剪或未绑定到一个设备 ID 时，停止真实运行控制。 | `Receiver`、`Shot Bench`、`Local`、`Doctor` |
+| PyPI 还包含 `imouse-xp 0.0.7` 和 `py-imouse-xp 1.0.1`，与 `imouse-py 0.0.4` 分开。 | `https://pypi.org/project/imouse-xp/`、`https://pypi.org/project/py-imouse-xp/`、`https://pypi.org/project/imouse-py/` | 将包名视为漂移和供应链信号。使用任何包之前审查命名空间、维护者、来源、hash、API 形态和许可证。 | 包采用需要固定版本、hash、来源审查、本地 API 回归测试和硬件支持的 smoke evidence。 | 如果包身份、来源或 API 形态不清楚，停止依赖采用。不要在未固定 artifact 的情况下在现场机器上安装包。 | `Sources`、`XP Gap`、`Local`、`Verify` |
+| XP 价值从单个命令成功转向群组操作、日志、恢复、账号/权限和可重复 SOP。 | iMouse 公开文档、XP 帮助镜像和本地 SOP 文档 | 让 P1/P2/P3/P4 阶段门明确。产品化在 evidence 之后，而不是之前。 | P3 需要 4 台设备逐设备 evidence 和失败隔离。P4 需要更长的稳定性 metrics 和恢复日志。 | 当一个设备的 evidence 被外推到多台设备时，停止群控声明。 | `Dashboard`、`Matrix`、`SOP`、`Pack`、`Goals` |
+| 公开 API/来源文档可能过时或宣传性。 | 所有公开来源 | 保持来源声明在台账中，保持验收声明在 JSONL evidence 中。 | 每个公开声明必须映射到路线字段、测试、artifact 和停止线才能影响范围。 | 当仅有来源的声明没有本地验证路径时，停止研发决策。 | `Sources`、`Operator Home`、`Goal Gate` |
 
-## Field SOP Conversion
+## 现场 SOP 转化
 
-Before a P1 real-device run:
+P1 真机运行前：
 
-1. Open `Home` and confirm the operator workflow starts at Route/Kit, not at "run everything".
-2. Open `Sources` and confirm every public signal has a verification gap or an evidence-backed status.
-3. Open `Kit Gate` and fill receiver, HID, iPhone, hub, cable, network, and backup hardware fields.
-4. Open `iOS SOP` and record AssistiveTouch, pointer speed, keyboard behavior, rotation lock, screen lock policy, QR scan policy, and baseline screenshot expectations.
-5. Open `Receiver` and `Shot Bench`; do not test HID until screenshots are current, nonblank, and tied to the right device.
-6. Open `P1 Trial`; click, swipe, and type only after route and doctor pass.
-7. Record manual observations after every HID action. API success without visible iPhone response is a failure category.
-8. Run `Acceptance` and `Readiness`; only those gates can move the run toward P2.
+1. 打开 `Home`，确认操作工作流从 Route/Kit 开始，而不是"全部运行"。
+2. 打开 `Sources`，确认每个公开信号都有验证缺口或 evidence 支持的状态。
+3. 打开 `Kit Gate`，填写 receiver、HID、iPhone、Hub、线材、网络和备用硬件字段。
+4. 打开 `iOS SOP`，记录 AssistiveTouch、指针速度、键盘行为、旋转锁、锁屏策略、二维码扫描策略和 baseline 截图预期。
+5. 打开 `Receiver` 和 `Shot Bench`；在截图是最新、非空且绑定到正确设备之前不要测试 HID。
+6. 打开 `P1 Trial`；只在路线和 Doctor 通过后才点击、滑动和输入。
+7. 每次 HID 动作后记录人工观察。API 成功但没有可见 iPhone 响应是失败分类。
+8. 运行 `Acceptance` 和 `Readiness`；只有这些门能把 run 推向 P2。
 
-## Package Registry Boundary
+## 包注册表边界
 
-Package registry data is useful for API drift and namespace risk:
+包注册表数据对 API 漂移和命名空间风险有用：
 
-| Package | Public Signal | R&D Use | Boundary |
+| 包 | 公开信号 | 研发用途 | 边界 |
 |---|---|---|---|
-| `imouse-py` | Public version signal `0.0.4`, released 2025-11-16; XP-only hardware-backed positioning. | Primary SDK-shape reference. | Import/install does not prove hardware, receiver, HID, or iPhone response. |
-| `imouse-xp` | Public version signal `0.0.7`, released 2025-08-10. | Compare package namespace and API shape if source review is needed. | Not a proof source unless pinned, reviewed, tested, and hardware-backed. |
-| `py-imouse-xp` | Public version signal `1.0.1`, released 2025-09-05; client library positioning with HTTP/WebSocket-style control language. | Watch for naming/API drift and dependency confusion risk. | Treat as third-party until source, maintainer, hashes, and behavior are reviewed. |
+| `imouse-py` | 公开版本信号 `0.0.4`，发布于 2025-11-16；仅限 XP 硬件支持的定位。 | 主要 SDK 形态参考。 | 导入/安装不证明硬件、receiver、HID 或 iPhone 响应。 |
+| `imouse-xp` | 公开版本信号 `0.0.7`，发布于 2025-08-10。 | 需要来源审查时比较包命名空间和 API 形态。 | 除非固定、审查、测试和有硬件支持，否则不是证明来源。 |
+| `py-imouse-xp` | 公开版本信号 `1.0.1`，发布于 2025-09-05；客户端库定位，具有 HTTP/WebSocket 风格控制语言。 | 关注命名/API 漂移和依赖混淆风险。 | 在来源、维护者、hash 和行为被审查之前视为第三方。 |
 
-## R&D Priority
+## 研发优先级
 
-1. P1 proof: one real iPhone, one receiver route, one HID route, screenshot, click, swipe, text input, manual observation, Acceptance, Readiness.
-2. XP comparison hardware: buy or borrow one XP hardware set; record model, firmware, authorization, binding flow, mouse profile, and logs.
-3. Receiver/capture bench: compare UxPlay, Windows receiver, wired projection, and capture-card fallback by screenshot stability and device binding.
-4. HID bench: compare CH9329, XP hardware, and future self-developed HID by release behavior, coordinate error, input method behavior, and recovery.
-5. Observability: preserve request/response, callback, receiver, HID, capture, screenshot, and manual observation artifacts by device id.
-6. P3/P4 group control: scale only after P1/P2 evidence is repeatable; every failure must isolate device plus component.
+1. P1 证明：一台真实 iPhone、一条 receiver 路线、一条 HID 路线、截图、点击、滑动、文本输入、人工观察、Acceptance、Readiness。
+2. XP 对标硬件：购买或借用一套 XP 硬件；记录型号、固件、授权、绑定流程、鼠标 profile 和日志。
+3. Receiver/采集 bench：通过截图稳定性和设备绑定比较 UxPlay、Windows receiver、有线投屏和采集卡备选。
+4. HID bench：通过释放行为、坐标误差、输入法行为和恢复比较 CH9329、XP 硬件和未来自研 HID。
+5. 可观测性：按设备 ID 保留请求/响应、callback、receiver、HID、采集、截图和人工观察 artifact。
+6. P3/P4 群控：只在 P1/P2 evidence 可重复后才扩规模；每个失败必须隔离设备加组件。
 
-## Non-Evidence Boundary
+## 非证据边界
 
-This map is a required planning asset. It can block readiness if missing, but it cannot pass readiness by itself. The only valid proof path for real iOS control is a real-device run with JSONL evidence, artifacts, manual observation, Acceptance, and Readiness.
+本映射是必需的规划资产。缺失时会阻断就绪，但它本身不能通过就绪。真实 iOS 控制的唯一有效证明路径是带有 JSONL evidence、artifact、人工观察、Acceptance 和 Readiness 的真机运行。
 
-## Source Links
+## 来源链接
 
 - https://www.imouse.cc/
 - https://www.imouse.cc/python-xp/

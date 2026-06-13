@@ -1,35 +1,35 @@
 # GUI Goal Gate
 
-`Goals` is the GUI acceptance board for the four user goals:
+`Goals` 是四个用户目标的 GUI 验收看板：
 
-1. iOS perfect control.
-2. iOS group-control SOP and issue log.
-3. iMouse XP core functions and docs.
-4. XP iteration lessons and pitfalls.
+1. iOS 完美控制。
+2. iOS 群控 SOP 和问题日志。
+3. iMouse XP 核心功能和文档。
+4. XP 迭代经验和教训。
 
-It exports:
+它导出：
 
 ```text
 evidence/<run_id>_<stage>_gui_goal_gate.md
 ```
 
-## Closure Inputs
+## 关闭输入
 
-Goal Gate reads the current evidence state and the surrounding GUI boards:
+Goal Gate 读取当前证据状态和周围的 GUI 看板：
 
-| Input | Why it matters |
+| 输入 | 为何重要 |
 |---|---|
-| Acceptance and Readiness | Stage gate results and `real_ios_control_verified`. |
-| Proof Map | Exact evidence rows still blocking iOS control claims. |
-| Claim Scope | Allowed and forbidden demo/handoff wording. |
-| Evidence Pack | Required and recommended artifacts for the same `run_id`. |
-| XP Gap Audit | XP core domains still blocked, partial, or unstarted. |
-| SOP artifacts | Runbook, worksheet, SOP board, issue triage, rerun, recovery, matrix, and gap report. |
+| Acceptance 和 Readiness | 阶段门控结果和 `real_ios_control_verified`。 |
+| Proof Map | 仍然阻止 iOS 控制声明的精确证据行。 |
+| Claim Scope | 允许和禁止的演示/交付措辞。 |
+| Evidence Pack | 相同 `run_id` 的必需和推荐工件。 |
+| XP 差距审计 | 仍被阻止、部分完成或未启动的 XP 核心域。 |
+| SOP 工件 | Runbook、工作表、SOP 看板、问题分类、重跑、恢复、Matrix 和差距报告。 |
 
-## Operator Rule
+## 操作者规则
 
-Use `Goals` near the end of a field session, after `Proof Map` and `Claim Scope`, and before any completion summary.
+在现场会议接近结束时使用 `Goals`，在 `Proof Map` 和 `Claim Scope` 之后，在任何完成摘要之前。
 
-The iOS control row cannot pass unless the same run has real-device evidence, Proof Map closure, Claim Scope pass wording, Acceptance PASS, Readiness PASS, and no unexplained fail events.
+iOS 控制行不能通过，除非相同运行具有真实设备证据、Proof Map 关闭、Claim Scope 通过措辞、Acceptance PASS、Readiness PASS，且无未解释的失败事件。
 
-Goal Gate is an acceptance map, not evidence. It does not write JSONL evidence and does not prove real iPhone response by itself.
+Goal Gate 是一个验收映射，而非证据。它不写入 JSONL 证据，也不能单独证明真实 iPhone 响应。

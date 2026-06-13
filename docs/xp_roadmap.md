@@ -9,7 +9,7 @@
 - `Run Selected` 会跳到当前行对应的 GUI 动作，例如 Verify、Kit Gate、Shot Bench、Control Bench、P1 Trial、Bench、Library、Attach Log、Dashboard 或 Goals。
 - Sources、Industry、Core、Iter Radar、XP Timeline 和 Start Pack footer 也提供 Roadmap 快捷入口。
 
-## Roadmap 行
+## Roadmap 列表
 
 | Lane | 目标 | 研发含义 | 证据门 |
 |---|---|---|---|
